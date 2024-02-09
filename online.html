@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Appointment Booking Form</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* Add your CSS styles here */
+        .timeslot {
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            margin: 5px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .timeslot.available {
+            background-color: lightgreen;
+        }
+        .timeslot.booked {
+            background-color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <div id="book-appointment-form" class="info" style="display: none;">
+        <h3>Book an Appointment</h3>
+        <form >
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required><br><br>
+            
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required><br><br>
+            
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" required><br><br>
+            
+            <label for="aadhar">Aadhar Card Number:</label>
+            <input type="text" id="aadhar" name="aadhar" required><br><br>
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required><br><br>
+            
+            <label for="appointment">Select OPD Department:</label>
+            <select id="appointment" name="appointment" required>
+                <option value="">Select Department</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <!-- Add more options as needed -->
+            </select><br><br>
+            
+            <label for="date">Select Date of Appointment:</label>
+            <input type="date" id="date" name="date" required onchange="updateTimeSlots()"><br><br>
+            
+            <label for="time">Select Time Slot:</label>
+            <div id="timeslots"></div><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function updateTimeSlots() {
+            const date = document.getElementById("date").value;
+            const timeslotsContainer = document.getElementById("timeslots");
+            timeslotsContainer.innerHTML = ""; // Clear previous slots
+    
+            // Simulate available and booked slots
+            const bookedSlots = ["09:00 AM", "09:30 AM", "10:00 AM"]; // Example of booked slots
+            const totalSlots = 20;
+    
+            for (let i = 9; i <= 16; i++) {
+                const slot = document.createElement("div");
+                const time = (i < 12 ? i : i - 12) + ":00 " + (i < 12 ? "AM" : "PM");
+                const isBooked = bookedSlots.includes(time);
+                slot.textContent = time;
+                slot.className = "timeslot " + (isBooked ? "booked" : "available");
+                slot.onclick = function() {
+                    if (!isBooked) {
+                        alert("Slot booked for " + time + " on " + date);
+                    }
+                };
+                timeslotsContainer.appendChild(slot);
+            }
+        }
+    
+        // Initially populate time slots for today's date
+        updateTimeSlots();
+    </script>
+</body>
+</html>

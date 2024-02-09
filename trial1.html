@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PATIENT INTERFACE</title>
+    <link rel="stylesheet" href="patient interface.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>WELCOME</h2>
+        <ul>
+            <li><a href="frontpage.html" ><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="online.html" id="book-appointment-link"><i class="fas fa-address-card"></i>BOOK AN APPOINTMENT</a></li>
+            <li><a href="#" id="book-telecommunicationappointment-link"><i class="fas fa-phone-volume"></i>BOOK AN TELECOMMUNICATION APPOINTMENT</a></li>
+            <li><a href="#"><i class="fa fa-user-md"></i>YOUR PRESCRIPTIONS</a></li>
+            <li><a href="#"><i class="fas fa-address-book"></i>LOGOUT</a></li>
+        </ul>
+    </div>
+    <div class="main_content">
+        <div class="header">Welcome TO PATIENT REGISTRATION SYSTEM</div>  
+        <div id="profile" class="info">
+            <h3>Profile</h3>
+            <p>This is the profile section. Here you can view and update your profile information.</p>
+        </div>
+        <div id="book-appointment-form" class="info" style="display: none;">
+            <h3>Book an Appointment</h3>
+            <form action="booking_process.php" method="POST">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" required><br><br>
+                
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" required><br><br>
+                
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" required><br><br>
+                
+                <label for="aadhar">Aadhar Card Number:</label>
+                <input type="text" id="aadhar" name="aadhar" required><br><br>
+                
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required><br><br>
+                
+                <label for="appointment">Select OPD Department:</label>
+                <select id="appointment" name="appointment" required>
+                    <option value="">Select Department</option>
+                    <option value="General Medicine">General Medicine</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <!-- Add more options as needed -->
+                </select><br><br>
+                
+                <label for="date">Select Date of Appointment:</label>
+                <input type="date" id="date" name="date" required onchange="updateTimeSlots()"><br><br>
+                
+                <label for="time">Select Time Slot:</label>
+                <div id="timeslots"></div><br><br>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                
+                <input type="submit" value="Submit">
+            </form>
+            
+        </div>
+        <div id="book-telecommunicationappointment-form" class="info" style="display: none;">
+            <h3>Book an Appointment</h3>
+        </div>
+        <div id="book-telecommunicationappointment-form" class="info" style="display: none;">
+            <h3>Book a Telecommunication Appointment</h3>
+            <p>Save Time in Queues</p>
+            <form action="telecommunication_booking_process.php" method="POST">
+                <label for="firstname_tele">Your Name:</label>
+                <input type="text" id="firstname_tele" name="firstname_tele" required><br><br>
+                
+                <label for="lastname_tele">Father's Name:</label>
+                <input type="text" id="lastname_tele" name="lastname_tele" required><br><br>
+                
+                <label for="aadhar_tele">Aadhar Card Number:</label>
+                <input type="text" id="aadhar_tele" name="aadhar_tele" required><br><br>
+                
+                <label for="mobile_tele">Mobile Number:</label>
+                <input type="tel" id="mobile_tele" name="mobile_tele" required><br><br>
+                
+                <label for="dob_tele">Date of Birth:</label>
+                <input type="date" id="dob_tele" name="dob_tele" required><br><br>
+                
+                <label for="appointment_tele">Select Telecommunication Department:</label>
+                <select id="appointment_tele" name="appointment_tele" required>
+                    <option value="">Select Department</option>
+                    <option value="Telemedicine">Telemedicine</option>
+                    <option value="Telepsychiatry">Telepsychiatry</option>
+                    <option value="Teletherapy">Teletherapy</option>
+                    <!-- Add more options as needed -->
+                </select><br><br>
+                
+                <label for="date_tele">Select Date of Telecommunication Appointment:</label>
+                <input type="date" id="date_tele" name="date_tele" required onchange="updateTimeSlotsTele()"><br><br>
+                
+                <label for="time_tele">Select Time Slot:</label>
+                <div id="timeslots_tele"></div><br><br>
+                
+                <label for="email_tele">Email:</label>
+                <input type="email" id="email_tele" name="email_tele" required><br><br>
+                
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        
+        </div>
+        
+        <!-- Other content areas -->
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const bookAppointmentLink = document.getElementById("book-appointment-link");
+        const bookAppointmentForm = document.getElementById("book-appointment-form");
+    
+        bookAppointmentLink.addEventListener("click", function(event) {
+            event.preventDefault();
+    
+            const infoSections = document.querySelectorAll(".main_content .info");
+            infoSections.forEach(section => {
+                section.style.display = "none";
+            });
+    
+            bookAppointmentForm.style.display = "block";
+        });
+    
+        const homeLink = document.getElementById("home-link");
+        homeLink.addEventListener("click", function(event) {
+            event.preventDefault();
+    
+            const infoSections = document.querySelectorAll(".main_content .info");
+            infoSections.forEach(section => {
+                section.style.display = "none";
+            });
+    
+            // No need to reference defaultContent since it doesn't exist in your HTML
+        });
+    });
+    function updateTimeSlots() {
+        const date = document.getElementById("date").value;
+        const timeslotsContainer = document.getElementById("timeslots");
+        timeslotsContainer.innerHTML = ""; // Clear previous slots
+
+        // Simulate available and booked slots
+        const bookedSlots = ["09:00 AM", "09:30 AM", "10:00 AM"]; // Example of booked slots
+        const totalSlots = 20;
+
+        for (let i = 1; i <= totalSlots; i++) {
+            const slot = document.createElement("div");
+            const time = i < 10 ? "0" + i + ":00 AM" : i + ":00 AM";
+            const isBooked = bookedSlots.includes(time);
+            slot.textContent = time;
+            slot.className = "timeslot " + (isBooked ? "booked" : "available");
+            slot.onclick = function() {
+                if (!isBooked) {
+                    alert("Slot booked for " + time + " on " + date);
+                }
+            };
+            timeslotsContainer.appendChild(slot);
+        }
+    }
+
+    // Initially populate time slots for today's date
+    updateTimeSlots();
+</script>
+
+</body>
+</html>

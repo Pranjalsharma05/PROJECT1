@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>PATIENT INTERFACE </title>
+	<link rel="stylesheet" href="patient interface.css">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>WELCOME</h2>
+        <ul>
+            <li><a href="frontpage.html"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="#"><i class="fas fa-address-card"></i>BOOK AN APPOINTMENT</a></li>
+            <li><a href="#"><i class="fas fa-phone-volume"></i>BOOK AN TELECOMMUNICATION APPOINTMENT</a></li>
+            <li><a href="#"><i class="fa fa-user-md"></i>YOUR PRESCRIPTIONS</a></li>
+            <li><a href="#"><i class="fas fa-address-book"></i>LOGOUT</a></li>
+        </ul> 
+       </div>
+    <div class="main_content">
+        <div class="header">Welcome TO PATIENT REGISTRATION SYSTEM</div>  
+        <div id="profile" class="info">
+            <!-- Profile content -->
+        </div>
+        <div id="book-appointment" class="info">
+            <!-- Book Appointment content -->
+        </div>
+        <!-- Other content areas -->
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+
+                const targetId = this.getAttribute("href").slice(1);
+                const targetContent = document.getElementById(targetId);
+
+                if (targetContent) {
+                    const infoSections = document.querySelectorAll(".main_content .info");
+                    infoSections.forEach(section => {
+                        section.style.display = "none";
+                    });
+
+                    targetContent.style.display = "block";
+                }
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>
