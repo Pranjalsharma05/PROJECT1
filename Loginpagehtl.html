@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> SIGNUP Page</title>
+        <link rel="stylesheet" href="Style.css">
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="title"><H1 style="margin-left:70px;">Welcome to SIGNUP Form</H1></div>
+        </div><br>
+        <h2 style="margin-left:500px;"">It Take Few Minutes Please Wait</h2>
+        <div class="signup-box">
+            <form action="" method="Post"><B>
+                <label>Firstname</label>
+                <input type="text" placeholder="" name="Firstname" required>
+                <label>lastname</label>
+                <input type="text" placeholder="" name="Lastname" required>
+                <label>Email</label>
+                <input type="email" placeholder="" name="Email" required>
+                <label>Password</label>
+                <script> function myFunction() {
+                    var x = document.getElementById("myInput");//this is used for Password purpose
+                    if (x.type === "Password") {
+                      x.type = "text";
+                    } else {
+                      x.type = "Password";
+                    }
+                  }
+                  </script>
+                <input type="password" value="" id="myinput" name="Password" required><br>
+                <input type="checkbox" onclick="myfunction()">Show Password
+                <label> Number</label>
+                <input type="number" placeholder="" name="Number" required>
+                <label>Gender</label>
+                <input type="radio" placeholder="" name="Gender" value="Male" required>Male
+                <input type="radio" placeholder="" name="Gender" value="Female" required>Female
+                <input type="radio" placeholder="" name="Gender" value="Others" required>Others<br>
+                <input type="submit" name="Submit" value="Submit"><br>
+            </B></form>
+            <p class="para-2">Already Have An Account? Then <a href="trial.html">Click Here</a></p>
+        </div>
+        <style>
+          body{
+            font-family: 'Roboto',sans-serif;
+            
+          }
+          .header
+          {
+            background-image:url('header.jpg');
+          color:BLACK;
+          height:10px;
+          width:100%;
+          border:2px;
+            border-radius:5px;
+            margin:auto;
+            background-origin: padding-box;
+          }
+          
+          .title{
+            color:solid-grey;
+          width:70%;
+          float:right;
+          height:50px;
+          }
+          .signup-box{
+            height: 500px;
+            width: 400px;
+              
+            border-radius: 5px;
+            margin: auto;
+            
+          }
+          .login-box{
+            height: 300px;
+            width: 400px;
+           
+            border-radius: 5px;
+            margin: auto;
+            
+          }
+          form{
+            padding-left:37px;
+            width:100%;
+            margin-left:20px
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid #3498db;
+            color: #3498db;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.3s ease;}
+            form label{
+              display:flex;
+              height:10px;
+              margin-top:8px;
+              font-size:18px;
+              }
+        </style>
+    </body>
+</html>

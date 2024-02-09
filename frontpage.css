@@ -1,0 +1,563 @@
+* {
+   padding: 0;
+   margin: 0;
+}
+
+body {
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+   background: rgb(208, 241, 244);
+}
+.title-container {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   padding: 10px;
+   z-index: 1;
+   background: linear-gradient(30deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+   background-size: 600% 600%;
+   animation: gradientAnimation 10s ease infinite;
+}
+.title {
+   
+   font-weight: bolder;
+   color: whitesmoke;
+   font-size: larger;
+   padding: 10px;
+   text-align: center;
+   background: linear-gradient(30deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+   background-size: 600% 600%;
+   animation: gradientAnimation 10s ease infinite;
+}
+
+.name {
+   display: flex;
+   align-items: center;
+}
+
+.name img {
+   width: 40px; 
+   height: auto; 
+   margin-right: 10px;
+}
+
+.name h2 {
+   margin: 0;   
+}
+
+.nav {
+   display: flex;
+   justify-content: space-around;
+   padding: 10px 0;
+}
+
+.nav a {
+   font-weight: bold;
+   color: black;
+   text-decoration: none;
+   padding: 10px 20px;
+}
+
+.nav a:hover {
+   background-color: #d88736;
+}
+
+.dropdown {
+   position: relative;
+   display: inline-block;
+}
+
+.dropdown-content {
+   display: none;
+   position: absolute;
+   background-color:whitesmoke;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+}
+
+.dropdown-content a {
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+}
+
+.dropdown-content a:hover {
+   background-color: rgb(233, 91, 126);
+}
+
+.dropdown:hover .dropdown-content {
+   display: block;
+}
+
+@media (max-width: 767px) {
+   .title {
+       font-size: smaller;
+   }
+
+   .name img {
+       width: 30px;
+   }
+
+   .nav {
+       flex-direction: column;
+       align-items: center;
+       padding: 0;
+   }
+
+   .nav a {
+       padding: 8px 16px;
+   }
+
+   .dropdown-content {
+       min-width: 120px;
+   }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+   /* Adjustments for medium-sized screens */
+}
+
+@keyframes gradientAnimation {
+   0% {
+       background-position: 0% 0%;
+   }
+   50% {
+       background-position: 100% 100%;
+   }
+   100% {
+       background-position: 0% 0%;
+   }
+}
+
+
+
+
+/* THIS SECTION CONTAIN HEADER CSS */
+header {
+   position: relative;
+   height: 40vh;
+}
+
+#video-background {
+   position: absolute;
+   top: 30%;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.header-content {
+   position: absolute;
+   top: 80%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: white;
+   text-align: center;
+   padding: 20px;
+   font-size: 180%; /* Common font size for all screen sizes */
+}
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 767px) {
+   .header-content {
+       /* Adjustments for smaller screens */
+       font-size: 50%; /* Adjust font size for smaller screens */
+   }
+}
+
+/* Media Query for screens between 768px and 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+   /* IF NEEDED ADD LATER */
+}
+
+
+@media (min-width: 1025px) {
+   /* IF NEEDED ADD LATER */
+}
+
+/* SLIDER SECTION */
+
+.container {
+   display: flex;
+   gap: 10px;
+   margin-top: 7%; 
+}
+
+.img1 {
+   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQboNyUxKPIqFGv885qctPpVhZoXkdQkonmB75k-e1Y2BX4liwqHj8T8IfrSvjzDbUs5-8&usqp=CAU);
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.img2 {
+   background-image: url(https://www.shutterstock.com/image-photo/close-doctor-showing-medical-analytics-260nw-1457191769.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.img3 {
+   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ773ds-gEpzw6JIyOY0WGx-vH0_lTwdXLa9Lr6Hc4GbNV1I9CZLqWKLDOt3wa-9eyFunc&usqp=CAU);
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.img4 {
+   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn0PbXc54QuqU09Ttdxjr7QhpXIhxYlr_sA4vVcA2T82jSqaC3c9PZujMxWhuDy6KKmm0&usqp=CAU);
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+.img5 {
+   background-image: url(https://codeit.us/storage/blog-posts/a3cef487-4f0c-5669-95f7-527747bf811c/conversions/Hospital-system-banner02-main.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.img6 {
+   background-image: url(https://www.slideteam.net/media/catalog/product/cache/1280x720/i/m/improving_hospital_management_system_powerpoint_presentation_slides_slide01.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.ctrl1 {
+   height: 500px;
+   width: 100%;
+   background-position: center;
+   border: 2px solid black;
+   border-radius: 10px;
+   transition: all 0.3s;
+   display: inline-block;
+}
+
+.ctrl1:hover {
+   width: 800%;
+}
+@media screen and (max-width: 767px) {
+   .ctrl1 {
+       max-width: calc(50% - 10px); 
+   }
+}
+
+
+
+/* THIS CSS TELLES ABOUT THE MAIN FEATIRE OF OUR SITE WHICH IS LEFT AND RIGHT */
+
+.interaction-section {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-evenly;
+}
+
+.box {
+   border: 2px solid black;
+   border-radius: 30px;
+   margin: 10px;
+   height: 150px;
+   width: 24%;
+}
+
+.box1-img,
+.box2-img,
+.box3-img,
+.box4-img {
+   background-repeat: no-repeat;
+   background-size: contain;
+   background-position: center;
+   height: 50px;
+   width: 50px;
+   margin: 0 auto;
+}
+
+.box1-img {
+   background-image: url("appoint.svg");
+}
+
+.box2-img {
+   background-image: url("login.png");
+}
+
+.box3-img {
+   background-image: url("service.png");
+}
+
+.box4-img {
+   background-image: url("call.svg");
+}
+
+.box {
+   border: 1px solid #ccc;
+   padding: 15px;
+   text-align: center;
+   transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.box1 {
+   background-color: #e1f199;
+   border: 1px solid #c2e918;
+}
+
+.box2 {
+   background-color: #58d4e5;
+   border: 1px solid #14d5ef;
+}
+
+.box3 {
+   background-color: #f1e880;
+   border: 1px solid #f3e019;
+}
+
+.box4 {
+   width: 60%;
+   background-color: #785fb9e4;
+   border: 1px solid #6834eae4;
+}
+
+.box:hover {
+   background-color: #e8a7548e;
+   transform: translateY(-5px);
+}
+
+.direction {
+   display: flex;
+   justify-content: space-around;
+   gap: 2%;
+   padding: 5%;
+   object-fit: cover;
+}
+
+.left {
+   position: relative;
+   width: 50%;
+   background-color: transparent;
+   filter: blur(1px);
+   border: 3px solid rgb(18, 225, 197);
+   border-radius: 10px;
+   overflow: hidden;
+}
+
+.left video {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   filter: blur(1px);
+   border: 3px solid rgb(18, 225, 197);
+   border-radius: 10px;
+}
+
+.left .overlay {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+}
+
+.left h1,
+.left p {
+   color: white;
+   margin: 5px 0;
+}
+
+.right {
+   height: 50%;
+   width: 70%;
+   background-color: transparent;
+   opacity: 9;
+   border: 3px solid rgb(18, 225, 197);
+   border-radius: 10px;
+   display: flex;
+   flex-wrap: wrap;
+}
+.right .interaction-section a {
+   text-decoration: none;
+   
+}
+
+
+
+h2 {
+   font-size: 18px;
+   text-decoration: none; 
+}
+
+p {
+   font-size: 14px; 
+}
+
+@media screen and (max-width: 767px) {
+   .box {
+       width: 35%; 
+   }
+   h2 {
+       font-size: 16px; 
+   }
+
+   p {
+       font-size: 12px; 
+   }
+  
+}
+
+
+/* THIS SECTION SHOWS OUR CSS FOR LOWER */
+
+
+.lower {
+   position: relative;
+   height: 40vh;
+   overflow: hidden; /* Ensure content does not overflow if it exceeds the height */
+}
+
+.lower img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover; /* Ensure the image covers the entire div */
+}
+
+.lower-content {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: white;
+   text-align: center;
+   padding: 20px;
+   font-size: 30px;
+   background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+}
+
+@media screen and (max-width: 767px) {
+   .lower-content {
+       font-size: 20px; /* Adjust font size for smaller screens */
+       padding: 10px; /* Adjust padding for smaller screens */
+   }
+}
+
+
+/* THIS SECTION SHOWS OUR INFORMATION SECTION */
+.information {
+   display: flex;
+   
+   justify-content: space-evenly;
+}
+
+.info-box {
+   position: relative;
+   width: 700px;
+   height: 500px;
+   border: 3px solid rgb(18, 225, 197);
+   border-radius: 10px;
+   overflow: hidden; /* Ensure the content does not overflow */
+   text-align: center; /* Center text and image */
+}
+
+.info-box img {
+   width: 100%; /* Make the image fill the container width */
+   height: 100%; /* Make the image fill the container height */
+   object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+.info-box .overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   opacity: 0; /* Initially transparent */
+   background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+   transition: opacity 0.3s; /* Smooth transition for hover effect */
+}
+
+.info-box:hover .overlay {
+   opacity: 1; /* Fully visible on hover */
+}
+
+.info-box h1,
+.info-box p {
+   color: white; /* Set text color */
+   margin: 5px 0; /* Add some margin to the text */
+}
+
+@media screen and (max-width: 767px) {
+   .info-box {
+       width: 90%; /* Adjust width to fit smaller screens */
+       height: auto; /* Adjust height to fit content */
+       margin-bottom: 20px; /* Add some space between boxes */
+   }
+   
+   .info-box img {
+       height: 200px; /* Set a fixed height for images on smaller screens */
+   }
+   
+   .info-box .overlay {
+       font-size: 16px; /* Adjust font size for overlay content */
+   }
+}
+/* THIS SHOWS THE FOOTER SECTION */
+
+footer {
+   display: flex;
+   justify-content: space-around;
+   padding: 20px;
+   background-color: #515151; /* Set your desired background color */
+}
+
+.contact-info,
+.appointments-info,
+.emergency-info,
+.connect-with-us,
+.stay-informed,
+.copyright {
+   width: 20%; /* Adjust the width based on your design preference */
+}
+
+h4 {
+   color: whitesmoke; /* Set your desired heading color */
+}
+
+p {
+   line-height: 1.5;
+}
+
+a {
+   color: #007bff; /* Set your desired link color */
+}
+
+/* Media Query for screens smaller than 768px */
+@media screen and (max-width: 767px) {
+   footer {
+       flex-direction: column; /* Stack items vertically on smaller screens */
+       align-items: center; /* Center items vertically */
+       text-align: center; /* Center text */
+   }
+   
+   .contact-info,
+   .appointments-info,
+   .emergency-info,
+   .connect-with-us,
+   .stay-informed,
+   .copyright {
+       width: 100%; /* Make all sections full width on smaller screens */
+       margin-bottom: 10px; /* Add some space between sections */
+   }
+}
+
+/* Media Query for screens between 768px and 1024px */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+   /* Adjustments if needed */
+}
+
+/* Media Query for screens larger than 1024px */
+@media screen and (min-width: 1025px) {
+   /* Adjustments if needed */
+}
+
+
+
