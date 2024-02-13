@@ -69,7 +69,8 @@ else{
 // If there were no errors, go ahead and insert into the database
 if(empty($username_err) && empty($password_err) && empty($confirm_password_err) &&empty($mobile_err))
 {
-    $sql = "INSERT INTO users (username, password,mobile) VALUES (?, ?, ?)";
+     
+         $sql = "INSERT INTO users (username, password,mobile) VALUES (?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt)
     {
@@ -86,7 +87,7 @@ if(empty($username_err) && empty($password_err) && empty($confirm_password_err) 
             header("location: login.php");
         }
         else{
-            echo "Something went wrong... cannot redirect!";
+           echo "Something went wrong... cannot redirect!";
         }
     }
     mysqli_stmt_close($stmt);
@@ -97,94 +98,138 @@ mysqli_close($conn);
 ?>
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REGISTRATION</title>
+    <title>its_login page</title>
     <style>
-        *{
+        body{
             margin: 0;
             padding: 0;
-            
-        }
-        .page{
+            background-color: rgb(215, 215, 221);
             display: flex;
-            
-            align-items: center;
-            flex-direction: column;
             height: 100vh;
-           
-            background:linear-gradient(aqua,white,rgb(11, 210, 210));
-         
-        }
-        .box{
-            background-color: rgb(235, 11, 18);
-            border:1.5px solid black;
-            color:white;
-            font-weight: 900;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 3%;
-             
-            font-family: 'Times New Roman', Times, serif;
-            
-        }
-        @media screen and (max-width:380px) {
-            .box{
-                font-size: x-small;
-            }
-           input{
-            width: 80%;
-           }
-        }
-        .label{
-            padding: 20px;
-            
-            width: 50%;
-         
-            background-color: rgb(134, 124, 124);
-            background: linear-gradient(black,blue,blue,black);
-            display: flex;
             justify-content: center;
-            margin-top: 5%;
-            border: 2px solid blue;
-            border-radius: 9px;
-            color:white;
-            flex-wrap: wrap;
-        
-
+            align-items: center;
+        }
+        .container{
+            background-color: white;
+            height: 80vh;
+            width: 60%;
+            border-radius: 10px;
+            display: flex;
+        }
+        .left-box{
+            height: 80vh;
+            width: 50%;
+          padding: 10%;
+            margin-right: auto;
+            display: block;
+           
+        }
+        .right-box{
+            height: 80vh;
+            width: 50%;
+            background-color: blue;
+            margin-left: auto;
+            border-radius: 10px;
+            border-top-left-radius: 70%;
+            border-bottom-left-radius: 70%; /* Push to the right */
+            color: white;
+            display: flex;
+           align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            
+        }
+        a{
+            color: red;
+        }
+       
+        h1, p .right-box{
+           
+             /* Reset default margins */
+            padding: 0;
+            margin: 0;/* Adjust the multiplier as needed */
+        }
+        @media (max-width:730px) {
+            h1, p{
+            font-size: 3vw;
+        }
+        }
+        .left-box h1{
+            /* background-color: rgb(215, 208, 208); */
+        }
+        input{
+            background-color: rgb(218, 237, 237);
+            border-radius: 4px;
         }
         button{
-           background-color:rgb(71, 136, 216);
-           border-radius: 4px;
-        }
-        button:hover{
-            background-color: rgb(221, 52, 52);
+            background-color: aqua;
             color: white;
+           
         }
+
     </style>
 </head>
 <body>
-    <div class="page">
-    <div class="box"><h1>REGISTRATION FORM</h1></div>
-    <div class="label">
-    <form action="" method="POST">
-       <h3>Email</h3>
-        <input type="email" class="email" id="username" name="username" placeholder=" Enter Email">
-        <h3>Password</h3>
-        <input type="password" class="password" id="password" name="password" placeholder="Password" >
-<h3>Confirm Password</h3>
-<input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" >
-  <h3>Mobile number</h3> 
-  <input type="tel" class="form-control" name="mobile" placeholder="Enter mobile no." size="10"  >
+    <div class="container">
+        <div class="left-box">
+     <h1>SIGN UP</h1>
+     <form action="" method="POST">
+        <p>Username *:</p>
+        <input placeholder="Enter email id" type="email" name="username" required>
+        <p>Password *:</p>
+        <input placeholder="Enter Password" type="password" name="password" required>
+        <p>Confirm Password *:</p>
+        <input placeholder="Confirm Password" type="password" name="confirm_password" required>
+        <p>Mobile No. *: </p>
+        <input placeholder="Enter Mobile no." type="tel" name="mobile" required>
+        <br><br>
+        <button>Register</button>
+
+     </form>
+        </div>
+
+        <div class="right-box">
+          
+<h1>Welcome Users</h1>
+
+<p>kindly register Yourself</p>
 <br><br>
-<button>Register</button>
-</form>
-</div>
-</div>
+<p>Already Registered?? Then </p>
+    <a href="login.php">Login here</a>
+    
+        </div>
+      
+
+    </div>
+    
+
+<?php
+// Your PHP code here...
+
+if (!empty($username_err) || !empty($password_err) || !empty($mobile_err) || !empty($wrong)) {
+    echo "<script>";
+    if (!empty($username_err)) {
+        echo "alert('{$username_err}');";
+    } elseif (!empty($password_err)) {
+        echo "alert('{$password_err}');";
+    } elseif (!empty($mobile_err)) {
+        echo "alert('{$mobile_err}');";
+    }   echo "</script>";
+}
+
+    ?>
+    
+        <?php if (!empty($param_username) && !empty($param_password) && !empty($param_mobile))
+         { echo "<p style='color: red;'>$username_err</p>"; } ?>
+    
+  
+
+
+
 </body>
 </html>
