@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewpoint" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/font-awesome.min.css">
+</head>
+<body><h1 style="font-size:34px;line-height: 24px;padding: 2px;text-align: center;">Welcome</h1>
+	<div class="Head">
+			<div class="input-name1">
+				<form>
+					<fieldset><div>
+						<h2>Registration Process For Patient Details</h2><br>
+	<div class="input-name">
+
+		<label for="Department">Choose a Department:</label>
+			<select id="Department">
+			<option value=""></option>
+  			<option value="Emergency Department">Emergency Department</option>
+  			<option value="Surgery Departmen">Surgery Departmen</option>
+  			<option value="Cardiology Department">Cardiology Department</option>
+  			<option value="Neurology Department">Neurology Department</option>
+  			<option value="Psychiatry Department">Psychiatry Department</option>
+  			<option value=" Laboratory Department"> Laboratory Department</option>
+			</select>
+	</div><br>
+				<input type="text" placeholder="First name" class="name" required=""><span>
+				<input type="text" placeholder="Last name" class="name" required=""></span><br><br>
+				<div>
+				<input type="text" placeholder=" Father First name" class="name" required=""><span>
+				<input type="text" placeholder="Father Last name" class="name" required=""></span></div>
+			</div>
+				<div><br>
+			    	<label for="ageOption">
+			        <input type="radio" id="ageOption" name="option" value="age"> Age:
+			        <input type="number" id="ageInput" name="age" min="1" max="120" required=""></label>
+			     	<label for="dobOption">
+			        <input type="radio" id="dobOption" name="option" value="dob"> Date of Birth:
+			        <input type="date" id="dobInput" name="dob"></label></div><br>
+			        <label>Mobile</label>
+			       	<input type="text" placeholder ="Mobile" pattern="[0-9]{10}" required><br><br>
+			       	<label>Email</label>
+			       	<input type="Email" name="Email" required=""><br>
+			        <p>Select ID Option:</p>
+				    <input type="radio" id="patientId" name="idOption" value="patientId">
+				    <label for="Abha Id">ABHA ID</label>
+
+				    <input type="radio" id="aadhaar" name="idOption" value="aadhaar">
+				    <label for="aadhaar">Aadhaar</label>
+
+				    <br><br>
+
+				    <label for="idNumber">ID Number:</label>
+				    <input type="text" id="idNumber" name="idNumber" required>
+
+				    <br><br>
+
+			        <input type="checkbox" onclick="myFunction()">Show Adhar or Abha Id<br><br>
+
+			        			    
+			     <input type="reset" value="Reset">
+			    <button type="button" onclick="">Submit</button></fieldset>
+
+   
+    </form>
+
+					<script>
+						    function submitOption() {
+						        var ageOption = document.getElementById('ageOption');
+						        var dobOption = document.getElementById('dobOption');
+						        var ageInput = document.getElementById('ageInput');
+						        var dobInput = document.getElementById('dobInput');
+
+						        if (ageOption.checked) {
+						            // Age option is selected
+						            alert('Selected Age: ' + ageInput.value);
+						        } else if (dobOption.checked) {
+						            // Date of Birth option is selected
+						            alert('Selected Date of Birth: ' + dobInput.value);
+						        } else {
+						            // Neither option is selected
+						            alert('Please choose an option.');
+						        }
+						    }function myFunction() {
+								  var x = document.getElementById("myInput");
+								  if (x.type === "password") {
+								    x.type = "text";
+								  } else {
+								    x.type = "password";
+								  }
+								}
+						</script>
+			</div>
+		</div>
+		<p style="margin-left: 160px;color: red;font-size:18px">Note: You must fill all boxes And
+         This facility is only for Online Pre-Registration and not for Online Appointment for a specific Consultant/Unit</p>
+</body>
+</html>
