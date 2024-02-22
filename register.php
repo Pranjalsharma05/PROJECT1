@@ -77,13 +77,17 @@ if(empty($username_err) && empty($password_err) && empty($confirm_password_err) 
         mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password,$param_mobile);
 
         // Set these parameters
-        $param_username = $username;
+        $param_username = trim($username);
         $param_password = password_hash($password, PASSWORD_DEFAULT);
-        $param_mobile=$mobile;
+        $param_mobile=$mobile; 
+       
+       
 
         // Try to execute the query
         if (mysqli_stmt_execute($stmt))
         {
+            $python = shell_exec("python email1.py $param_username");
+            // echo $python;
             header("location: login.php");
         }
         else{
@@ -191,6 +195,9 @@ mysqli_close($conn);
         <button>Register</button>
 
      </form>
+     <?php if (!empty($username_err)) { echo "<p style='color: red;'>$username_err</p>"; } ?>
+     <?php if (!empty($password_err)) { echo "<p style='color: red;'>$password_err</p>"; } ?>
+     <?php if (!empty($mobile_err)) { echo "<p style='color: red;'>$mobile_err</p>"; } ?>
         </div>
 
         <div class="right-box">
@@ -211,22 +218,26 @@ mysqli_close($conn);
 <?php
 // Your PHP code here...
 
-if (!empty($username_err) || !empty($password_err) || !empty($mobile_err) || !empty($wrong)) {
-    echo "<script>";
-    if (!empty($username_err)) {
-        echo "alert('{$username_err}');";
-    } elseif (!empty($password_err)) {
-        echo "alert('{$password_err}');";
-    } elseif (!empty($mobile_err)) {
-        echo "alert('{$mobile_err}');";
-    }   echo "</script>";
-}
+// if (!empty($username_err) || !empty($password_err) || !empty($mobile_err) || !empty($wrong)) {
+//     echo "<script>";
+//     if (!empty($username_err)) {
+//         echo "alert('{$username_err}');";
+//     } elseif (!empty($password_err)) {
+//         echo "alert('{$password_err}');";
+//     } elseif (!empty($mobile_err)) {
+//         echo "alert('{$mobile_err}');";
+//     }   echo "</script>";
+// }
 
     ?>
     
-        <?php if (!empty($param_username) && !empty($param_password) && !empty($param_mobile))
-         { echo "<p style='color: red;'>$username_err</p>"; } ?>
+        <?php
+        //  if (!empty($param_username) && !empty($param_password) && !empty($param_mobile))
+        //  { echo "<p style='color: red;'>$username_err</p>"; }
+         
+         ?>
     
+   
   
 
 
