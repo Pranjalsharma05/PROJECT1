@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lab test</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+      
+    .form-container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+      
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+      
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: #45a049;
+      }
+    
+</style>
+</head>
+<body>
+    <div id="choice" class="form-container">
+        <h2>BOOK YOUR LAB TEST JUST A CLICK BELOW</h2>
+        <form id="choiceForm">
+            <label>Select WHAT YOU WANT:</label>
+            <select id="choiceSelect" required>
+                <option value="">Select...</option>
+                <option value="book1">BOOK A TECHNICIAN TO YOUR PLACE</option>
+                <option value="book2">COME AT OUR PLACE</option>
+            </select>
+            <button type="button" onclick="selectchoice()">Select</button>
+        </form>
+    </div>
+    
+    <script>
+        function selectchoice() {
+            var selectElement = document.getElementById("choiceSelect");
+            var selectedOption = selectElement.options[selectElement.selectedIndex].value;
+            
+            if (selectedOption === "book1") {
+                window.open("book1.html", "_blank");
+            } else if (selectedOption === "come2") {
+                window.open("book2.html", "_blank");
+            } else {
+                alert("Please select an option.");
+            }
+        }
+    </script>
+</body>
+</html>
