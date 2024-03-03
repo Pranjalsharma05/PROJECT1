@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Members</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            background-color: #3498db;
+            animation: colorChange 5s infinite alternate;
+            padding: 0;
+        }
+         @keyframes colorChange {
+            from {
+                background-color: #3498db;
+            }
+            to {
+                background-color: #83e73c;
+            }
+
+        }
+
+        h1 {
+            color: #333;
+
+        }
+        p{
+            color: black;
+            margin-top:250px;
+            background-color: #fff;
+       
+        }
+
+        .team-members-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .team-member {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            text-align: left;
+            width: 600px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .team-member:hover {
+            transform: scale(1.05);
+            color: blue;
+        }
+
+        .team-member img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+<B><i>
+    <h1>Our Team Members</h1>
+
+    <div class="team-members-container">
+
+        <div class="team-member">
+            <img src="Aryan.jpg" alt="Aryan Jaswal">
+            
+        </div>
+        <div>
+            <p><h2>Aryan Jaswal</h2>
+            Position: Software Engineer AND
+        Frontend Developer</p></div>
+
+
+        <div><p><h2>Nikhil Kumar</h2>
+            Position: Software Engineer 
+        And Backend Developer</p></div>
+        <div class="team-member">
+            <img src="Nikhil Kumar.jpg" alt="Nikhil Kumar">
+            
+        </div>
+        <div class="team-member">
+            <img src="Nikhil.jpg" alt="Nikhil">
+        </div>
+        <div> <p><h2>Nikhil</h2>
+            Position: Software Engineer And Frontend Developer</p></div>
+
+            <div><p><h2>Pawan Kumar</h2>
+            Position: Software Engineer And Frontend Developer</p></div>
+        <div class="team-member">
+            <img src="Pawan.jpg" alt="Pawan Kumar">
+        </div>
+        
+        <div class="team-member">
+            <img src="Pranjal.jpg" alt="Pranjal Sharma">
+            
+        </div>
+       <div>
+            <p><h2>Pranjal Sharma</h2>
+            Position: Project Manager And
+            Frontend Developer</p></div>
+
+        <div><p><h2>Simran</h2>
+            Position: Software Engineer And
+            Backend Developer</p></div>
+        <div class="team-member">
+            <img src="Simran.jpg" alt="Simran">
+        </div>
+    </div>
+</B></i>
+</body>
+</html>

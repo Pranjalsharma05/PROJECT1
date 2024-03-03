@@ -11,6 +11,586 @@
     <link rel="stylesheet" href="frontpage.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+   <style>* {
+    padding: 0;
+    margin: 0;
+ }
+ 
+ body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: rgb(208, 241, 244);
+ }
+ .title-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 1;
+    background: linear-gradient(30deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 600% 600%;
+    animation: gradientAnimation 10s ease infinite;
+ }
+ .title {
+    
+    font-weight: bolder;
+    color: whitesmoke;
+    font-size: larger;
+    padding: 10px;
+    text-align: center;
+    background: linear-gradient(30deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 600% 600%;
+    animation: gradientAnimation 10s ease infinite;
+ }
+ 
+ .name {
+    display: flex;
+    align-items: center;
+ }
+ 
+ .name img {
+    width: 40px; 
+    height: auto; 
+    margin-right: 10px;
+ }
+ 
+ .name h2 {
+    margin: 0;   
+ }
+ 
+ .nav {
+ 
+ flex-wrap: wrap;
+  
+ }
+ 
+ .nav a {
+    font-weight: 600;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+ }
+ 
+ .nav a:hover {
+    background-color: #d88736;
+    border-radius: 10%;
+ }
+ 
+ .dropdown {
+    position: relative;
+    display: inline-block;
+ }
+ 
+ .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:whitesmoke;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+ }
+ 
+ .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+ }
+ 
+ .dropdown-content a:hover {
+    background-color: rgb(233, 91, 126);
+ }
+ 
+ .dropdown:hover .dropdown-content {
+    display: block;
+ }
+ 
+ @media (max-width: 767px) {
+    .title {
+        font-size: smaller;
+    }
+ 
+    .name img {
+        width: 30px;
+    }
+ 
+    .nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+ 
+    .nav a {
+        padding: 8px 16px;
+    }
+ 
+    .dropdown-content {
+        min-width: 120px;
+    }
+ }
+ 
+ @media (min-width: 768px) and (max-width: 1024px) {
+    /* Adjustments for medium-sized screens */
+ }
+ 
+ @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+ }
+ 
+ 
+ 
+ 
+ /* THIS SECTION CONTAIN HEADER CSS */
+ header {
+    position: relative;
+    height: 40vh;
+ }
+ 
+ #video-background {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+ }
+ 
+ .header-content {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 180%; /* Common font size for all screen sizes */
+ }
+ .header-content p{
+    font-size: 3vw;
+    font-family:cursive;
+ }
+ .box11{
+    height: 2vh;
+   
+    width: 100%;
+ }
+ 
+ 
+ 
+ .container {
+    display: flex;
+    gap: 10px;
+    margin-top: 7%; 
+ }
+ 
+ .img1 {
+    background-image: url(https://media.istockphoto.com/id/1454794642/photo/empty-corridor-hospital.webp?b=1&s=170667a&w=0&k=20&c=Xbf9XHT1CGMt0QwMKNauTC038BDt1t7pR9keixSgS3A=);
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+ .img2 {
+    background-image: url(https://st.depositphotos.com/1000128/2158/i/450/depositphotos_21581271-stock-photo-stethoscope-on-laptop-keyboard.jpg);
+    background-repeat: no-repeat;
+    
+   
+ }
+ .img3 {
+    background-image: url(https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1lZGljYWx8ZW58MHx8MHx8fDA%3D);
+    background-repeat: no-repeat;
+    background-size: cover;
+ 
+ }
+ .img4 {
+    background-image: url(https://media.gettyimages.com/id/1312706413/photo/modern-hospital-building.jpg?s=612x612&w=0&k=20&c=oUILskmtaPiA711DP53DFhOUvE7pfdNeEK9CfyxlGio=);
+ background-repeat: no-repeat;
+ background-size: auto 100%;
+ 
+ }
+ 
+ .img5 {
+    background-image: url(https://i.pinimg.com/474x/58/80/49/58804997cd06915fece52e9c4bc89938.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+ .img6 {
+    background-image: url(https://www.slideteam.net/media/catalog/product/cache/1280x720/i/m/improving_hospital_management_system_powerpoint_presentation_slides_slide01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+ .ctrl1 {
+    height: 500px;
+    width: 100%;
+    background-position: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    transition: all 0.3s;
+    display: inline-block;
+ }
+ 
+ .ctrl1:hover {
+    width: 800%;
+ }
+ @media screen and (max-width: 767px) {
+    .ctrl1 {
+        max-width: calc(50% - 10px); 
+    }
+ }
+ 
+ 
+ 
+ /* THIS CSS TELLES ABOUT THE MAIN FEATIRE OF OUR SITE WHICH IS LEFT AND RIGHT */
+ 
+ .interaction-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+ }
+ 
+ .box {
+    border: 2px solid black;
+    border-radius: 30px;
+    margin: 10px;
+    height: 150px;
+    width: 24%;
+ }
+ 
+ .box1-img,
+ .box2-img,
+ .box3-img,
+ .box4-img {
+    background-repeat: no-repeat;
+ display: block;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    background-size: contain;
+    
+  
+ }
+ 
+ .box1-img {
+    background-image: url("https://t3.ftcdn.net/jpg/02/44/58/20/240_F_244582094_BTflxzaxlNDHk250JiOaPwAeC4487ns8.jpg");
+ }
+ 
+ .box2-img {
+    background-image: url("https://t4.ftcdn.net/jpg/02/11/04/53/240_F_211045328_HnemU2NVFNwDWnQtDi5JHeHVhMV1jTOr.jpg");
+ }
+ 
+ .box3-img {
+    background-image: url("https://t4.ftcdn.net/jpg/06/14/93/73/240_F_614937332_ekRdE7Vba2DtfoWR9l0qlclxqIVmHgrd.jpg");
+ }
+ 
+ .box4-img {
+    background-image: url("https://t3.ftcdn.net/jpg/06/25/70/44/240_F_625704477_ts4U9PMM2HIcorPuNHqdwuQ0LJX8L4SW.jpg");
+ }
+ 
+ .box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+ }
+ 
+ .box1 {
+    background-color: #e1f199;
+    border: 1px solid #c2e918;
+    
+ }
+ /* .box1 h2{
+    font-size: vw;
+ } */
+ 
+ .box2 {
+    background-color: #58d4e5;
+    border: 1px solid #14d5ef;
+ }
+ 
+ .box3 {
+    background-color: #f1e880;
+    border: 1px solid #f3e019;
+ }
+ 
+ .box4 {
+    width: 60%;
+    background-color: #785fb9e4;
+    border: 1px solid #6834eae4;
+ }
+ 
+ .box:hover {
+    background-color: #e8a7548e;
+    transform: translateY(-5px);
+ }
+ 
+ .direction {
+    display: flex;
+    justify-content: space-around;
+    gap: 2%;
+    padding: 5%;
+    object-fit: cover;
+ }
+ 
+ .left {
+    position: relative;
+    width: 50%;
+    background-color: transparent;
+    filter: blur(1px);
+    border: 3px solid rgb(18, 225, 197);
+    border-radius: 10px;
+    overflow: hidden;
+ }
+ .overlay b{
+    font-size: 4vw;
+    color: #c2e918;
+ }
+ 
+ 
+ .left video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(1px);
+    border: 3px solid rgb(18, 225, 197);
+    border-radius: 10px;
+ }
+ 
+ .left .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+ }
+ 
+ .left h1,
+ .left p {
+    color: white;
+    margin: 5px 0;
+ }
+ 
+ .right {
+    height: 50%;
+    width: 70%;
+    background-color: transparent;
+    background: linear-gradient(rgb(217, 217, 224),rgb(99, 198, 193));
+    opacity: 9;
+    border: 3px solid rgb(18, 225, 197);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+ }
+ .right .interaction-section a {
+    text-decoration: none;
+    
+ }
+ 
+ 
+ 
+ h2 {
+    font-size: 18px;
+    text-decoration: none; 
+ }
+ 
+ p {
+    font-size: 14px; 
+ }
+ 
+ @media screen and (max-width: 767px) {
+    .box {
+        width: 35%; 
+    }
+    h2 {
+        font-size: 16px; 
+    }
+ 
+    p {
+        font-size: 12px; 
+    }
+   
+ }
+ 
+ 
+ /* THIS SECTION SHOWS OUR CSS FOR LOWER */
+ .information b{
+    font-size: 3vw;
+ }
+ 
+ 
+ .lower {
+    position: relative;
+    height: 50vh;
+    overflow: hidden; /* Ensure content does not overflow if it exceeds the height */
+ }
+ 
+ .lower img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    background-size: cover;/* Ensure the image covers the entire div */
+ }
+ .lower h1{
+    font-size: 5vw;
+ }
+ .lower-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+ }
+ 
+ @media screen and (max-width: 767px) {
+    .lower-content {
+        font-size: 20px; /* Adjust font size for smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+ }
+ .overlay p{
+    color: black;
+ }
+ 
+ /* THIS SECTION SHOWS OUR INFORMATION SECTION */
+ .information {
+    display: flex;
+    gap:10px;
+ }
+ 
+ .info-box {
+    position: relative;
+    width: 700vw;
+    height: 50vh;
+    border: 3px solid rgb(18, 225, 197);
+    
+    border-radius: 10px;
+    overflow: hidden; /* Ensure the content does not overflow */
+    text-align: center; /* Center text and image */
+ }
+ 
+ .info-box img {
+    width: 100%; /* Make the image fill the container width */
+    height: 100%; /* Make the image fill the container height */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+ }
+ 
+ .info-box .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Initially transparent */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    transition: opacity 0.3s; /* Smooth transition for hover effect */
+ }
+ 
+ .info-box:hover .overlay {
+    opacity: 1; /* Fully visible on hover */
+ }
+ 
+ .info-box h1,
+ .info-box p {
+    color: white; /* Set text color */
+    margin: 5px 0; /* Add some margin to the text */
+ }
+ 
+ @media screen and (max-width: 767px) {
+    .info-box {
+        width: 90%; /* Adjust width to fit smaller screens */
+        height: auto; /* Adjust height to fit content */
+        margin-bottom: 20px; /* Add some space between boxes */
+    }
+    
+    .info-box img {
+        height: 200px; /* Set a fixed height for images on smaller screens */
+    }
+    
+    .info-box .overlay {
+        font-size: 16px; /* Adjust font size for overlay content */
+    }
+ }
+ /* THIS SHOWS THE FOOTER SECTION */
+ 
+ footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #515151; /* Set your desired background color */
+ }
+ 
+ .contact-info,
+ .appointments-info,
+ .emergency-info,
+ .connect-with-us,
+ .stay-informed,
+ .copyright {
+    width: 20%; /* Adjust the width based on your design preference */
+ }
+ 
+ h4 {
+    color: whitesmoke; /* Set your desired heading color */
+ }
+ 
+ p {
+    line-height: 1.5;
+ }
+ 
+ a {
+    color: #007bff; /* Set your desired link color */
+ }
+ 
+ /* Media Query for screens smaller than 768px */
+ @media screen and (max-width: 767px) {
+    footer {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center; /* Center items vertically */
+        text-align: center; /* Center text */
+    }
+    
+    .contact-info,
+    .appointments-info,
+    .emergency-info,
+    .connect-with-us,
+    .stay-informed,
+    .copyright {
+        width: 100%; /* Make all sections full width on smaller screens */
+        margin-bottom: 10px; /* Add some space between sections */
+    }
+ }
+ 
+ /* Media Query for screens between 768px and 1024px */
+ @media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Adjustments if needed */
+ }
+ 
+ /* Media Query for screens larger than 1024px */
+ @media screen and (min-width: 1025px) {
+    /* Adjustments if needed */
+ }
+ 
+ 
+ 
+ </style> 
 </head>
  <body>
   <div class="title-container">
@@ -25,7 +605,7 @@
         <a href="#" id="login">LOGIN</a>
         <div class="dropdown-content">
             <a href="#">DOCTOR</a>
-            <a href="Patient.html">PATIENT</a>
+            <a href="login.php">PATIENT</a>
             <a href="#">ADMIN</a>
         </div>
     </div>
@@ -40,19 +620,31 @@
       
       <a  href="#connect-with-us">CONTACT US</a>
       <a href="#">ABOUT US</a>
+      <a href="Ourteam.html">ABOUT PROJECT TEAM</a>
+      <div id="google_translate_element"></div>
+        
+      <script type="text/javascript">
+          function googleTranslateElementInit() {
+              new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,es,fr,hi,mr,ta,ur' }, 'google_translate_element');
+          }
+      </script>
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
+      <script src="" async defer></script>
       
     </div>
    </div> 
   </div>
-   
+   <div class="box11"></div>
     <header>
+      
       <video autoplay muted loop id="video-background">
           <source src="video2.mp4" type="video/mp4">
           
       </video>
       <div class="header-content">
-          <h1>HEY HOW ARE YOU
-            <br>BE THE PART OF MODERN ERA</h1>
+        <p>HEY HOW ARE YOU
+            <br>BE THE PART OF MODERN ERA</p>
           <!-- Other content goes here -->
       </div>
   </header>
@@ -65,53 +657,166 @@
     <div class="ctrl1 img5"></div>
     <div class="ctrl1 img6"></div>
 </div>
+<br>
+<!-- css of square -->
+<style>
+  .square{
+    height: 60vh;
+    width: 95%;
+    background-color:transparent;
+    margin: auto;
+    display: flex;
+    border-radius: 3px;
+  
+    position: relative;
 
-<div class="direction">
-        <div class="left">
-
-
-          <video autoplay muted loop poster="video-thumbnail.jpg" id="video-bg">
-            <source src="video3.mp4" type="video/mp4">
-            
-            Your browser does not support the video tag.
-          </video>
-          <div class="overlay">
-            <h1>WE ARE ALWAYS AVILABLE FOR YOU</h1>
-            <p>LETS CURE THE NEEDY TOGETHER</p>
-          </div>
-      </div>
-      <div class="right">
-        <div class="interaction-section">
-          <a href="patient interface.html">
-        <div class="box1 box">
-           <h2>BOOK AN APPOINTMENT</h2>
-           <p>click here</p>
-          <div class="box1-img"></div>
-      
-        </a>
-        </div>
-        <div class="box2 box">
-          <h2>LAB TESTS</h2>
-          <div class="box2-img"></div>
-          
-          </div>
-          
-        <div class="box3 box">
-          <h2>OUR FACILITIES</h2>
-          <p>click here</p>
-          <div class="box3-img"></div>
-        
-          </div>
-        <div class="box4 box">
-          <h2>BOOK A telecommunication APPOINTMENT</h2>
-          <p>click here</p></div>
-          <div class="box4-img"></div>
-         
-        </div>
-        </div>
-       </div>
-      
+  }
+  .leftt{
     
+    height: 50vh;
+    width: 40%;
+    margin: auto;
+    position: relative;
+    border-radius: 13%;
+    overflow: hidden;
+    box-shadow: 2px 3px 3px 2px rgb(78, 161, 200);
+  }
+  .leftt video{
+object-fit: cover;
+    width: 100%;
+  height: 100%;
+  position: relative;
+
+  }
+ .leftt .over b{
+    position: absolute;
+   
+    top: 50%; /* Adjust as needed */
+    left: 50%; /* Adjust as needed */
+    transform: translate(-50%, -50%);
+    color: white; /* Adjust text color as needed */
+    font-size: 2.5vw; /* Adjust font size as needed */
+    font-weight: bold; /* Adjust font weight as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    
+  }
+  .over p{
+    font-size: 3vw;
+  }
+  .leftt .over p{
+    font-size: 2vw;
+  }
+  .rightt{
+    background-color: transparent;
+    height: 50vh;
+    width: 50%;
+    margin: auto;
+    border-radius: 6%;
+    display: flex;
+  box-shadow: 3px 2px 3px 3px aquamarine;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    overflow: hidden;
+    background-size: contain;
+   
+  }
+  .b1,.b2,.b3{
+height: 40%;
+width: 12vw;
+background-color: aqua;
+margin: 2%;
+border-radius: 10px;
+position: relative;
+overflow: hidden;
+box-shadow: 2px 2px 3px 2px rgb(153, 241, 241);
+  }
+  .b4{
+    height: 40%;
+width: 30vw;
+background-color: aqua;
+position: relative;
+border-radius: 4px;
+
+  }
+ .rightt p{
+position: absolute;
+text-align: center;
+font-weight: bolder;
+font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+color: rgb(54, 64, 64);
+font-size: 2vw;
+overflow-wrap: break-word;
+word-wrap: break-word;
+word-break: break-all;
+
+  }
+
+  .b1{
+    background-image: url("https://images.unsplash.com/photo-1633526543814-9718c8922b7a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwb2ludG1lbnR8ZW58MHx8MHx8fDA%3D");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 10vw;
+
+    
+  
+  }
+  .b1:hover,.b2:hover,.b3:hover,.b4:hover{
+    box-shadow: 2px 3px 3px 2px rgb(235, 169, 102);
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  .b2{
+    background-image: url("https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxhYiUyMHRlc3RzfGVufDB8fDB8fHww");
+    background-size: cover;
+    background-repeat: no-repeat;
+  
+  
+  }
+  .b3{
+    background-image: url("https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG9zcGl0YWx8ZW58MHx8MHx8fDA%3D");
+    background-size: cover;
+    background-repeat: no-repeat;
+  
+  
+  }
+  .b4{
+    background-image: url("https://media.istockphoto.com/id/1349094915/photo/businessman-using-computer-laptop-for-learning-online-internet-lessons-e-learning-education.webp?b=1&s=170667a&w=0&k=20&c=vPtu3BYtkLi5Oq2IJwSFZjQrRExHu8yXfQ8xPboercw=");
+    background-size: cover;
+    background-repeat: no-repeat;
+  
+  
+  }
+
+  
+</style>
+
+<div class="square">
+<div class="leftt">
+  <video autoplay muted loop poster="video-thumbnail.jpg" id="video-bg">
+    <source src="video3.mp4" type="video/mp4">
+    
+    Your browser does not support the video tag.
+  
+  </video>
+  <div class="over">
+    <p><b>WE ARE ALWAYS AVILABLE FOR YOU</b>LETS CURE THE NEEDY TOGETHER</p>
+        
+  </div>
+
+</div>
+<div class="rightt">
+
+ <div class="b1"> <p> Pre<br> Register</p></div>
+  <div class="b2"><p>Lab <br>Tests</p></div>
+  <div class="b3"><p>Our<br> facilities</p></div>
+  <div class="b4"><p>Book an Online <br>Appointment</p></div>
+
+</div>
+
+</div>
+       
+      
+    <br>
        <div class="lower">
         <img src="https://a.storyblok.com/f/86602/965x541/f99b8b2b37/hospital-management-system-sm-01.png/m/1080x0" alt="Image">
         <div class="lower-content">
@@ -124,34 +829,38 @@
     <br>
 
 
+
+
+
     <div class="information">
       <div class="info-box">
-        <a href="www.google.com" target="_blank">
+        <a href="https://www.who.int/news-room/feature-stories/detail/recognizing-outstanding-achievements-with-proven-impact-for-health-gains-in-countries" target="_blank">
           <img src="https://t3.ftcdn.net/jpg/03/31/34/32/240_F_331343249_ITCgRIBuNR4JguUSh9Hd4pjgRqjtCAlL.jpg" alt="Health Image">
-        </a>
         <div class="overlay">
-          <h1>AWARDS & ACHIEVEMENTS</h1>
+          <p class="p"><b>AWARDS & ACHIEVEMENTS</b></p>
           <p>HIGHLY EXCELLENT PATIENT CARE</p>
         </div>
+      </a>
       </div>
       
-    
-    
-    
-    
           <div class="info-box">
+            <a href="https://www.who.int/docs/default-source/documents/health-topics/standard-precautions-in-health-care.pdf" target="_blank">
             <img src="https://plus.unsplash.com/premium_photo-1661603901299-c8554e8b8678?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y292aWQlMjAxOSUyMHZhY2NpbmV8ZW58MHx8MHx8fDA%3D" alt="Health Image">
+            
             <div class="overlay">
-              <h1>PRECAUTIONS MAKE A PERSON WISER</h1>
+            <p><b>PRECAUTIONS MAKE A PERSON WISER</b></p>
               <p>BE CAUTIOUS TOWARDS YOUR HEALTH</p>
             </div>
+            </a>
           </div>
           <div class="info-box">
+            <a href="https://cdn.who.int/media/docs/default-source/searo/ncd/ncd-flip-charts/2.-healthy-diet-24-04-19.pdf?sfvrsn=3f98aec6_2" target="_blank">
             <img src="https://media.istockphoto.com/id/1340734082/photo/female-hand-fliping-wooden-cubes-with-word-wealth-to-health-copyspace-for-ad-offer.jpg?s=612x612&w=0&k=20&c=mW0jikF-T9Fd6H46tTzXFelM5N3MjQRVqdwj4GunkTM=" alt="Health Image">
             <div class="overlay">
-              <h1>HEALTH IS THE REAL WEALTH</h1>
+              <p><b>HEALTH IS THE REAL WEALTH</b></p>
               <p>EAT HEALTHY BE HEALTHY</p>
             </div>
+            </a>
           </div>
         </div>
          
