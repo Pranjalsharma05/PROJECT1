@@ -5,44 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>lab test</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-      
-    .form-container {
-        max-width: 400px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-      
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-      
-    input, select {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-    }
-    button {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-      }
-      
-      button:hover {
-        background-color: #45a049;
-      }
+   /* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(https://www.shutterstock.com/shutterstock/photos/1397341274/display_1500/stock-vector-medical-tests-template-chemical-laboratory-analysis-modern-flat-vector-concept-digital-1397341274.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.5);
+
+}
+
+header {
+    background-color: #4caf50;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+section {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h2 {
+    color: #4caf50;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+/* Form container */
+.form-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Form elements */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Benefits section */
+#benefits ul {
+    margin-top: 10px;
+    font-size: ;
+}
+
+/* Contact section */
+#contact {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+#intro {
+   
+    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+}
+
+    </style>
+    </head>
+    <body>
     
-</style>
-</head>
+    <header>
+      <h1>Welcome to Lab Appointment Services</h1>
+    </header>
+    
+    <section id="intro">
+      
+        <p style="font-size: large;">
+        <strong>Welcome to our lab appointment services. We offer convenient options for booking lab appointments at home or at our lab facility. Experience the convenience of getting lab tests done at the comfort of your home, with our trained professionals visiting you at your preferred time. Visit our lab facility for a wide range of lab tests in a safe and hygienic environment.</strong></p>
+    </section>
 <body>
     <div id="choice" class="form-container">
         <h2>BOOK YOUR LAB TEST JUST A CLICK BELOW</h2>
@@ -56,6 +137,28 @@
             <button type="button" onclick="selectchoice()">Select</button>
         </form>
     </div>
+    <section id="benefits">
+        <h2><b>Benefits</b></h2>
+        <ul><strong>
+          <li>Convenient and flexible appointment options</li>
+          <li>Professional and experienced staff</li>
+          <li>Accurate and reliable test results</li>
+          <li>Easy booking process</li>
+          <li>Safe and hygienic lab environment</li>
+          </strong>
+        </ul>
+      </section>
+
+      <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need assistance, feel free to contact us:</p>
+        <p>Phone: 123-456-7890<br>Email: info@example.com</p>
+      </section>
+      
+      <footer>
+        <p>&copy; 2024 Lab Appointment Services. All rights reserved.</p>
+      </footer>
+
     
     <script>
         function selectchoice() {
@@ -64,7 +167,7 @@
             
             if (selectedOption === "book1") {
                 window.open("book1.html", "_blank");
-            } else if (selectedOption === "come2") {
+            } else if (selectedOption === "book2") {
                 window.open("book2.html", "_blank");
             } else {
                 alert("Please select an option.");
