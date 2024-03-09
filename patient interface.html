@@ -1,10 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>PATIENT INTERFACE </title>
-	<link rel="stylesheet" href="patient interface.css">
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <meta charset="UTF-8">
+    <title>PATIENT INTERFACE</title>
+    <link rel="stylesheet" href="patient_interface.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+    <style>
+        /* Your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Josefin Sans', sans-serif;
+            background-color: #f3f5f9;
+        }
+
+        .wrapper {
+            display: flex;
+        }
+
+        .sidebar  {
+            width: 300px;
+            height: 100vh;
+            background: rgb(46, 80, 143);
+            padding: 30px 0px;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            border-bottom: 1px solid #bdb8d7;
+        }
+
+        .sidebar ul li a {
+            color: #bdb8d7;
+            display: block;
+        }
+
+        .sidebar ul li a .fas {
+            margin-right: 10px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #594f8d;
+        }
+
+        .sidebar ul li:hover a {
+            color: #fff;
+        }
+
+        .sidebar .social_media {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .sidebar .social_media a {
+            display: block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background: #594f8d;
+            text-align: center;
+            margin: 0 5px;
+            color: #bdb8d7;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .main_content {
+            margin-left: 306px;
+            padding: 20px;
+            background: #fff;
+            color: #717171;
+            flex-grow: 1; /* Added to allow the main content to grow */
+        }
+        .a{
+            text-decoration: none;
+        }
+        
+    </style>
 </head>
 <body>
 
@@ -12,49 +96,45 @@
     <div class="sidebar">
         <h2>WELCOME</h2>
         <ul>
-            <li><a href="frontpage.html"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
-            <li><a href="#"><i class="fas fa-address-card"></i>BOOK AN APPOINTMENT</a></li>
-            <li><a href="#"><i class="fas fa-phone-volume"></i>BOOK AN TELECOMMUNICATION APPOINTMENT</a></li>
-            <li><a href="#"><i class="fa fa-user-md"></i>YOUR PRESCRIPTIONS</a></li>
-            <li><a href="#"><i class="fas fa-address-book"></i>LOGOUT</a></li>
-        </ul> 
-       </div>
+            <li><a href="welcome.html" target="content"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="profile.html" target="content"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="appointment.html" id="book-appointment-link" target="content"><i class="fas fa-address-card"></i>BOOK AN APPOINTMENT</a></li>
+            <li><a href="teleappoint.html" id="book-telecommunication-appointment-link" target="content"><i class="fas fa-phone-volume"></i>BOOK A TELECOMMUNICATION APPOINTMENT</a></li>
+            <li><a href="lab.html" id="book-labtest-link" target="content"><i class="fas fa-user-md"></i>BOOK Lab Tests</a></li>
+            <li><a href="#" target="content"><i class="fas fa-prescription-bottle-alt"></i>YOUR PRESCRIPTIONS</a></li>
+            <li><a href="#" target="content"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
+        </ul>
+    </div>
+    
     <div class="main_content">
-        <div class="header">Welcome TO PATIENT REGISTRATION SYSTEM</div>  
-        <div id="profile" class="info">
-            <!-- Profile content -->
-        </div>
-        <div id="book-appointment" class="info">
-            <!-- Book Appointment content -->
-        </div>
-        <!-- Other content areas -->
+        <iframe name="content" style="width: calc(100vw - 300px); height: 95vh; border: none;"></iframe>
     </div>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const sidebarLinks = document.querySelectorAll(".sidebar a");
+        // Set the iframe src to the home page URL
+        document.querySelector('iframe[name="content"]').src = 'welcome.html';
 
-        sidebarLinks.forEach(link => {
-            link.addEventListener("click", function(event) {
-                event.preventDefault();
+        const bookAppointmentLink = document.getElementById("book-appointment-link");
+        const bookLabTestLink = document.getElementById("book-labtest-link");
+        const bookTelecommunicationAppointmentLink = document.getElementById("book-telecommunication-appointment-link");
 
-                const targetId = this.getAttribute("href").slice(1);
-                const targetContent = document.getElementById(targetId);
+        bookAppointmentLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.querySelector('iframe[name="content"]').src = 'appointment.html';
+        });
 
-                if (targetContent) {
-                    const infoSections = document.querySelectorAll(".main_content .info");
-                    infoSections.forEach(section => {
-                        section.style.display = "none";
-                    });
+        bookLabTestLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.querySelector('iframe[name="content"]').src = 'lab.html';
+        });
 
-                    targetContent.style.display = "block";
-                }
-            });
+        bookTelecommunicationAppointmentLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.querySelector('iframe[name="content"]').src = 'telecommunication.html';
         });
     });
 </script>
-
-
 </body>
 </html>
