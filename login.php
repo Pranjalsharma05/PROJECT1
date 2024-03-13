@@ -3,11 +3,11 @@
 session_start();
 
 // check if the user is already logged in
-// if(isset($_SESSION['username']))
-// {
-//     header("location: PROJECT1/trial1.html");
-//     exit;
-// }
+if(isset($_SESSION['username']))
+{
+    header("location: main_page.php");
+    exit;
+}
 require_once "config.php";
 
 $username = $password = "";
@@ -51,7 +51,7 @@ if(empty($err))
 
                             //Redirect user to welcome page
                             // echo 'done';
-                            header("location: PROJECT1/trial1.html");
+                            header("location: main_page.php");
                             
                         }
                      
@@ -144,7 +144,7 @@ if(empty($err))
            
         }
         button:hover{
-            background-color: chartreuse;
+            background-color: #2191b9;;
             cursor: pointer;
         }
 
@@ -152,13 +152,16 @@ if(empty($err))
 </head>
 <body>
     <div class="container">
+       
+        <a href="frontpage.html" ><button style="background-color: blue; font-weight: 900;">Go to Home Page</button></a>
         <div class="right-box">
      <h1>SIGN IN</h1>
+
      <form action="" method="POST">
         <p>Username *:</p>
         <input placeholder="Enter email id" type="email" name="username" required>
         <p>Password *:</p>
-        <input placeholder="Enter Password" type="text" name="password" required>
+        <input placeholder="Enter Password" type="password" name="password" required>
       <br><br>
         <button>Submit</button>
         <?php if (!empty($err)) { echo "<p style='color: red;'>$err</p>"; } ?>
