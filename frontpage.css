@@ -14,7 +14,7 @@ body {
    top: 0;
    left: 0;
    right: 0;
-   padding: 10px;
+   padding:px;
    z-index: 1;
    background: linear-gradient(30deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
    background-size: 600% 600%;
@@ -28,7 +28,7 @@ body {
    font-size: larger;
    padding: 10px;
    text-align: center;
-   background: linear-gradient(30deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+   /* background: linear-gradient(30deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
    background-size: 600% 600%;
    animation: gradientAnimation 10s ease infinite;
 }
@@ -63,6 +63,7 @@ flex-wrap: wrap;
 
 .nav a:hover {
    background-color: #d88736;
+   border-radius: 10%;
 }
 
 .dropdown {
@@ -162,26 +163,17 @@ header {
    padding: 20px;
    font-size: 180%; /* Common font size for all screen sizes */
 }
-
-/* Media Query for screens smaller than 768px */
-@media (max-width: 767px) {
-   .header-content {
-       /* Adjustments for smaller screens */
-       font-size: 50%; /* Adjust font size for smaller screens */
-   }
+.header-content p{
+   font-size: 3vw;
+   font-family:cursive;
 }
-
-/* Media Query for screens between 768px and 1024px */
-@media (min-width: 768px) and (max-width: 1024px) {
-   /* IF NEEDED ADD LATER */
+.box11{
+   height: 2vh;
+  
+   width: 100%;
 }
 
 
-@media (min-width: 1025px) {
-   /* IF NEEDED ADD LATER */
-}
-
-/* SLIDER SECTION */
 
 .container {
    display: flex;
@@ -302,6 +294,9 @@ display: block;
    border: 1px solid #c2e918;
    
 }
+/* .box1 h2{
+   font-size: vw;
+} */
 
 .box2 {
    background-color: #58d4e5;
@@ -341,6 +336,11 @@ display: block;
    border-radius: 10px;
    overflow: hidden;
 }
+.overlay b{
+   font-size: 4vw;
+   color: #c2e918;
+}
+
 
 .left video {
    position: absolute;
@@ -372,6 +372,7 @@ display: block;
    height: 50%;
    width: 70%;
    background-color: transparent;
+   background: linear-gradient(rgb(217, 217, 224),rgb(99, 198, 193));
    opacity: 9;
    border: 3px solid rgb(18, 225, 197);
    border-radius: 10px;
@@ -410,20 +411,26 @@ p {
 
 
 /* THIS SECTION SHOWS OUR CSS FOR LOWER */
+.information b{
+   font-size: 3vw;
+}
 
 
 .lower {
    position: relative;
-   height: 40vh;
+   height: 50vh;
    overflow: hidden; /* Ensure content does not overflow if it exceeds the height */
 }
 
 .lower img {
    width: 100%;
    height: 100%;
-   object-fit: cover; /* Ensure the image covers the entire div */
+   object-fit: cover; 
+   background-size: cover;/* Ensure the image covers the entire div */
 }
-
+.lower h1{
+   font-size: 5vw;
+}
 .lower-content {
    position: absolute;
    top: 50%;
@@ -442,20 +449,22 @@ p {
        padding: 10px; /* Adjust padding for smaller screens */
    }
 }
-
+.overlay p{
+   color: black;
+}
 
 /* THIS SECTION SHOWS OUR INFORMATION SECTION */
 .information {
    display: flex;
-   
-   justify-content: space-evenly;
+   gap:10px;
 }
 
 .info-box {
    position: relative;
-   width: 700px;
-   height: 500px;
+   width: 700vw;
+   height: 50vh;
    border: 3px solid rgb(18, 225, 197);
+   
    border-radius: 10px;
    overflow: hidden; /* Ensure the content does not overflow */
    text-align: center; /* Center text and image */
@@ -568,3 +577,4 @@ a {
 
 
 
+ 
