@@ -135,7 +135,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
         <script src="" async defer></script>
         </div>
     </div>
-
 <div class="wrapper">
 
     <div class="left">
