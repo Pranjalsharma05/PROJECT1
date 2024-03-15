@@ -132,14 +132,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
 </div>
 
 <script>
-
-document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
         // Set the iframe src to the home page URL
         document.querySelector('iframe[name="content"]').src = 'welcome.html';
-    document.addEventListener("DOMContentLoaded", function() {
+
         const bookAppointmentLink = document.getElementById("book-appointment-link");
         const bookLabTestLink = document.getElementById("book-labtest-link");
-       
+        const bookTelecommunicationAppointmentLink = document.getElementById("book-telecommunication-appointment-link");
 
         bookAppointmentLink.addEventListener("click", function(event) {
             event.preventDefault();
@@ -150,13 +149,10 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault();
             document.querySelector('iframe[name="content"]').src = 'lab.html';
         });
- bookLabTestLink.addEventListener("click", function(event) {
-            event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'lab.html';
-        });
+
         bookTelecommunicationAppointmentLink.addEventListener("click", function(event) {
             event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'teleappoint.html';
+            document.querySelector('iframe[name="content"]').src = 'telecommunication.html';
         });
     });
 </script>
