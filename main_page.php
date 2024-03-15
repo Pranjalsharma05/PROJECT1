@@ -94,7 +94,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
         <hr>
         
         <ul>
-            <span style="display: block; "><br><a href="frontpage.html" style="display: block;"><i class="fas fa-home"></i>HOME  <Br></a>
+            <span style="display: block; "><br><a href="welcome.html" style="display: block;"><i class="fas fa-home"></i>HOME  <Br></a>
           
             <hr></span>
            <span> <Br>
@@ -132,6 +132,10 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
 </div>
 
 <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+        // Set the iframe src to the home page URL
+        document.querySelector('iframe[name="content"]').src = 'welcome.html';
     document.addEventListener("DOMContentLoaded", function() {
         const bookAppointmentLink = document.getElementById("book-appointment-link");
         const bookLabTestLink = document.getElementById("book-labtest-link");
