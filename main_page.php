@@ -94,7 +94,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
         <hr>
         
         <ul>
-            <span style="display: block; "><br><a href="frontpage.html" style="display: block;"><i class="fas fa-home"></i>HOME  <Br></a>
+        <li><a href="welcome.html" target="content"><i class="fas fa-home"></i>Home</a></li>
           
             <hr></span>
            <span> <Br>
@@ -133,9 +133,12 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Set the iframe src to the home page URL
+        document.querySelector('iframe[name="content"]').src = 'welcome.html';
+
         const bookAppointmentLink = document.getElementById("book-appointment-link");
         const bookLabTestLink = document.getElementById("book-labtest-link");
-       
+        const bookTelecommunicationAppointmentLink = document.getElementById("book-telecommunication-appointment-link");
 
         bookAppointmentLink.addEventListener("click", function(event) {
             event.preventDefault();
@@ -146,13 +149,10 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
             event.preventDefault();
             document.querySelector('iframe[name="content"]').src = 'lab.html';
         });
- bookLabTestLink.addEventListener("click", function(event) {
-            event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'lab.html';
-        });
+
         bookTelecommunicationAppointmentLink.addEventListener("click", function(event) {
             event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'teleappoint.html';
+            document.querySelector('iframe[name="content"]').src = 'telecommunication.html';
         });
     });
 </script>
