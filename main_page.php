@@ -84,8 +84,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
         border-radius: 2px;
       }
       .navbar {
-            background-color: #5366ef;
+            background-color: #7FFFD4;
             overflow: hidden;
+            height: 80px;
         }
         
         .navbar a {
@@ -93,13 +94,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
             display: block;
             color: white;
             text-align: center;
-            padding: 14px 20px;
+            padding: 20px 20px;
             text-decoration: none;
             cursor: pointer;
         }
         
         .navbar a:hover {
-            background-color: #ddd;
+            background-color: #F08A5D;
             color: black;
         }  
         .navbar img{
@@ -142,8 +143,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
         <hr>
         
         <ul>
+            <span><br>
         <li><a href="welcome.html" target="content"><i class="fas fa-home"></i>Home</a></li>
-          
+          <br>
             <hr></span>
            <span> <Br>
                 <li><a href="profile.php" target="content"><i class="fas fa-user"></i>Profile</li>
