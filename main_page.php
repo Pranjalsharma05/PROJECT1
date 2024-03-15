@@ -83,9 +83,58 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
         background-color: #F08A5D;
         border-radius: 2px;
       }
+      .navbar {
+            background-color: #5366ef;
+            overflow: hidden;
+        }
+        
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }  
+        .navbar img{
+            height: 60px;
+        } 
+        #google_translate_element {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            
+            background-color:transparent;
+            border-radius: 5px;
+            
+         
+        }
     </style>
 </head>
 <body>
+<div class="navbar">
+        <a href="#" class="logo"><img src="doc.png" alt="Logo"></a>
+        <a href="#">Go To Main Page</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <div id="google_translate_element"></div>
+        
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,es,fr,hi,mr,ta,ur' }, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+        <script src="" async defer></script>
+        </div>
+    </div>
 
 <div class="wrapper">
 
