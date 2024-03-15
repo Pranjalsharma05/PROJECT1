@@ -94,7 +94,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
         <hr>
         
         <ul>
-            <span style="display: block; "><br><a href="welcome.html" style="display: block;"><i class="fas fa-home"></i>HOME  <Br></a>
+        <li><a href="welcome.html" target="content"><i class="fas fa-home"></i>Home</a></li>
           
             <hr></span>
            <span> <Br>
