@@ -120,7 +120,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
 <body>
 <div class="navbar">
         <a href="#" class="logo"><img src="doc.png" alt="Logo"></a>
-        <a href="#">Go To Main Page</a>
+        <a href="frontpage.html">Go To Main Page</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
         <div id="google_translate_element"></div>
