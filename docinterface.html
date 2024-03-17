@@ -153,7 +153,7 @@
     <h2>WELCOME DOCTOR</h2>
     <ul>
         <li><a href="welcomedoc.html" id="home-link"><i class="fas fa-home"></i>Home</a></li>
-        <li><a href="#" id="view-appointments-link"><i class="fa fa-calendar"></i>View Appointments</a></li>
+        <li><a href="index.php" id="view-appointments-link"><i class="fa fa-calendar"></i>View Appointments</a></li>
         <li><a href="#" id="view-prescription-link"><i class="fas fa-prescription"></i>View Prescription</a></li>
         <li><a href="#" id="view-graphs-link"><i class="fa fa-chart-bar"></i>View Graphs</a></li> <!-- Changed icon -->
         <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
@@ -165,21 +165,46 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const homeLink = document.getElementById("home-link");
-    const viewAppointmentsLink = document.getElementById("view-appointments-link");
-    const viewPrescriptionLink = document.getElementById("view-prescription-link");
-    const viewGraphsLink = document.getElementById("view-graphs-link");
-    const logoutLink = document.getElementById("logout-link");
-
-    homeLink.addEventListener("click", function(event) {
-        event.preventDefault();
-        document.querySelector('iframe[name="content"]').src = 'welcomedoc.html';
+    document.addEventListener("DOMContentLoaded", function() {
+        const homeLink = document.getElementById("home-link");
+        const viewAppointmentsLink = document.getElementById("view-appointments-link");
+        const viewPrescriptionLink = document.getElementById("view-prescription-link");
+        const viewGraphsLink = document.getElementById("view-graphs-link");
+        const logoutLink = document.getElementById("logout-link");
+    
+        // Function to set iframe source
+        function setIframeSrc(src) {
+            document.querySelector('iframe[name="content"]').src = src;
+        }
+    
+        // Add event listeners to links
+        homeLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            setIframeSrc('welcomedoc.html');
+        });
+    
+        viewAppointmentsLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            setIframeSrc('index.php'); // Replace with actual URL
+        });
+    
+        viewPrescriptionLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            setIframeSrc('view_prescription.html'); // Replace with actual URL
+        });
+    
+        viewGraphsLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            setIframeSrc('view_graphs.html'); // Replace with actual URL
+        });
+    
+        logoutLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            setIframeSrc('logout.html'); // Replace with actual URL
+        });
     });
-
-    // Add event listeners for other links as needed
-});
-</script>
+    </script>
+    
 
 </body>
 </html>
