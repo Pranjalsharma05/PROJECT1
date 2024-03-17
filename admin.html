@@ -22,7 +22,7 @@
         .sidebar  {
             width: 300px;
             height: 100vh;
-            background: rgb(46, 80, 143);
+            background: rgb(12, 145, 43);
             padding: 30px 0px;
             position: fixed;
         }
@@ -69,7 +69,7 @@
             width: 40px;
             height: 40px;
             line-height: 40px;
-            background: #594f8d;
+            background: #0a973e;
             text-align: center;
             margin: 0 5px;
             color: #bdb8d7;
@@ -88,22 +88,23 @@
             text-decoration: none;
         }
         .navbar {
-            background-color: #5366ef;
+            background-color: #7FFFD4;
             overflow: hidden;
+            height: 80px;
         }
         
         .navbar a {
             float: left;
             display: block;
-            color: white;
+            color: rgb(18, 14, 14);
             text-align: center;
-            padding: 14px 20px;
+            padding: 20px 20px;
             text-decoration: none;
             cursor: pointer;
         }
         
         .navbar a:hover {
-            background-color: #ddd;
+            background-color: #F08A5D;
             color: black;
         }  
         .navbar img{
@@ -145,13 +146,13 @@
         <h2>WELCOME</h2>
         <ul>
             <li><a href="welcomeadmin.html" target="content"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="#" target="content"><i class="fas fa-user"></i>REGISTER A DOCTOR </a></li>
-            <li><a href="#" target="content"><i class="fas fa-user"></i>VIEW DOCTORS</a></li>
-            <li><a href="#" id="book-appointment-link" target="content"><i class="fas fa-address-card"></i>VIEW OFFLINE APPOINTMENT</a></li>
-            <li><a href="#" id="book-telecommunication-appointment-link" target="content"><i class="fas fa-phone-volume"></i>VIEW TELECOMMUNICATION APPOINTMENT</a></li>
-            <li><a href="#" id="book-labtest-link" target="content"><i class="fas fa-user-md"></i>VIEW OFFLINE LAB TEST APPOINTMENTS</a></li>
-            <li><a href="#" target="content"><i class="fas fa-prescription-bottle-alt"></i>VIEW HOME LAB TEST BOOKINGS</a></li>
-            <li><a href="#" target="content"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
+            <li><a href="doc_registration.html" id="doc-registration-link" target="content"><i class="fas fa-user"></i>REGISTER A DOCTOR </a></li>
+            <li><a href="#" id="view-doctor-link" target="content"><i class="fas fa-user"></i>VIEW DOCTORS</a></li>
+            <li><a href="#" id="view-appointment-link" target="content"><i class="fas fa-address-card"></i>VIEW OFFLINE APPOINTMENT</a></li>
+            <li><a href="#" id="view-telecommunication-appointment-link" target="content"><i class="fas fa-phone-volume"></i>VIEW TELECOMMUNICATION APPOINTMENT</a></li>
+            <li><a href="#" id="view-offlinelabtest-link" target="content"><i class="fas fa-user-md"></i>VIEW OFFLINE LAB TEST APPOINTMENTS</a></li>
+            <li><a href="#" id="view-onlinelabtest-link" target="content"><i class="fas fa-prescription-bottle-alt"></i>VIEW HOME LAB TEST BOOKINGS</a></li>
+            <li><a href="#" id="logout-link" target="content"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
         </ul>
     </div>
     
@@ -162,28 +163,51 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const contentFrame = document.querySelector('iframe[name="content"]');
+
         // Set the iframe src to the home page URL
-        document.querySelector('iframe[name="content"]').src = 'welcomeadmin.html';
+        contentFrame.src = 'welcome.html';
 
-        const bookAppointmentLink = document.getElementById("book-appointment-link");
-        const bookLabTestLink = document.getElementById("book-labtest-link");
-        const bookTelecommunicationAppointmentLink = document.getElementById("book-telecommunication-appointment-link");
+        const homeLink = document.getElementById("home-link");
+        const docregistrationLink = document.getElementById("doc-registration-link");
+        const viewdoctorLink = document.getElementById("view-doctor-link");
+        const viewAppointmentsLink = document.getElementById("view-appointments-link");
+        const viewPrescriptionLink = document.getElementById("view-prescription-link");
+        const viewGraphsLink = document.getElementById("view-graphs-link");
+        const logoutLink = document.getElementById("logout-link");
 
-        bookAppointmentLink.addEventListener("click", function(event) {
+        // Function to set iframe source
+        function setIframeSrc(src) {
+            contentFrame.src = src;
+        }
+
+        // Add event listeners to links
+        homeLink.addEventListener("click", function(event) {
             event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'appointment.html';
+            setIframeSrc('welcomedoc.html');
         });
 
-        bookLabTestLink.addEventListener("click", function(event) {
+        viewAppointmentsLink.addEventListener("click", function(event) {
             event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'lab.html';
+            setIframeSrc('doc_registration.html');
         });
 
-        bookTelecommunicationAppointmentLink.addEventListener("click", function(event) {
+        viewPrescriptionLink.addEventListener("click", function(event) {
             event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'telecommunication.html';
+            contentFrame.src = '#';
+        });
+
+        viewGraphsLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            contentFrame.src = '#';
+        });
+
+        logoutLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            setIframeSrc('logout.html');
         });
     });
 </script>
+
 </body>
 </html>
