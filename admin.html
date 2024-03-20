@@ -146,7 +146,7 @@
         <h2>WELCOME</h2>
         <ul>
             <li><a href="welcomeadmin.html" target="content"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="doc_registration.html" id="doc-registration-link" target="content"><i class="fas fa-user"></i>REGISTER A DOCTOR </a></li>
+            <li><a href="doc_registration.php" id="doc-registration-link" target="content"><i class="fas fa-user"></i>REGISTER A DOCTOR </a></li>
             <li><a href="#" id="view-doctor-link" target="content"><i class="fas fa-user"></i>VIEW DOCTORS</a></li>
             <li><a href="#" id="view-appointment-link" target="content"><i class="fas fa-address-card"></i>VIEW OFFLINE APPOINTMENT</a></li>
             <li><a href="#" id="view-telecommunication-appointment-link" target="content"><i class="fas fa-phone-volume"></i>VIEW TELECOMMUNICATION APPOINTMENT</a></li>
@@ -189,7 +189,7 @@
 
         viewAppointmentsLink.addEventListener("click", function(event) {
             event.preventDefault();
-            setIframeSrc('doc_registration.html');
+            setIframeSrc('doc_registration.php');
         });
 
         viewPrescriptionLink.addEventListener("click", function(event) {

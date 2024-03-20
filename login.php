@@ -75,6 +75,8 @@ if(empty($err))
     <title>its_login page</title>
     <style>
         body{
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK9pIsCYx9Z9wPHyN-qDcqJMUALTYV0phaxw&usqp=CAU);
+ 
             margin: 0;
             padding: 0;
             background-color: rgb(215, 215, 221);
@@ -84,17 +86,22 @@ if(empty($err))
             align-items: center;
         }
         .container{
-            background-color: white;
-            height: 80vh;
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK9pIsCYx9Z9wPHyN-qDcqJMUALTYV0phaxw&usqp=CAU);
+ 
+            background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+            height: 60vh;
             width: 60%;
             border-radius: 10px;
             display: flex;
             flex-direction: row-reverse;
         }
         .right-box{
-            height: 80vh;
+            height:60vh;
             width: 50%;
-          padding: 10%;
+          padding: 5%;
           
             display: flex;
             flex-direction: column;
@@ -102,7 +109,7 @@ if(empty($err))
            
         }
         .left-box{
-            height: 80vh;
+            height: 60vh;
             width: 50%;
             background-color: blue;
            
@@ -141,6 +148,8 @@ if(empty($err))
         button{
             background-color: aqua;
             color: white;
+        
+            border-radius: 10px;
            
         }
         button:hover{
