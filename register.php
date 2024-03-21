@@ -130,7 +130,7 @@ mysqli_close($conn);
             display: flex;
         }
         .left-box{
-            height: 60vh;
+            
             width: 50%;
           padding: 5%;
             margin-right: auto;
@@ -138,7 +138,7 @@ mysqli_close($conn);
            
         }
         .right-box{
-            height: 60vh;
+            min-height:min-content;
             width: 50%;
             background-color: blue;
             margin-left: auto;
