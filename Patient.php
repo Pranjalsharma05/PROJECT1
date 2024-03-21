@@ -133,7 +133,7 @@ mysqli_close($conn);
 				<div><br>
 			    	<h2>Patient age:</h2><?php echo $age ?>
 					<h2>Patient Gender:</h2><?php echo $gender ?>
-			        <label>Mobile</label>
+			        
 					<h2>Patient Mobile no.:</h2><?php echo $mobile ?>
 					<h2>Patient Email Id:</h2><?php echo $username ?>
 			 
