@@ -6,7 +6,6 @@
 <title>Doctor Dashboard</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <style>
-    /* Global Styles */
     body {
         margin: 0;
         padding: 0;
@@ -14,87 +13,63 @@
         background-color: #f3f5f9;
     }
 
+    .wrapper {
+     display: flex;
+
+    }
+
     
 
-    /* Sidebar Styles */
-    .sidebar  {
-        width: 250px;
-        height: 100%;
-        background: #7FFFD4;
-        padding: 30px 0;
-        position: fixed;
-    }
-
-    .sidebar h2 {
-        color: #fff;
-        text-transform: uppercase;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .sidebar ul {
-        padding: 0;
-        list-style: none;
-    }
-
-    .sidebar ul li {
-        padding: 15px;
-        border-bottom: 1px solid #bdb8d7;
-    }
-
-    .sidebar ul li a {
-        color: #bdb8d7;
-        display: block;
-        text-decoration: none;
-    }
-
-    .sidebar ul li a .fas {
-        margin-right: 10px;
-    }
-
-    .sidebar ul li:hover {
-        background-color: #594f8d;
-    }
-
-    .sidebar ul li:hover a {
-        color: #fff;
-    }
-
-    .sidebar .social_media {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-    }
-
-    .sidebar .social_media a {
-        display: block;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        background: #594f8d;
-        text-align: center;
-        margin: 0 5px;
-        color: #bdb8d7;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-
-    /* Main Content Styles */
     .main_content {
-        margin-left: 250px;
-        padding: 20px;
+       
+        
         background: #fff;
         color: #717171;
     }
-
-    .main_content iframe {
-        width: 100%;
-        height: calc(100vh - 60px); /* Adjusted height to accommodate header */
-        border: none;
+    ul{
+       list-style-type: none;
     }
-    .navbar {
+
+
+    /*  */
+    .left{
+      margin-left: 0.1vw;
+      flex-direction: column;
+      text-decoration: none;
+      background: #52CEBA;
+ max-width: 200px;
+   flex-wrap: wrap;
+ padding: 3%;
+ box-shadow: 1px 2px 3px 5px grey;
+      border: 2px dotted rgb(138, 138, 215);
+      
+   
+  }
+ .left p{
+    font-weight: bolder;
+      color: aliceblue;
+flex-wrap: wrap;
+      font-size: 2.5vw;
+      margin-top: 0.6vh;
+  }
+  ul{
+      text-decoration: dotted;
+      display: flex;
+      flex-direction: column;
+  display:contents;
+   
+  }
+  a{
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  span:hover{
+   display: block;
+    background-color: #F08A5D;
+    border-radius: 2px;
+  }
+  .navbar {
         background-color: #7FFFD4;
         overflow: hidden;
         height: 80px;
@@ -149,14 +124,16 @@
     </div>
 
 
-<div class="sidebar">
+<div class="left">
     <h2>WELCOME DOCTOR</h2>
+    <hr>
     <ul>
-        <li><a href="welcomedoc.html" id="home-link"><i class="fas fa-home"></i>Home</a></li>
-        <li><a href="viewappointmentdordoc.php" id="view-appointments-link"><i class="fa fa-calendar"></i>View Appointments</a></li>
-        <li><a href="#" id="view-prescription-link"><i class="fas fa-prescription"></i>View Prescription</a></li>
-        <li><a href="#" id="view-graphs-link"><i class="fa fa-chart-bar"></i>View Graphs</a></li> <!-- Changed icon -->
-        <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
+        <span><br>
+            <hr> <span><br> <li><a href="welcomedoc.html" id="home-link"><i class="fas fa-home"></i>Home</a></li></span>
+           <hr> <span><br> <li><a href="viewappointmentdordoc.php" id="view-appointments-link"><i class="fa fa-calendar"></i>View Appointments</a></li></span>
+           <hr>  <span><br> <li><a href="#" id="view-prescription-link"><i class="fas fa-prescription"></i>View Prescription</a></li></span>
+           <hr> <span><br> <li><a href="#" id="view-graphs-link"><i class="fa fa-chart-bar"></i>View Graphs</a></li> </span><!-- Changed icon -->
+           <hr>  <span><br> <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li></span>
     </ul>
 </div>
 
