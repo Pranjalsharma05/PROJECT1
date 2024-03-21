@@ -62,11 +62,41 @@ if ($result) {
 } else {
     $em = "Error retrieving data from the database: " . mysqli_error($conn);
 }
+ $sql1 = "SELECT mobile FROM users INNER JOIN profile ON profile.username = users.username WHERE profile.username = ?";
+
+$stmt1 = mysqli_prepare($conn, $sql1);
+
+// Bind the parameter
+mysqli_stmt_bind_param($stmt1, "s", $loggedInUsername);
+
+// Execute the statement
+mysqli_stmt_execute($stmt1);
+
+// Get the result set
+$result1 = mysqli_stmt_get_result($stmt1);
+
+// Check if the query was successful
+if ($result1) {
+    // Use a conditional check to see if there are any rows returned
+    if(mysqli_num_rows($result1) > 0) {
+        while ($row1 = mysqli_fetch_assoc($result1)) {
+            // Process each row
+			$mobile = $row1['mobile'];
+			
+
+		}}}
 
 // Close the statement and database connection
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 ?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,18 +135,12 @@ mysqli_close($conn);
 					<h2>Patient Gender:</h2><?php echo $gender ?>
 			        <label>Mobile</label>
 					<h2>Patient Mobile no.:</h2><?php echo $mobile ?>
-			       	<label>Email</label>
-			       	<input type="Email" name="Email" required=""><br>
+					<h2>Patient Email Id:</h2><?php echo $username ?>
 			 
 
-				    <br><br>
+					<h2>Patient Aadhar no.:</h2><?php echo $adharcard ?>
 
-				    <label for="adhar">Adhar Number:</label>
-				    <input type="password" id="idNumber" name="idNumber" required>
-
-				    <br><br>
-
-			        <input type="checkbox" onclick="myFunction()">Show Adhar  Number<br><br>
+			     
 
 			        			    
 			     <input type="reset" value="Reset">
