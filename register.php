@@ -125,8 +125,7 @@ mysqli_close($conn);
             background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    min-height:min-content;
-            width: 60%;
+     width: 60%;
             border-radius: 10px;
             display: flex;
         }
