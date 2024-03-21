@@ -104,6 +104,11 @@ mysqli_close($conn);
 	<meta name="viewpoint" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link rel="stylesheet" href="style.css">
+	<style>
+		button:hover{
+cursor:pointer;
+		}
+	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/font-awesome.min.css">
 </head>
 <body><h1 style="font-size:34px;line-height: 24px;padding: 2px;text-align: center;">Welcome</h1>
@@ -139,8 +144,13 @@ mysqli_close($conn);
 			 
 
 					<h2>Patient Aadhar no.:</h2><?php echo $adharcard ?>
-
-			     
+					<button onclick="time(event)">Book appointment time</button>
+<script>
+    function time(event) {
+        event.preventDefault(); // Prevent default form submission behavior
+        window.location.href = "samya.html";
+    }
+</script>
 
 			        			    
 			     <input type="reset" value="Reset">
