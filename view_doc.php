@@ -24,7 +24,7 @@ mysqli_close($conn);
     <style>
          body {
             font-family: Arial, sans-serif;
-            background-image: url('https://media.istockphoto.com/id/1161898151/photo/close-up-of-calendar-and-alarm-clock-on-the-green-background-planning-for-business-meeting-or.jpg?s=1024x1024&w=is&k=20&c=8czACQwkxiEZmbXxpSi0Me_Kjj7nrAaFB_by2SWyjuE=');
+            background-image: url('https://img.freepik.com/free-vector/medical-team-design_1232-3215.jpg?t=st=1710982746~exp=1710986346~hmac=269b4f6f6027ee62dfca84d5740f3125a020aad74eba1c9c16e1d54e4db7431f&w=740');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;

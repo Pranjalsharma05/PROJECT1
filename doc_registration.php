@@ -1,8 +1,8 @@
 <?php
 require_once "config.php";
 
-$doc_name = $password = $confirm_password = $mobile = "";
-$doc_name_err = $password_err = $confirm_password_err = $mobile_err = "";
+$doc_name = $doc_email = $doc_password = $confirm_password = $doc_mobile = $doc_department = $doc_qualification = $doc_gender = $doc_aadhar = "";
+$doc_name_err = $doc_email_err = $doc_password_err = $confirm_password_err = $doc_mobile_err = $doc_department_err = $doc_qualification_err = $doc_gender_err = $doc_aadhar_err = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Check if doctor name is empty
@@ -13,13 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $doc_name = trim($_POST["doc_name"]);
     }
 
-    // Check if password is empty
-    if (empty(trim($_POST["password"]))) {
-        $password_err = "Password cannot be blank";
-    } elseif (strlen(trim($_POST["password"])) < 4) {
-        $password_err = "Password must be at least 4 characters";
+    // Check if doctor email is empty
+    if (empty(trim($_POST["doc_email"]))) {
+        $doc_email_err = "Email cannot be blank";
     } else {
-        $password = trim($_POST["password"]);
+        // Validate doctor email
+        $doc_email = trim($_POST["doc_email"]);
+    }
+
+    // Check if password is empty
+    if (empty(trim($_POST["doc_password"]))) {
+        $doc_password_err = "Password cannot be blank";
+    } elseif (strlen(trim($_POST["doc_password"])) < 4) {
+        $doc_password_err = "Password must be at least 4 characters";
+    } else {
+        $doc_password = trim($_POST["doc_password"]);
     }
 
     // Check if confirm password matches
@@ -27,28 +35,61 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $confirm_password_err = "Please confirm password";
     } else {
         $confirm_password = trim($_POST["confirm_password"]);
-        if (empty($password_err) && ($password != $confirm_password)) {
+        if (empty($doc_password_err) && ($doc_password != $confirm_password)) {
             $confirm_password_err = "Passwords did not match";
         }
     }
 
     // Check if mobile number is empty
-    if (empty(trim($_POST["mobile"]))) {
-        $mobile_err = "Mobile number cannot be blank";
-    } elseif (strlen(trim($_POST["mobile"])) < 10) {
-        $mobile_err = "Mobile number must be at least 10 characters";
+    if (empty(trim($_POST["doc_mobile"]))) {
+        $doc_mobile_err = "Mobile number cannot be blank";
+    } elseif (strlen(trim($_POST["doc_mobile"])) < 10) {
+        $doc_mobile_err = "Mobile number must be at least 10 characters";
     } else {
-        $mobile = trim($_POST["mobile"]);
+        $doc_mobile = trim($_POST["doc_mobile"]);
+    }
+
+    // Check if department is empty
+    if (empty(trim($_POST["doc_department"]))) {
+        $doc_department_err = "Please select a department";
+    } else {
+        $doc_department = trim($_POST["doc_department"]);
+    }
+
+    // Check if qualification is empty
+    if (empty(trim($_POST["doc_qualification"]))) {
+        $doc_qualification_err = "Qualification cannot be blank";
+    } else {
+        $doc_qualification = trim($_POST["doc_qualification"]);
+    }
+
+    // Check if gender is empty
+    if (empty(trim($_POST["doc_gender"]))) {
+        $doc_gender_err = "Please select a gender";
+    } else {
+        $doc_gender = trim($_POST["doc_gender"]);
+    }
+
+    // Check if Aadhar card number is empty
+    if (empty(trim($_POST["doc_aadhar"]))) {
+        $doc_aadhar_err = "Aadhar Card number cannot be blank";
+    } else {
+        $doc_aadhar = trim($_POST["doc_aadhar"]);
     }
 
     // If no errors, insert into database
-    if (empty($doc_name_err) && empty($password_err) && empty($confirm_password_err) && empty($mobile_err)) {
-        $sql = "INSERT INTO users (doc_name, password, mobile) VALUES (?, ?, ?)";
+    if (empty($doc_name_err) && empty($doc_email_err) && empty($doc_password_err) && empty($confirm_password_err) && empty($doc_mobile_err) && empty($doc_department_err) && empty($doc_qualification_err) && empty($doc_gender_err) && empty($doc_aadhar_err)) {
+        $sql = "INSERT INTO doctors (doc_name, doc_email, doc_password, doc_mobile, doc_department, doc_qualification, doc_gender, doc_aadhar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
-            mysqli_stmt_bind_param($stmt, "sss", $param_doc_name, $param_password, $param_mobile);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $param_doc_name, $param_doc_email, $param_doc_password, $param_doc_mobile, $param_doc_department, $param_doc_qualification, $param_doc_gender, $param_doc_aadhar);
             $param_doc_name = $doc_name;
-            $param_password = password_hash($password, PASSWORD_DEFAULT);
-            $param_mobile = $mobile;
+            $param_doc_email = $doc_email;
+            $param_doc_password = password_hash($doc_password, PASSWORD_DEFAULT);
+            $param_doc_mobile = $doc_mobile;
+            $param_doc_department = $doc_department;
+            $param_doc_qualification = $doc_qualification;
+            $param_doc_gender = $doc_gender;
+            $param_doc_aadhar = $doc_aadhar;
 
             if (mysqli_stmt_execute($stmt)) {
                 header("location: login.php");
@@ -125,23 +166,10 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(45deg, #6bff90, #7562ff, #d8e344, #118AB2);
-    font-family: 'Arial', sans-serif;
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
-}
-
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+    background-image: url('https://img.freepik.com/free-vector/medical-team-design_1232-3215.jpg?t=st=1710982746~exp=1710986346~hmac=269b4f6f6027ee62dfca84d5740f3125a020aad74eba1c9c16e1d54e4db7431f&w=740');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
 
 main {
     width: 60%;
@@ -180,68 +208,61 @@ strong{
 <body>
   
     
-    <main>
-        <form action="register_doctor.php" method="post">
-            <strong>REGISTER A DOCTOR</strong>
+<main>
+    <form action="register_doctor.php" method="post">
+        <strong>REGISTER A DOCTOR</strong>
         <hr>
 
         <div class="upper">
             <label for="doc_name">Doctor Name:</label>
             <input type="text" id="doc_name" name="doc_name" required>
 
-
             <label for="image">Image:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="file" id="image" name="image" accept="image/*" required>
         </div>
         <hr>
         <div class="middle">
+            <label for="doc_email">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="email" id="doc_email" name="doc_email" required>
 
+            <label for="doc_mobile">&nbsp;&nbsp;&nbsp;&nbsp;Mobile:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" id="doc_mobile" name="doc_mobile" required>
+            <br><br>
 
-            <label for="email">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="mobile">&nbsp;&nbsp;&nbsp;&nbsp;Mobile:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="mobile" name="mobile" required>
-<br>
-<br>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="doc_password">Password:</label>
+            <input type="password" id="doc_password" name="doc_password" required>
 
             <label for="confirm_password">Confirm Password:</label>
             <input type="password" id="confirm_password" name="confirm_password" required>
-
-
-            
         </div>
         <hr>
         <div class="lower">
-
-            <label for="department">Department:</label>
-            <select id="depaetment" name="department" required>
+            <label for="doc_department">Department:</label>
+            <select id="doc_department" name="doc_department" required>
                 <option value="dept1">DEPT1</option>
                 <option value="dept2">DEPT2</option>
                 <option value="dept3">DEPT3</option>
             </select>
 
-            <label for="qualification">Qualification:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="qualification" name="qualification" required>
+            <label for="doc_qualification">Qualification:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" id="doc_qualification" name="doc_qualification" required>
 
             <hr>
-            <label for="gender">Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <select id="gender" name="gender" required>
+            <label for="doc_gender">Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <select id="doc_gender" name="doc_gender" required>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
             </select>
 
-            <label for="aadhar_no">Aadhar Card N0.</label>
-            <input type="text" id="aadhar_no" name="aadhar_no" required>
+            <label for="doc_aadhar">Aadhar Card N0.</label>
+            <input type="text" id="doc_aadhar" name="doc_aadhar" required>
         </div>
         <hr>
         <button type="submit">Submit</button>
     </form>
-    </main>
+</main>
+
     <script src="" async defer></script>
     
 </body>
