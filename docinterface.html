@@ -123,26 +123,34 @@ flex-wrap: wrap;
         </div>
     </div>
 
-
+    <div class="wrapper">
 <div class="left">
     <h2>WELCOME DOCTOR</h2>
     <hr>
     <ul>
-        <span><br>
-            <hr> <span><br> <li><a href="welcomedoc.html" id="home-link"><i class="fas fa-home"></i>Home</a></li></span>
+        
+         <span><br> <li><a href="welcomedoc.html" id="home-link"><i class="fas fa-home"></i>Home</a></li></span>
            <hr> <span><br> <li><a href="viewappointmentdordoc.php" id="view-appointments-link"><i class="fa fa-calendar"></i>View Appointments</a></li></span>
            <hr>  <span><br> <li><a href="#" id="view-prescription-link"><i class="fas fa-prescription"></i>View Prescription</a></li></span>
            <hr> <span><br> <li><a href="#" id="view-graphs-link"><i class="fa fa-chart-bar"></i>View Graphs</a></li> </span><!-- Changed icon -->
            <hr>  <span><br> <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li></span>
-    </ul>
+   
+   
+        </ul>
 </div>
 
 <div class="main_content">
-    <iframe name="content" src="welcomedoc.html"></iframe> <!-- Initial content source -->
+    <iframe name="content" style="width: calc(100vw - 300px); height: 95vh; border: none;"></iframe>
+</div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const contentFrame = document.querySelector('iframe[name="content"]');
+
+        // Set the iframe src to the home page URL
+        contentFrame.src = 'welcome.html';
+
         const homeLink = document.getElementById("home-link");
         const viewAppointmentsLink = document.getElementById("view-appointments-link");
         const viewPrescriptionLink = document.getElementById("view-prescription-link");
@@ -151,9 +159,8 @@ flex-wrap: wrap;
     
         // Function to set iframe source
         function setIframeSrc(src) {
-            document.querySelector('iframe[name="content"]').src = src;
+            contentFrame.src = src;
         }
-    
         // Add event listeners to links
         homeLink.addEventListener("click", function(event) {
             event.preventDefault();
