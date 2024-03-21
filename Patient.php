@@ -1,0 +1,159 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once "config.php";
+
+// Initialize error message
+$em = "";
+
+// Start the session
+session_start();
+
+// Check if the connection is successful
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Get the username of the currently logged-in user from the session
+$loggedInUsername = $_SESSION['username'] ?? '';
+
+// Check if the username is available
+if (empty($loggedInUsername)) {
+    die("Username not available");
+}
+
+// Retrieve data from the database using a prepared statement
+$sql = "SELECT * FROM profile
+        INNER JOIN users ON profile.username = users.username
+        WHERE profile.username = ?";
+$stmt = mysqli_prepare($conn, $sql);
+
+// Bind the parameter
+mysqli_stmt_bind_param($stmt, "s", $loggedInUsername);
+
+// Execute the statement
+mysqli_stmt_execute($stmt);
+
+// Get the result set
+$result = mysqli_stmt_get_result($stmt);
+
+// Check if the query was successful
+if ($result) {
+    // Use a conditional check to see if there are any rows returned
+    if(mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Process each row
+            $base64_image = $row['profileimage'];
+            $name = $row['name'];
+            $username = $row['username'];
+            $age = $row['age'];
+            $gender = $row['gender'];
+            $fathername = $row['fathername'];
+            $adharcard = $row['adharcard'];
+            $city = $row['city']; // Assuming 'name' is the column for the user's name
+
+           
+        }
+    } else {
+        // No matching profile found
+        echo "No profile found for the logged-in user.";
+    }
+} else {
+    $em = "Error retrieving data from the database: " . mysqli_error($conn);
+}
+
+// Close the statement and database connection
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewpoint" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/font-awesome.min.css">
+</head>
+<body><h1 style="font-size:34px;line-height: 24px;padding: 2px;text-align: center;">Welcome</h1>
+	<div class="Head">
+			<div class="input-name1">
+				<form>
+					<fieldset><div>
+						<h2>Registration Process For Patient Details</h2><br>
+	<div class="input-name">
+
+		<label for="Department">Choose a Department:</label>
+			<select id="Department">
+			<option value=""></option>
+  			<option value="Cardiology Department">Cardiology Department</option>
+  			<option value="Orthopedics Departmen">Orthopedics Departmen</option>
+  			<option value="Oncology Department">Oncology Department</option>
+  			<option value="Neurology Department">Neurology Department</option>
+  			<option value="Gynecology/Obstetrics Department">Gynecology/Obstetrics Department</option>
+  			
+			</select>
+	</div><br>
+				<h2>Patient Name:</h2><?php echo $name ?>
+				<div>
+				<h2>Father Name:</h2><?php echo $fathername ?>
+				
+			</div>
+				<div><br>
+			    	<h2>Patient age:</h2><?php echo $age ?>
+					<h2>Patient Gender:</h2><?php echo $gender ?>
+			        <label>Mobile</label>
+					<h2>Patient Mobile no.:</h2><?php echo $mobile ?>
+			       	<label>Email</label>
+			       	<input type="Email" name="Email" required=""><br>
+			 
+
+				    <br><br>
+
+				    <label for="adhar">Adhar Number:</label>
+				    <input type="password" id="idNumber" name="idNumber" required>
+
+				    <br><br>
+
+			        <input type="checkbox" onclick="myFunction()">Show Adhar  Number<br><br>
+
+			        			    
+			     <input type="reset" value="Reset">
+			    <button type="button" onclick="">Submit</button></fieldset>
+
+   
+    </form>
+
+					<script>
+						    function submitOption() {
+						        var ageOption = document.getElementById('ageOption');
+						        var dobOption = document.getElementById('dobOption');
+						        var ageInput = document.getElementById('ageInput');
+						        var dobInput = document.getElementById('dobInput');
+
+						        if (ageOption.checked) {
+						            // Age option is selected
+						            alert('Selected Age: ' + ageInput.value);
+						        } else if (dobOption.checked) {
+						            // Date of Birth option is selected
+						            alert('Selected Date of Birth: ' + dobInput.value);
+						        } else {
+						            // Neither option is selected
+						            alert('Please choose an option.');
+						        }
+						    }function myFunction() {
+								  var x = document.getElementById("myInput");
+								  if (x.type === "password") {
+								    x.type = "text";
+								  } else {
+								    x.type = "password";
+								  }
+								}
+						</script>
+			</div>
+		</div>
+		<p style="margin-left: 160px;color: red;font-size:18px">Note: You must fill all boxes And
+         This facility is only for Online Pre-Registration and not for Online Appointment for a specific Consultant/Unit</p>
+</body>
+</html>

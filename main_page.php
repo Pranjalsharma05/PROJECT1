@@ -151,7 +151,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
                 <li><a href="profile.php" target="content"><i class="fas fa-user"></i>Profile</li>
             <BR></a></span>
                 <hr>
-               <span><br> <li><a href="appointment.html" id="book-appointment-link" target="content"><i class="fas fa-address-card"></i>BOOK AN APPOINTMENT</li>
+               <span><br> <li><a href="patient.php" id="book-appointment-link" target="content"><i class="fas fa-address-card"></i>BOOK AN APPOINTMENT</li>
           <BR></a></span>
             <hr>
            <span> <a href="teleappoint.html"><i class="fas fa-phone-volume"></i>BOOK A<br>TELECOMMUNICATION<br> APPOINTMENT
@@ -192,7 +192,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
 
         bookAppointmentLink.addEventListener("click", function(event) {
             event.preventDefault();
-            document.querySelector('iframe[name="content"]').src = 'appointment.html';
+            document.querySelector('iframe[name="content"]').src = 'patient.php';
         });
 
         bookLabTestLink.addEventListener("click", function(event) {
