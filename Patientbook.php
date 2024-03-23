@@ -9,42 +9,6 @@ $em = "";
 // Start the session
 session_start();
 
-
-if($_POST['bookAppointment'])
-{
-	if (isset($_SESSION['username'])) {
-		// Select the username from the profile table
-		$query = "SELECT username FROM profile WHERE username = ?";
-		$stmt = mysqli_prepare($conn, $query);
-		mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
-		mysqli_stmt_execute($stmt);
-	
-		// Store the result
-		mysqli_stmt_store_result($stmt);
-	
-		if (mysqli_stmt_num_rows($stmt) == 1) {
-			// The username exists in the profile table
-	
-			// You don't need a separate query for the users table
-			// Just check if the username exists in the users table
-			$query = "SELECT username FROM users WHERE username = ?";
-			mysqli_stmt_prepare($stmt, $query);
-			mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
-			mysqli_stmt_execute($stmt);
-	
-			// Store the result
-			mysqli_stmt_store_result($stmt);
-	
-			if (mysqli_stmt_num_rows($stmt) == 1) {
-				// Redirect to profile_output.php if the username exists in both tables
-				header("location: Patientbook.php");
-				exit;
-			}
-		}
-	}
-   
-}
-
 // Check if the connection is successful
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -190,8 +154,7 @@ cursor:pointer;
 					<h2>Patient Aadhar no.:</h2><?php echo $adharcard ?>
 			
 				
-        <button type="submit" name="bookAppointment" value="Book Appointment">Date</button>
-
+      <h2>Appointment Date:</h2></h2><?php echo $adharcard ?>
 
 
 			        			    

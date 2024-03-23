@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date selection</title>
+  <style>
+    body{
+      height:100vh;
+       width:100%;
+    }
+    h2{
+      text-align: center;
+    }
+    .head{
+      display: flex;
+      justify-content: center;
+    }
+    .head input{
+      height: 5vh;
+    }
+    button:hover{
+     cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Appointment Booking</h2>
+  <div class="head">
+    <form action="/submit_date" method="post" id="dateForm">
+      <h1>Enter Date:</h1>
+      <input placeholder="Enter Appointment Date" type="date" id="AppointmentDate" min="{{a}}" max="{{b}}" 
+      required>
+      <br><button type="button" onclick="btn()" id="btn11" disabled>BOOK</button>
+    </form>
+  </div>
+  <script>
+    
+
+var AppointmentDate = document.getElementById("AppointmentDate");
+var button=document.getElementById('btn11');
+ 
+button.addEventListener('click', function() {
+    button.clicked = true;
+});
+       
+
+document.getElementById('btn11').addEventListener('click', function() {
+  if (button.clicked === true && AppointmentDate !== ""){
+        document.getElementById('AppointmentDate').readOnly = true;}
+    });
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("AppointmentDate").setAttribute("min", today);
+
+    var maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 30); // Adding 30 days
+    var max_dd = String(maxDate.getDate()).padStart(2, '0');
+    var max_mm = String(maxDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var max_yyyy = maxDate.getFullYear();
+    var maxDateFormatted = max_yyyy + '-' + max_mm + '-' + max_dd;
+    document.getElementById("AppointmentDate").setAttribute("max", maxDateFormatted);
+
+
+
+
+    function btn() {
+
+      var AppointmentDate = document.getElementById("AppointmentDate").value;
+      if (AppointmentDate !== "") {
+        document.forms[0].submit();
+        // window.location.href = "time.html";
+
+      } else {
+        alert("Please enter the appointment date");
+      }
+    }
+
+
+    document.getElementById("AppointmentDate").addEventListener("input", function() {
+    var btn11 = document.getElementById("btn11");
+    if (this.value !== "") {
+        btn11.disabled = false; // Enable the button
+    } else {
+        btn11.disabled = true; // Disable the button
+    }
+});
+  </script>
+
+
+
+
+<!-- time
+
+
+
+-->
+
+
+
+
+
+
+
+<style>
+  h1{
+    text-align: center;
+  }
+  table{
+    width: 100%;
+  }
+  
+  table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+th {
+  background-color: #f2f2f2;
+}
+button:hover{
+  cursor: pointer;
+}
+#slot1{
+  background-color: rgb(73, 198, 73);
+}
+#slot2{
+  background-color: rgb(73, 198, 73);
+}
+#slot3{
+  background-color: rgb(73, 198, 73);
+}
+.confirm button{
+background-color: red;
+color: white;
+}
+.confirm button:hover{
+cursor: pointer;
+}
+</style>
+
+<!--  -->
+<h1>Select Appointment Booking Time--(4)booking</h1>
+<div class="time">
+  <table>
+<tr>
+<th>Time</th>
+<th>Availability</th>
+<th>Booking</th>
+</tr>
+<form action="/submit_date" method="post" id="dateForm">
+<tr>
+<td>9:00 - 10:00 AM</td>
+<td id="slot1">Available</td>
+<td><button onclick="btn1('9:00-10:00')" class="disable" name="9:00-10:00">Book</button></td>
+</tr>
+<tr>
+<td>10:00 - 11:00 AM</td>
+<td id="slot2">Available</td>
+<td><button onclick="btn2('10:00-11:00')" class="disable" name="10:00-11:00">Book</button></td>
+</tr>
+<tr>
+<td>2:00 - 3:00 PM</td>
+<td id="slot3">Available</td>
+<td><button onclick="btn3('2:00-3:00')" class="disable" name="2:00-3:00">Book</button></td>
+</tr>
+</form>
+
+  </table>
+</div>
+  <div class="confirm">
+    <button onclick="reset()" >Reset</button>
+  <button style="background-color: green;" onclick="submit()">Submit</button>
+  </div>
+
+<!-- <\Asli logic!!! -->
+
+<script>
+
+
+
+
+   var selectTime=[];
+   var dateFilled = false;
+   var disable=document.getElementsByClassName("disable");
+
+   function btn() {
+    var AppointmentDate = document.getElementById("AppointmentDate").value;
+    if (AppointmentDate !== "") {
+        dateFilled = true; // Set flag to true if date is filled
+        // Enable time selection buttons
+        var buttons = document.getElementsByClassName("disable");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = false;
+        }
+    } else {
+        dateFilled = false; // Set flag to false if date is not filled
+        alert("Please enter the appointment date");
+        // Disable time selection buttons
+        var buttons = document.getElementsByClassName("disable");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+        }
+    }
+}
+
+    
+
+  // Function to disable time booking buttons on page load if date is not filled
+  window.onload = function() {
+      var AppointmentDate = document.getElementById("AppointmentDate").value;
+      if (AppointmentDate === "") {
+        var buttons = document.getElementsByClassName("disable");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = true;
+        }
+      }
+    };
+
+
+
+
+    function submit() {
+  if (!dateFilled) {
+    alert("Please enter the appointment date first.");
+    return;
+  }
+  if (selectTime.length === 0) {
+    alert("Please select one appointment time!");
+    return;
+  }
+  
+  // Construct URL with selected times
+  var url = "Patientbook.php?";
+  selectTime.forEach(function(time) {
+    url += "Patientbook=" + encodeURIComponent(time) + "&";
+  });
+  
+  // Remove trailing "&" from the URL
+  url = url.slice(0, -1);
+  
+  // Redirect to the previous page with selected times as URL parameters
+  window.location.href = url;
+}
+
+
+function reset() {
+ 
+  document.getElementById("dateForm").reset(); // Reset the form
+  selectTime = []; // Clear the selected time slots array
+  dateFilled = false; // Reset the dateFilled flag
+ 
+  // Disable time booking buttons if the date is not filled
+  var AppointmentDate = document.getElementById("AppointmentDate").value;
+  if (AppointmentDate === "") {
+    var buttons = document.getElementsByClassName("disable");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
+
+    // Reset availability status and styles for each time slot
+    var slots = document.querySelectorAll(".time button");
+    slots.forEach(function(slot) {
+      if (slot.parentNode.previousElementSibling.textContent === "Booked") {
+        slot.parentNode.previousElementSibling.textContent = "Available"; // Reset availability text
+        slot.parentNode.previousElementSibling.style.backgroundColor = "rgb(73, 198, 73)"; // Reset background color
+        slot.disabled = true; // Disable the button
+      }
+    });
+  } else {
+    // Enable time booking buttons if the date is filled
+    var buttons = document.getElementsByClassName("disable");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = false;
+    }
+  }
+  document.getElementById('AppointmentDate').readOnly = false;
+      document.getElementById('btn11').disabled = true;
+    
+}
+
+
+
+
+
+
+
+ 
+  var available1=5;
+  function btn1(time){
+  selectTime.push(time); // Push selected time into array
+  // for(i=0;i<5;i++){
+  //       slot=slot-1;
+  // }
+  var time1=document.getElementById("slot1");
+
+  available1=available1-1;
+  var btn11 = document.getElementById("btn11");
+   
+        btn11.disabled = true;
+
+
+if(available1>0){
+console.log(available1);
+time1.innerHTML="Booked";
+time1.style.backgroundColor="yellow";
+// time1.style.color="white";
+alert("your appointment is booked");
+var disable=document.getElementsByClassName("disable");
+
+    for (var i = 0; i < disable.length; i++) {
+      disable[i].disabled = true;
+
+}}
+else{
+console.log("no available");
+time1.style.backgroundColor="red";
+time1.style.color="white";
+time1.innerHTML = "Not Available";
+alert("no booking Available");
+}
+
+
+
+}
+
+var available2=5;
+function btn2(time){
+  selectTime.push(time); // Push selected time into array
+  // for(i=0;i<5;i++){
+  //       slot=slot-1;
+  // }
+  var time2=document.getElementById("slot2");
+  var btn11 = document.getElementById("btn11");
+   
+   btn11.disabled = true;
+
+  available2=available2-1;
+
+
+if(available2>0){
+console.log(available2);
+time2.innerHTML="Booked";
+time2.style.backgroundColor="yellow";
+// time1.style.color="white";
+alert("your appointment is booked");
+var disable=document.getElementsByClassName("disable");
+
+    for (var i = 0; i < disable.length; i++) {
+      disable[i].disabled = true;
+
+}
+
+
+}
+else{
+console.log("no available");
+time2.style.backgroundColor="red";
+time2.style.color="white";
+time2.innerHTML = "Not Available";
+}
+
+}
+var available3=5;
+function btn3(time){
+  selectTime.push(time); // Push selected time into array
+  // for(i=0;i<5;i++){
+  //       slot=slot-1;
+  // }
+  var time3=document.getElementById("slot3");
+  var btn11 = document.getElementById("btn11");
+   
+   btn11.disabled = true;
+
+  available3=available3-1;
+
+
+if(available3>0){
+console.log(available3);
+time3.innerHTML="Booked";
+time3.style.backgroundColor="yellow";
+// time1.style.color="white";
+alert("your appointment is booked");
+var disable=document.getElementsByClassName("disable");
+
+    for (var i = 0; i < disable.length; i++) {
+      disable[i].disabled = true;
+
+}
+}
+else{
+console.log("no available");
+time3.style.backgroundColor="red";
+time3.style.color="white";
+time3.innerHTML = "Not Available";
+}
+}
+
+</script>
+</body>
+</html>
