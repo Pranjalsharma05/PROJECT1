@@ -147,12 +147,16 @@ mysqli_close($conn);
 	<meta charset="utf-8">
 	<meta name="viewpoint" content="width=device-width, initial-scale=1">
 	<title></title>
+<<<<<<< HEAD
 	<link rel="stylesheet" href="style.css">
 	<style>
 		button:hover{
 cursor:pointer;
 		}
 	</style>
+=======
+	<link rel="stylesheet" href="Patient.css">
+>>>>>>> ea0c56a0506830af6bc3cf2c7606b120eec4660e
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/font-awesome.min.css">
 </head>
 <body><h1 style="font-size:34px;line-height: 24px;padding: 2px;text-align: center;">Welcome</h1>

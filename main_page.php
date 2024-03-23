@@ -87,6 +87,9 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
             background-color: #7FFFD4;
             overflow: hidden;
             height: 80px;
+            
+            display: flex;
+            flex-wrap: wrap;
         }
         
         .navbar a {
@@ -103,9 +106,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
             background-color: #F08A5D;
             color: black;
         }  
-        .navbar img{
-            height: 60px;
-        } 
+       
         #google_translate_element {
             position: fixed;
             top: 20px;
@@ -116,11 +117,19 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
             
          
         }
+        .logo{
+            background-image: url(https://img.freepik.com/free-photo/3d-cartoon-doctor-character-face-mask_1048-12965.jpg?w=740&t=st=1711044975~exp=1711045575~hmac=008ff2bfe9abfc5ce60e37cee6188b705166bfff152fd905460aa3bc39c18fb2);
+            background-repeat: no-repeat;
+            height: 79px;
+            width: 100px;
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
 <div class="navbar">
-        <a href="#" class="logo"><img src="doc.png" alt="Logo"></a>
+<div class="logo"></div>
+
         <a href="frontpage.html">Go To Main Page</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
