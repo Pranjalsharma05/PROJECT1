@@ -1,4 +1,21 @@
-<!--  -->
+<?php
+// Connect to MySQL database
+$conn = mysqli_connect("localhost", "root", "", "login");
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Query to fetch data from the database
+$query = "SELECT * FROM doc_reg";
+
+// Execute query
+$result = mysqli_query($conn, $query);
+
+// Close database connection
+mysqli_close($conn);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -54,24 +71,36 @@
         button:hover {
             background-color: #45a049;
         }
+        /* CSS for the image */
+        td img {
+    width: 150px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image covers the specified dimensions */
+    border-radius: 5px; /* Add rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+
 
         </style>
 
 </head>
 <body>
     <h1>WELCOME DOCTOR WISHES YOU ALL THE BEST</h1>
-    <table>
+    <table border="2">
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>MOBILE</th>
-            <th>PASSWORD</th>
-            <th>Father name</th>
+            
+            <th>Doctor  Department</th>
+            <th>Doctor Gender</th>
+            <th>Doctor Qualification</th>
             <th>Adhar card number</th>
+            <th>Doctor Registration Date</th>
             <th>Photo</th>
             <td>
-            <a href=PFORM1.html>
-            <button>Prescribe</button></a></td>
+           
             
             <!-- Add other column headers here -->
         </tr>
@@ -79,13 +108,17 @@
         // Loop through the fetched data and display it in the table
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['username'] . "</td>";
-            echo "<td>" . $row['mobile'] . "</td>";
-            echo "<td>" . $row['password'] . "</td>";
-            echo "<td>" . $row['mobile'] . "</td>";
-            echo "<td>" . $row['mobile'] . "</td>";
-            echo "<td>" . $row['mobile'] . "</td>";
+            echo "<td>" . $row['doc_id'] . "</td>";
+            echo "<td>" . $row['doc_name'] . "</td>";
+            echo "<td>" . $row['doc_mobile'] . "</td>";
+           
+            echo "<td>" . $row['doc_department'] . "</td>";
+            echo "<td>" . $row['doc_gender'] . "</td>";
+            echo "<td>" . $row['doc_qualification'] . "</td>";
+            echo "<td>" . $row['doc_aadhar'] . "</td>";
+            echo "<td>" . $row['doc_reg_date'] . "</td>";
+            echo '<td><img src="data:image/jpeg;base64,' . $row['doc_image'] . '" /></td>';
+
             // Add other columns here
             
             echo "</tr>";
