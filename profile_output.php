@@ -84,14 +84,15 @@ mysqli_close($conn);
         }
 
         body {
+            background-image: url(https://img.freepik.com/free-photo/copy-space-bowl-with-fruits-breakfast_23-2148571051.jpg?t=st=1711343043~exp=1711346643~hmac=10433a0f4139644d26efe6ffb21880d94706c60cb0926d3d3b8604da478c448c&w=740);
+        background-repeat: no-repeat;
+        background-size: cover;
             background-color: whitesmoke;
             color: black;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            border-left:10px solid #45a049;
-            border-right:10px solid #45a049;
-            border-bottom:10px solid #45a049;
+           
         }
 
     
@@ -157,25 +158,26 @@ mysqli_close($conn);
             }
         }
         .box h1{
-            color:white;
+            color:#667272;
             font-size:3vw;
         }
         .box {
-            background-color: #45a049;
+            background-color: #83F1F3;
             display: flex;
             color:white;
             margin-top:2%;
             padding: 1%;
-            border-radius: 5px;
-            border-left: 2px solid white;
-            border-right: 2px solid white;
+            border-radius: 8px;
+           margin-left:20%;
+           margin-right:20%;
         }
+        
     </style>
 </head>
 
 <body>
     <div class="box">
-        <h1>Profile Detail</h1>
+        <h1>PROFILE DETAILS</h1>
     </div>
     <div class="container">
     <div class="two">
