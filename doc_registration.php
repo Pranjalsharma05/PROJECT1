@@ -164,17 +164,19 @@ $sql="INSERT INTO doc_reg(doc_id,doc_name,doc_image,doc_email,doc_password,doc_m
 
 <head>
     <title>DOCTOR REGISTRATION PAGE</title>
-    <link rel="stylesheet" href="login1.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <link rel="icon" type="image/x-icon" href="ps.png">
- <style>
+    <style>
+    /* Base Styles */
 input[type="text"],
 input[type="password"],
 input[type="email"],
+input[type="number"],
 select {
     padding: 10px;
     width: 200px;
@@ -192,10 +194,14 @@ select:focus {
     border-color: #e74c3c;
 }
 
+input[type="number"] { /* Corrected selector */
+    width: 200px;
+}
+
 /* Button Styles */
 button {
-    display: block; /* Ensure the button takes up the full width */
-    margin: 0 auto; /* Center the button horizontally */
+    display: block;
+    margin: 0 auto;
     background-color: #2ecc71;
     color: white;
     padding: 10px 20px;
@@ -205,57 +211,88 @@ button {
     cursor: pointer;
 }
 
-
 button:hover {
     background-color: #1abc9c;
 }
 
 /* Text Color Styles */
-body {
-    color: #2c3e50;
-}
 
 /* Background and Container Styles */
 body {
+    color: #2c3e50;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background-image: url('https://img.freepik.com/free-vector/medical-team-design_1232-3215.jpg?t=st=1710982746~exp=1710986346~hmac=269b4f6f6027ee62dfca84d5740f3125a020aad74eba1c9c16e1d54e4db7431f&w=740');
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;}
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+main h1{
+    /* Your existing styles */
+    text-align: center; /* Align text (including <h1>) center */
+}
 
 main {
-    width: 60%;
-    
+    width: 90%;
+    max-width: 1100px;
+    height: auto;
     padding: 20px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 20px;
 }
 
-.upper,.lower{
+.upper {
     width: 100%;
-    height: 80px;
-    display: contents;
+    height: 100px;
+    display: flex;
+    
     justify-content: space-evenly;
-    
-    
+    align-items: center;
 }
-.middle{
+
+.middle {
     height: 100px;
     width: 100%;
-    display: contents;
+    display: flex;
     justify-content: space-evenly;
+    align-items: center;
+}
+
+.lower {
+    width: 70%;
+    height: 100px;
+    display: flex;
     
+    justify-content: space-evenly;
+    align-items: center;
 }
-strong{
+
+strong {
     text-align: center;
-    display: block;
-        margin: 0 auto;
+    margin: 10px 0;
 }
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 798px) {
+    main {
+        width: 90%;
+    }
+}
+
+
+
 
 </style>
 </head>
@@ -263,7 +300,7 @@ strong{
 <body>
   
     
-
+<main>
 <h1>REGISTER A DOCTOR</h1>
 <style>
     form{
@@ -274,6 +311,7 @@ strong{
    
 <div class="inputs">
       <form action="" method="POST" enctype="multipart/form-data">
+    <div class="upper">
         <label>Doctor Id:</label>
         <input type="number" name="doc_id">
         <label>Doctor Name:</label>
@@ -281,25 +319,34 @@ strong{
         <label>Doctor Image</label>
         <!-- <img src="https://i.pinimg.com/474x/16/18/20/1618201e616f4a40928c403f222d7562.jpg"> -->
         <input type="file"  name="doc_image" accept="image/*" required>
+    </div>
+        <hr>
+    <div class"middle">
         <label>Doctor Email:</label>
         <input type="email" name="doc_email">
         <label>Doctor Mobile:</label>
-        <input type="tel" name="doc_mobile">
-
+        <input type="number" name="doc_mobile">
+<br><br>
         <label>Doctor password:</label>
         <input type="password" name="doc_password">
         <label>Doctor Confirm password:</label>
         <input type="password" name="doc_confirm_password">
-        <label>Doctor Qualification:</label>
-        <input type="text" name="doc_qualification" >
-        <label>Doctor Gender:</label>
-        <input type="text" name="doc_gender">
-        <label>Doctor Adhar</label>
-        <input type="number" name="doc_aadhar">
-        <label>Doctor Department</label>
-        <input type="text" name="doc_department">
+    </div>
+        <hr>
+        <div class="lower">
+    <label>Doctor Qualification:</label>
+    <input type="text" name="doc_qualification">
+    <label>Doctor Gender:</label>
+    <input type="text" name="doc_gender">
+    <br>
+    <label>Doctor Adhar</label>
+    <input type="number" name="doc_aadhar">
+    <label>Doctor Department</label>
+    <input type="text" name="doc_department">
+</div>
+<hr>
+<button>SUBMIT</button>
 
-        <button>SUBMIT</button>
       </form>
 
     <?php if (!empty($doc_id_err)) { echo "<p style='color: red;'>$doc_id_err</p>"; } ?>

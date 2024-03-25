@@ -49,3 +49,7 @@ p {
     color: red;
     font-size: 18px;
 }
+body{
+    display: flex;
+    flex-wrap: wrap;
+}
