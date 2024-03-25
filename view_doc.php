@@ -92,7 +92,7 @@ mysqli_close($conn);
             <th>ID</th>
             <th>Name</th>
             <th>MOBILE</th>
-            <th>PASSWORD</th>
+            
             <th>Doctor  Department</th>
             <th>Doctor Gender</th>
             <th>Doctor Qualification</th>
@@ -111,7 +111,7 @@ mysqli_close($conn);
             echo "<td>" . $row['doc_id'] . "</td>";
             echo "<td>" . $row['doc_name'] . "</td>";
             echo "<td>" . $row['doc_mobile'] . "</td>";
-            echo "<td>" . $row['doc_password'] . "</td>";
+           
             echo "<td>" . $row['doc_department'] . "</td>";
             echo "<td>" . $row['doc_gender'] . "</td>";
             echo "<td>" . $row['doc_qualification'] . "</td>";
