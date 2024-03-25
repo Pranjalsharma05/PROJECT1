@@ -60,7 +60,7 @@
 </head>
 <body>
     <h1>WELCOME DOCTOR WISHES YOU ALL THE BEST</h1>
-    <table border="2">
+    <table>
         <tr>
             <th>ID</th>
             <th>Name</th>
