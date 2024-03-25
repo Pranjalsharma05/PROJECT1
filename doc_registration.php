@@ -1,9 +1,11 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once "config.php";
 
 // image_doc
 
-
+$em="";
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Process image upload
@@ -36,17 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Remove line breaks from the base64 string
                     $base64_image = str_replace(array("\r", "\n"), '', $base64_image);
 
-                    // Use prepared statement to insert into database
-                    // $sql = "INSERT INTO profile (profileimage) VALUES (?)";
-                    // $stmt = mysqli_prepare($conn, $sql);
-
-                    // if ($stmt) {
-                    //     mysqli_stmt_bind_param($stmt, "s", $base64_image);
-                    //     mysqli_stmt_execute($stmt);
-                    //     mysqli_stmt_close($stmt);
-                    // } else {
-                    //     $em = "Error executing the SQL statement: " . mysqli_error($conn);
-                    // }
+                   
                 } else {
                     $em = "Sorry, only JPG, JPEG, and PNG files are allowed";
                 }
@@ -124,7 +116,7 @@ else{
 
 // Check for confirm password field
 if(trim($_POST['doc_password']) !=  trim($_POST['doc_confirm_password'])){
-    $doc_password_err = "Passwords should match";}
+    $doc_confirm_password_err = "Passwords should match";}
 
     if (empty(trim($_POST['doc_department']))) {
         $doc_department_err = "Gender can't be empty";
@@ -268,63 +260,57 @@ strong{
 <body>
   
     
-<main>
-    <form action="" method="POST" enctype="multipart/form-data">
-        <h1>REGISTER A DOCTOR</h1>
-        <hr>
 
-        <div class="upper">
-        <label for="doc_id">Doctor Id:</label>
-            <input type="number" id="doc_id" name="doc_id" required ><br><br>
+<h1>REGISTER A DOCTOR</h1>
+<style>
+    form{
+        display:flex;
+        flex-direction:column;
+    }
+    </style>
+   
+<div class="inputs">
+      <form action="" method="POST" enctype="multipart/form-data">
+        <label>Doctor Id:</label>
+        <input type="number" name="doc_id">
+        <label>Doctor Name:</label>
+        <input type="text" name="doc_name">
+        <label>Doctor Image</label>
+        <!-- <img src="https://i.pinimg.com/474x/16/18/20/1618201e616f4a40928c403f222d7562.jpg"> -->
+        <input type="file"  name="doc_image" accept="image/*" required>
+        <label>Doctor Email:</label>
+        <input type="email" name="doc_email">
+        <label>Doctor Mobile:</label>
+        <input type="tel" name="doc_mobile">
 
-            <label for="doc_name">Doctor Name:</label>
-            <input type="text" id="doc_name" name="doc_name" required>
+        <label>Doctor password:</label>
+        <input type="password" name="doc_password">
+        <label>Doctor Confirm password:</label>
+        <input type="password" name="doc_confirm_password">
+        <label>Doctor Qualification:</label>
+        <input type="text" name="doc_qualification" >
+        <label>Doctor Gender:</label>
+        <input type="text" name="doc_gender">
+        <label>Doctor Adhar</label>
+        <input type="number" name="doc_aadhar">
+        <label>Doctor Department</label>
+        <input type="text" name="doc_department">
 
-            <label for="image">Image:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="file" id="doc_image" name="doc_image" accept="image/*" required>
-    </div>
-        <hr>
-        <div class="middle">
-            <label for="doc_email">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="email" id="doc_email" name="doc_email" required>
+        <button>SUBMIT</button>
+      </form>
 
-            <label for="doc_mobile">&nbsp;&nbsp;&nbsp;&nbsp;Mobile:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" id="doc_mobile" name="doc_mobile" required>
-            <br><br>
-
-            <label for="doc_password">Password:</label>
-            <input type="password" id="doc_password" name="doc_password" required>
-
-            <label for="doc_confirm_password">Confirm Password:</label>
-            <input type="password" id="doc_confirm_password" name="doc_confirm_password" required>
-        </div>
-        <hr>
-        <div class="lower">
-            <label for="doc_department">Department:</label>
-            <select id="doc_department" name="doc_department" required>
-                <option value="dept1">DEPT1</option>
-                <option value="dept2">DEPT2</option>
-                <option value="dept3">DEPT3</option>
-            </select>
-
-            <label for="doc_qualification">Qualification:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="doc_qualification" name="doc_qualification" required>
-
-            <hr>
-            <label for="doc_gender">Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-         <input type="text" name="doc_gender" >
-            <label for="doc_aadhar">Aadhar Card N0.</label>
-            <input type="number" id="doc_aadhar" name="doc_aadhar" required>
-        </div>
-        <hr>
-        <button type="submit">Submit</button>
-    </form>
     <?php if (!empty($doc_id_err)) { echo "<p style='color: red;'>$doc_id_err</p>"; } ?>
      <?php if (!empty($doc_name_err)) { echo "<p style='color: red;'>$doc_name_err</p>"; } ?>
      <?php if (!empty($doc_password_err)) { echo "<p style='color: red;'>$doc_password_err</p>"; } ?>
      <?php if (!empty($doc_email_err)) { echo "<p style='color: red;'>$doc_email_err</p>"; } ?>
      <?php if (!empty($doc_aadhar_err)) { echo "<p style='color: red;'>$doc_aadhar_err</p>"; } ?>
      <?php if (!empty($doc_gender_err)) { echo "<p style='color: red;'>$doc_gender_err</p>"; } ?>
+     <?php if (!empty($em)) { echo "<p style='color: red;'>$em</p>"; } ?>
+     <?php if (!empty($doc_qualification_err)) { echo "<p style='color: red;'>$doc_qualification_err</p>"; } ?>
+     <?php if (!empty($doc_department_err)) { echo "<p style='color: red;'>$doc_department_err</p>"; } ?>
+     <?php if (!empty($doc_mobile_err)) { echo "<p style='color: red;'>$doc_mobile_err</p>"; } ?>
+     <?php if (!empty($error)) { echo "<p style='color: red;'>$error</p>"; } ?>
+     <?php if (!empty($doc_confirm_password_err)) { echo "<p style='color: red;'>$doc_confirm_password_err</p>"; } ?>
     </main>
 
     
