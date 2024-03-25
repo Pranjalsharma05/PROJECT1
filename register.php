@@ -7,18 +7,18 @@ $username_err = $password_err = $confirm_password_err = $mobile_err = "";
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
     // Check if username is empty
-    if(empty(trim($_POST["doc_name"]))){
+    if(empty(trim($_POST["username"]))){
         $username_err = "Username cannot be blank";
     }
     else{
-        $sql = "SELECT id FROM doc_reg WHERE doc_name = ?";
+        $sql = "SELECT id FROM users WHERE username = ?";
         $stmt = mysqli_prepare($conn, $sql);
         if($stmt)
         {
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
             // Set the value of param username
-            $param_username = trim($_POST['doc_name']);
+            $param_username = trim($_POST['username']);
 
             // Try to execute this statement
             if(mysqli_stmt_execute($stmt)){

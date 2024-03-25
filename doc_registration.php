@@ -1,107 +1,167 @@
 <?php
 require_once "config.php";
 
-$doc_name = $doc_email = $doc_password = $confirm_password = $doc_mobile = $doc_department = $doc_qualification = $doc_gender = $doc_aadhar = "";
-$doc_name_err = $doc_email_err = $doc_password_err = $confirm_password_err = $doc_mobile_err = $doc_department_err = $doc_qualification_err = $doc_gender_err = $doc_aadhar_err = "";
+// image_doc
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // Check if doctor name is empty
-    if (empty(trim($_POST["doc_name"]))) {
-        $doc_name_err = "Doctor Name cannot be blank";
-    } else {
-        // Validate doctor name
-        $doc_name = trim($_POST["doc_name"]);
-    }
 
-    // Check if doctor email is empty
-    if (empty(trim($_POST["doc_email"]))) {
-        $doc_email_err = "Email cannot be blank";
-    } else {
-        // Validate doctor email
-        $doc_email = trim($_POST["doc_email"]);
-    }
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Process image upload
+    if (isset($_FILES['doc_image'])) {
+        // Retrieve file details
+        $img_name = $_FILES['doc_image']['name'];
+        $img_size = $_FILES['doc_image']['size'];
+        $tmp_name = $_FILES['doc_image']['tmp_name'];
+        $error = $_FILES['doc_image']['error'];
 
-    // Check if password is empty
-    if (empty(trim($_POST["doc_password"]))) {
-        $doc_password_err = "Password cannot be blank";
-    } elseif (strlen(trim($_POST["doc_password"])) < 4) {
-        $doc_password_err = "Password must be at least 4 characters";
-    } else {
-        $doc_password = trim($_POST["doc_password"]);
-    }
-
-    // Check if confirm password matches
-    if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm password";
-    } else {
-        $confirm_password = trim($_POST["confirm_password"]);
-        if (empty($doc_password_err) && ($doc_password != $confirm_password)) {
-            $confirm_password_err = "Passwords did not match";
-        }
-    }
-
-    // Check if mobile number is empty
-    if (empty(trim($_POST["doc_mobile"]))) {
-        $doc_mobile_err = "Mobile number cannot be blank";
-    } elseif (strlen(trim($_POST["doc_mobile"])) < 10) {
-        $doc_mobile_err = "Mobile number must be at least 10 characters";
-    } else {
-        $doc_mobile = trim($_POST["doc_mobile"]);
-    }
-
-    // Check if department is empty
-    if (empty(trim($_POST["doc_department"]))) {
-        $doc_department_err = "Please select a department";
-    } else {
-        $doc_department = trim($_POST["doc_department"]);
-    }
-
-    // Check if qualification is empty
-    if (empty(trim($_POST["doc_qualification"]))) {
-        $doc_qualification_err = "Qualification cannot be blank";
-    } else {
-        $doc_qualification = trim($_POST["doc_qualification"]);
-    }
-
-    // Check if gender is empty
-    if (empty(trim($_POST["doc_gender"]))) {
-        $doc_gender_err = "Please select a gender";
-    } else {
-        $doc_gender = trim($_POST["doc_gender"]);
-    }
-
-    // Check if Aadhar card number is empty
-    if (empty(trim($_POST["doc_aadhar"]))) {
-        $doc_aadhar_err = "Aadhar Card number cannot be blank";
-    } else {
-        $doc_aadhar = trim($_POST["doc_aadhar"]);
-    }
-
-    // If no errors, insert into database
-    if (empty($doc_name_err) && empty($doc_email_err) && empty($doc_password_err) && empty($confirm_password_err) && empty($doc_mobile_err) && empty($doc_department_err) && empty($doc_qualification_err) && empty($doc_gender_err) && empty($doc_aadhar_err)) {
-        $sql = "INSERT INTO doctors (doc_name, doc_email, doc_password, doc_mobile, doc_department, doc_qualification, doc_gender, doc_aadhar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        if ($stmt = mysqli_prepare($conn, $sql)) {
-            mysqli_stmt_bind_param($stmt, "ssssssss", $param_doc_name, $param_doc_email, $param_doc_password, $param_doc_mobile, $param_doc_department, $param_doc_qualification, $param_doc_gender, $param_doc_aadhar);
-            $param_doc_name = $doc_name;
-            $param_doc_email = $doc_email;
-            $param_doc_password = password_hash($doc_password, PASSWORD_DEFAULT);
-            $param_doc_mobile = $doc_mobile;
-            $param_doc_department = $doc_department;
-            $param_doc_qualification = $doc_qualification;
-            $param_doc_gender = $doc_gender;
-            $param_doc_aadhar = $doc_aadhar;
-
-            if (mysqli_stmt_execute($stmt)) {
-                header("location: login.php");
+        // Check if there was no error during file upload
+        if ($error === UPLOAD_ERR_OK) {
+            // Check file size
+            if ($img_size > 1250000) {
+                $em = "Sorry, the file is too large";
             } else {
-                echo "Something went wrong... cannot redirect!";
+                // Get file extension
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+
+                // Allowed file extensions
+                $allowed_exs = array("jpeg", "jpg", "png");
+
+                // Check if the file has an allowed extension
+                if (in_array($img_ex_lc, $allowed_exs)) {
+                    // Read image data and encode as base64
+                    $image_data = file_get_contents($tmp_name);
+                    $base64_image = base64_encode($image_data);
+
+                    // Remove line breaks from the base64 string
+                    $base64_image = str_replace(array("\r", "\n"), '', $base64_image);
+
+                    // Use prepared statement to insert into database
+                    // $sql = "INSERT INTO profile (profileimage) VALUES (?)";
+                    // $stmt = mysqli_prepare($conn, $sql);
+
+                    // if ($stmt) {
+                    //     mysqli_stmt_bind_param($stmt, "s", $base64_image);
+                    //     mysqli_stmt_execute($stmt);
+                    //     mysqli_stmt_close($stmt);
+                    // } else {
+                    //     $em = "Error executing the SQL statement: " . mysqli_error($conn);
+                    // }
+                } else {
+                    $em = "Sorry, only JPG, JPEG, and PNG files are allowed";
+                }
             }
-            mysqli_stmt_close($stmt);
+        } else {
+            $em = "Sorry, there was an error uploading your file";
         }
+    } else {
+        $em = "Please select a file to upload";
     }
 
+$doc_id = $doc_name = $doc_email = $doc_password = $doc_confirm_password = $doc_aadhar = $doc_gender =$doc_qualification = $doc_mobile =$doc_department = "";
+$doc_id_err = $doc_name_err = $doc_email_err = $doc_password_err = $doc_confirm_password_err = $doc_aadhar_err = $doc_gender_err = $doc_qualification_err  = $doc_mobile_err =$doc_department_err = "";
+
+if (empty(trim($_POST["doc_id"]))) {
+    $doc_id_err = "Name cannot be blank";
+} else {
+    $doc_id = trim($_POST['doc_id']);
+}
+
+
+if (empty(trim($_POST["doc_name"]))) {
+    $doc_name_err = "Name cannot be blank";
+} else {
+    $doc_name = trim($_POST['doc_name']);
+}
+
+if (empty(trim($_POST['doc_gender']))) {
+    $doc_gender_err = "doc_gender can't be empty";
+} else {
+    $doc_gender = trim($_POST['doc_gender']);
+}
+
+if (empty(trim($_POST['doc_email']))) {
+    $doc_email_err = "doc_email name can't be empty";
+} else {
+    $doc_email = trim($_POST['doc_email']);
+}
+
+if (empty(trim($_POST['doc_aadhar']))) {
+    $doc_aadhar_err = "Adhar card number can't be empty";
+} elseif (strlen(trim($_POST['doc_aadhar'])) < 12) {
+    $doc_aadhar_err = "Adoc_aadhar number cannot be less than 12 characters";
+} else {
+    $doc_aadhar = trim($_POST['doc_aadhar']);
+}
+
+if (empty(trim($_POST['doc_qualification']))) {
+    $doc_qualification_err = "Gender can't be empty";
+} else {
+    $doc_qualification = trim($_POST['doc_qualification']);
+}
+
+// check mobile
+if(empty(trim($_POST['doc_mobile']))){
+    $doc_mobile_err="mobile can't empty";
+  }
+  elseif(strlen(trim($_POST['doc_mobile']))<10){
+    $doc_mobile_err = "doc_mobile no. cannot be less than 10 characters";
+  }
+  else{
+    $doc_mobile = trim($_POST['doc_mobile']);
+  }
+
+  // Check for password
+if(empty(trim($_POST['doc_password']))){
+    $doc_password_err = "doc_Password cannot be blank";
+}
+elseif(strlen(trim($_POST['doc_password'])) < 4){
+    $doc_password_err = "Password cannot be less than 4 characters";
+}
+else{
+    $doc_password = trim($_POST['doc_password']);
+}
+
+// Check for confirm password field
+if(trim($_POST['doc_password']) !=  trim($_POST['doc_confirm_password'])){
+    $doc_password_err = "Passwords should match";}
+
+    if (empty(trim($_POST['doc_department']))) {
+        $doc_department_err = "Gender can't be empty";
+    } else {
+        $doc_department = trim($_POST['doc_department']);
+    }
+
+if(empty($doc_id_err) && empty($doc_name_err) && empty($doc_email_err) && empty($doc_mobile_err) && empty($doc_department) && empty($doc_qualification) && empty($doc_password_err) && empty($doc_confirm_password_err) && empty($doc_gender_err) && empty($doc_aadhar_err)){
+
+$sql="INSERT INTO doc_reg(doc_id,doc_name,doc_image,doc_email,doc_password,doc_mobile,doc_department,doc_qualification,doc_gender,doc_aadhar) VALUES(?,?,?,?,?,?,?,?,?,?)";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if($stmt){
+        mysqli_stmt_bind_param($stmt,"ssssssssss",$param_doc_id,$param_doc_name,$base64_image,$param_doc_email,$param_doc_password,$param_doc_mobile,$param_doc_department,$param_doc_qualification,$param_doc_gender,$param_doc_aadhar);
+
+        $param_doc_id=trim($doc_id);
+        $param_doc_name=trim($doc_name);
+        $param_doc_email=trim($doc_email);
+        $param_doc_password= password_hash($doc_password, PASSWORD_DEFAULT);
+        $param_doc_mobile=$doc_mobile;
+        $param_doc_department=trim($doc_department);
+        $param_doc_qualification=trim($doc_qualification);
+        $param_doc_gender=trim($doc_gender);
+        $param_doc_aadhar=$doc_aadhar;
+        if (mysqli_stmt_execute($stmt)) {
+            header("location: view_doc.php");
+        } else {
+            echo "Something went wrong... cannot redirect!";
+        }
+    }
+    mysqli_stmt_close($stmt);
+    }
     mysqli_close($conn);
 }
+
+
+
 ?>
 
 
@@ -169,7 +229,7 @@ body {
     background-image: url('https://img.freepik.com/free-vector/medical-team-design_1232-3215.jpg?t=st=1710982746~exp=1710986346~hmac=269b4f6f6027ee62dfca84d5740f3125a020aad74eba1c9c16e1d54e4db7431f&w=740');
                 background-repeat: no-repeat;
                 background-position: center;
-                background-size: cover;
+                background-size: cover;}
 
 main {
     width: 60%;
@@ -209,31 +269,34 @@ strong{
   
     
 <main>
-    <form action="register_doctor.php" method="post">
-        <strong>REGISTER A DOCTOR</strong>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <h1>REGISTER A DOCTOR</h1>
         <hr>
 
         <div class="upper">
+        <label for="doc_id">Doctor Id:</label>
+            <input type="number" id="doc_id" name="doc_id" required ><br><br>
+
             <label for="doc_name">Doctor Name:</label>
             <input type="text" id="doc_name" name="doc_name" required>
 
             <label for="image">Image:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
-        </div>
+            <input type="file" id="doc_image" name="doc_image" accept="image/*" required>
+    </div>
         <hr>
         <div class="middle">
             <label for="doc_email">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="email" id="doc_email" name="doc_email" required>
 
             <label for="doc_mobile">&nbsp;&nbsp;&nbsp;&nbsp;Mobile:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" id="doc_mobile" name="doc_mobile" required>
+            <input type="number" id="doc_mobile" name="doc_mobile" required>
             <br><br>
 
             <label for="doc_password">Password:</label>
             <input type="password" id="doc_password" name="doc_password" required>
 
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
+            <label for="doc_confirm_password">Confirm Password:</label>
+            <input type="password" id="doc_confirm_password" name="doc_confirm_password" required>
         </div>
         <hr>
         <div class="lower">
@@ -249,21 +312,22 @@ strong{
 
             <hr>
             <label for="doc_gender">Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <select id="doc_gender" name="doc_gender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-
+         <input type="text" name="doc_gender" >
             <label for="doc_aadhar">Aadhar Card N0.</label>
-            <input type="text" id="doc_aadhar" name="doc_aadhar" required>
+            <input type="number" id="doc_aadhar" name="doc_aadhar" required>
         </div>
         <hr>
         <button type="submit">Submit</button>
     </form>
-</main>
+    <?php if (!empty($doc_id_err)) { echo "<p style='color: red;'>$doc_id_err</p>"; } ?>
+     <?php if (!empty($doc_name_err)) { echo "<p style='color: red;'>$doc_name_err</p>"; } ?>
+     <?php if (!empty($doc_password_err)) { echo "<p style='color: red;'>$doc_password_err</p>"; } ?>
+     <?php if (!empty($doc_email_err)) { echo "<p style='color: red;'>$doc_email_err</p>"; } ?>
+     <?php if (!empty($doc_aadhar_err)) { echo "<p style='color: red;'>$doc_aadhar_err</p>"; } ?>
+     <?php if (!empty($doc_gender_err)) { echo "<p style='color: red;'>$doc_gender_err</p>"; } ?>
+    </main>
 
-    <script src="" async defer></script>
+    
     
 </body>
 

@@ -1,6 +1,6 @@
 <?php
 // Connect to MySQL database
-$conn = mysqli_connect("localhost", "root", "", "login");
+require_once "config.php";
 
 // Check connection
 if (!$conn) {
@@ -8,7 +8,7 @@ if (!$conn) {
 }
 
 // Query to fetch data from the database
-$query = "SELECT * FROM users";
+$query = "SELECT doc_name FROM doc_reg";
 
 // Execute query
 $result = mysqli_query($conn, $query);

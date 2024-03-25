@@ -92,7 +92,7 @@ if(empty($err))
     background-size: cover;
     background-position: center;
 
-            height: 60vh;
+            min-height:max-content;
             width: 60%;
             border-radius: 10px;
             display: flex;

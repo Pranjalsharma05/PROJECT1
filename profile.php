@@ -51,44 +51,7 @@ if (isset($_SESSION['username'])) {
     }
 }
 
-// If the username doesn't exist in both tables, handle the situation accordingly
-// For example, display an error message or redirect to another page.
 
-
-
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-//         $username = trim($_POST['username']);
-    
-
-//     // Check if the user has both a login entry and a profile entry
-    // $sql = "SELECT  FROM users
-    //         INNER JOIN profile ON users.username = profile.username";
-    // $stmt = mysqli_prepare($conn, $sql);
-
-    // mysqli_stmt_execute($stmt);
-
-    // // Store the result
-    // mysqli_stmt_store_result($stmt);
-
-    // if (mysqli_stmt_num_rows($stmt) == 1) {
-    //     if(isset($_SESSION['username']))
-    //     {
-            
-        
-    //     // Redirect to the profile_output.php
-    //     header("location: profile_output.php");
-    //     exit;
-    // }
-//     else{
-//         echo "no";
-//     }
-// }
-// else{
-//     echo "no";
-// }
-
-// }
 
 
 
