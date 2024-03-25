@@ -54,7 +54,7 @@ $doc_id = $doc_name = $doc_email = $doc_password = $doc_confirm_password = $doc_
 $doc_id_err = $doc_name_err = $doc_email_err = $doc_password_err = $doc_confirm_password_err = $doc_aadhar_err = $doc_gender_err = $doc_qualification_err  = $doc_mobile_err =$doc_department_err = "";
 
 if (empty(trim($_POST["doc_id"]))) {
-    $doc_id_err = "Name cannot be blank";
+    $doc_id_err = "ID cannot be blank";
 } else {
     $doc_id = trim($_POST['doc_id']);
 }
@@ -87,7 +87,7 @@ if (empty(trim($_POST['doc_aadhar']))) {
 }
 
 if (empty(trim($_POST['doc_qualification']))) {
-    $doc_qualification_err = "Gender can't be empty";
+    $doc_qualification_err = "Qualification can't be empty";
 } else {
     $doc_qualification = trim($_POST['doc_qualification']);
 }
@@ -103,28 +103,31 @@ if(empty(trim($_POST['doc_mobile']))){
     $doc_mobile = trim($_POST['doc_mobile']);
   }
 
-  // Check for password
-if(empty(trim($_POST['doc_password']))){
-    $doc_password_err = "doc_Password cannot be blank";
-}
-elseif(strlen(trim($_POST['doc_password'])) < 4){
+// Check for password
+// Check for password
+if (empty(trim($_POST['doc_password']))) {
+    $doc_password_err = "Password cannot be blank";
+} elseif (strlen(trim($_POST['doc_password'])) < 4) {
     $doc_password_err = "Password cannot be less than 4 characters";
-}
-else{
+} else {
     $doc_password = trim($_POST['doc_password']);
 }
 
 // Check for confirm password field
-if(trim($_POST['doc_password']) !=  trim($_POST['doc_confirm_password'])){
-    $doc_confirm_password_err = "Passwords should match";}
+if (trim($_POST['doc_password']) != trim($_POST['doc_confirm_password'])) {
+    $doc_confirm_password_err = "Passwords should match";
+}
+
+
+
 
     if (empty(trim($_POST['doc_department']))) {
-        $doc_department_err = "Gender can't be empty";
+        $doc_department_err = "Department can't be empty";
     } else {
         $doc_department = trim($_POST['doc_department']);
     }
 
-if(empty($doc_id_err) && empty($doc_name_err) && empty($doc_email_err) && empty($doc_mobile_err) && empty($doc_department) && empty($doc_qualification) && empty($doc_password_err) && empty($doc_confirm_password_err) && empty($doc_gender_err) && empty($doc_aadhar_err)){
+if(empty($doc_id_err) && empty($doc_name_err) && empty($doc_email_err) && empty($doc_mobile_err) && empty($doc_department_err) && empty($doc_qualification_err) && empty($doc_password_err) && empty($doc_confirm_password_err) && empty($doc_gender_err) && empty($doc_aadhar_err)){
 
 $sql="INSERT INTO doc_reg(doc_id,doc_name,doc_image,doc_email,doc_password,doc_mobile,doc_department,doc_qualification,doc_gender,doc_aadhar) VALUES(?,?,?,?,?,?,?,?,?,?)";
     $stmt = mysqli_prepare($conn, $sql);
@@ -135,7 +138,7 @@ $sql="INSERT INTO doc_reg(doc_id,doc_name,doc_image,doc_email,doc_password,doc_m
         $param_doc_id=trim($doc_id);
         $param_doc_name=trim($doc_name);
         $param_doc_email=trim($doc_email);
-        $param_doc_password= password_hash($doc_password, PASSWORD_DEFAULT);
+        $param_doc_password = password_hash($doc_password, PASSWORD_DEFAULT);
         $param_doc_mobile=$doc_mobile;
         $param_doc_department=trim($doc_department);
         $param_doc_qualification=trim($doc_qualification);

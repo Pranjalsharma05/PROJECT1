@@ -1,21 +1,4 @@
-<?php
-// Connect to MySQL database
-require_once "config.php";
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Query to fetch data from the database
-$query = "SELECT doc_name FROM doc_reg";
-
-// Execute query
-$result = mysqli_query($conn, $query);
-
-// Close database connection
-mysqli_close($conn);
-?>
+<!--  -->
 
 <!DOCTYPE html>
 <html>
