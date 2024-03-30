@@ -25,13 +25,13 @@ if (empty($loggedInUsername)) {
 
 // Retrieve data from the form
 $name = $_POST['user_name'] ?? '';
-$father_name = $_POST['users_father'] ?? '';
+$father_name = $_POST['father_name'] ?? '';
 $adhar_card = $_POST['adhar_card'] ?? '';
 $mobile_number = $_POST['users_mobile'] ?? '';
 $email = $_POST['users_email'] ?? '';
-$age = $_POST['age'] ?? '';
-$gender = $_POST['gender'] ?? '';
-$labTests = $_POST['labTests'] ?? '';
+$age = $_POST['users_age'] ?? '';
+$gender = $_POST['users_gender'] ?? '';
+$labTests = $_POST['choosen_test    '] ?? '';
 $lab_visit_date = $_POST['lab_visit_date'] ?? '';
 $slot = $_POST['slot'] ?? '';
 

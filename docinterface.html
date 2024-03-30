@@ -141,7 +141,7 @@ flex-wrap: wrap;
          <span><br> <li><a href="welcomedoc.html" id="home-link"><i class="fas fa-home"></i>Home</a></li></span>
            <hr> <span><br> <li><a href="viewappointmentdordoc.php" id="view-appointments-link"><i class="fa fa-calendar"></i>View Appointments</a></li></span>
            <hr>  <span><br> <li><a href="#" id="view-prescription-link"><i class="fas fa-prescription"></i>View Prescription</a></li></span>
-           <hr>  <span><br> <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li></span>
+           <hr>  <span><br> <li><a href="doc_logout.php" id="logout-link"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li></span>
    
    
         </ul>
@@ -187,10 +187,7 @@ flex-wrap: wrap;
     
        
     
-        logoutLink.addEventListener("click", function(event) {
-            event.preventDefault();
-            setIframeSrc('logout.html'); // Replace with actual URL
-        });
+        
     });
     </script>
     
