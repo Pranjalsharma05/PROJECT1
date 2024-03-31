@@ -1,52 +1,53 @@
 <?php
 session_start();
 
-if(isset($_SESSION['username']))
+if(isset($_SESSION['doc_id']))
 {
-    header("location:docinterface.html");
+    header("location: docinterface.html");
     exit;
 }
 require_once "config.php";
-$username = $password = "";
+
 $err = "";
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty(trim($_POST['doc_email'])) || empty(trim($_POST['doc_password']))) {
-        $err = "Please enter email and password";
+    if (empty(trim($_POST['doc_id'])) || empty(trim($_POST['doc_password']))) {
+        $err = "Please enter id and password";
     } else {
-        $username = trim($_POST['doc_email']);
-        $password = trim($_POST['doc_password']);
+        $doc_id = trim($_POST['doc_id']);
+        $doc_password = trim($_POST['doc_password']);
 
-        $sql = "SELECT doc_id, doc_email, doc_password FROM doc_reg WHERE doc_email=?";
+        $sql = "SELECT doc_id, doc_password FROM doc_reg WHERE doc_id=?";
 
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $param_username);
-        $param_username = $username;
+        mysqli_stmt_bind_param($stmt, "s", $param_id);
+        $param_id = $doc_id;
 
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_store_result($stmt);
             if (mysqli_stmt_num_rows($stmt) == 1) {
-                mysqli_stmt_bind_result($stmt, $id, $doc_email, $hashed_password);
+                mysqli_stmt_bind_result($stmt, $doc_id, $hashed_password);
                 if (mysqli_stmt_fetch($stmt)) {
-                    if (password_verify($password, $hashed_password)) {
+                    if (password_verify($doc_password, $hashed_password)) {
                         session_start();
-                        $_SESSION["username"] = $doc_email;
-                        $_SESSION["id"] = $id;
+                        $_SESSION["doc_id"] = $doc_id;
+                        $_SESSION["doc_password"] = $doc_password;
                         $_SESSION["loggedin"] = true;
                         header("location: docinterface.html");
                     } else {
-                        $err = "Invalid username or password";
+                        $err = "Invalid id or password";
                     }
                 }
             } else {
-                $err = "Invalid username or password";
+                $err = "Invalid id or password";
             }
         } else {
             $err = "Something went wrong. Please try again later.";
         }
+        mysqli_stmt_close($stmt);
     }
-    mysqli_stmt_close($stmt);
+ 
     mysqli_close($conn);
 }
 ?>
@@ -194,7 +195,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              margin-top: 20%;
              margin-bottom: 10;
          }
-         
+         form{
+            display:flex;
+            flex-direction:column;
+         }
          
          
      </style>
@@ -206,32 +210,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <b>WELCOME DOCTOR</b>  
             </h2>
         </div>
-        <main>
-       <header>
-        
-            <h2>
-              <b>LOGIN</b>  
-            </h2></header>
-            <form></form>
-        <div class="Form_base">
-<input id="username" type="text" required>
-<label for="input"><B>USER NAME</B></label>
-        </div>
-        
-            
-            
-            <br>
-<input id="password" type="password" required>
-<label for="input"><B>Enter Your  PASSWORD</B></label>
-        </div>
-    <br>
-    <br>
-    <div>
-        <button>Login</button>
-    </div>
+  
+        <form action="" method="POST">
+        <h2>Doctor Login
+        </h2>
 
+        <h3>Doctor Id:</h3>
+        <input type="number" placeholder="Enter doctor id" name="doc_id" >
+
+        <h3>Doctor password:</h3>
+        <input  type="password" placeholder="Enter doctor password" name="doc_password" >
+          <?php if (!empty($err)) { echo "<p style='color: red;'>$err</p>"; } ?>
+           <button>Login </button>
         </form>
-       </main>
+
         
     </body>
 </html>

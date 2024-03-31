@@ -261,13 +261,13 @@ button[type="button"]:hover {
 						<form method="post" action="samya.html">
     <div class="input-name">
         <label for="Department"><h2>Choose a Department:</h2></label>
-        <select id="Department">
+        <select id="Department" name="patient_department">
             <option value=""></option>
-            <option value="Cardiology Department">Cardiology Department</option>
-            <option value="Orthopedics Department">Orthopedics Department</option>
-            <option value="Oncology Department">Oncology Department</option>
-            <option value="Neurology Department">Neurology Department</option>
-            <option value="Gynecology/Obstetrics Department">Gynecology/Obstetrics Department</option>
+            <option value="Cardiology Department" name="patient_department">Cardiology Department</option>
+            <option value="Orthopedics Department" name="patient_department">Orthopedics Department</option>
+            <option value="Oncology Department" name="patient_department">Oncology Department</option>
+            <option value="Neurology Department" name="patient_department">Neurology Department</option>
+            <option value="Gynecology/Obstetrics Department" name="patient_department">Gynecology/Obstetrics Department</option>
         </select>
     </div><br>
     <h2>Patient Name:</h2><br><?php echo $name ?>
@@ -282,7 +282,7 @@ button[type="button"]:hover {
         <h2>Patient Aadhar no.:</h2><?php echo $adharcard ?>
     </div>
     <hr>
-    <button type="submit" name="bookAppointment" value="Book Appointment">SELECT APPOINTMENT DATE:</button>
+    <button type="submit"  value="Book Appointment">SELECT APPOINTMENT DATE:</button>
     <hr>			    
     <input type="reset" value="Reset">
     <button type="button" onclick="">Submit</button>
