@@ -82,10 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               /* Ensure the background image covers the entire area */
          }
          .right{
+            margin-right: 15%;
              margin-left: 10%;
              height: 50%;
-             width: 250px;
-             padding:20px;
+             width: 320px;
+             padding:10px;
              border-radius: 10px;
                background-color: transparent;
                backdrop-filter:blur(25px);
@@ -119,8 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              margin-right: 15%;
              margin-left: 10%;
              height: 50%;
-             width: 250px;
-             padding:20px;
+             width: 320px;
+             padding:10px;
              border-radius: 10px;
                background-color: transparent;
                backdrop-filter:blur(25px);
@@ -137,12 +138,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          border-radius: 10px;
          }
          form{
-             margin: 60px;
+             margin: 50px;
              display: flex;
              gap:20px;
              
          }
-         input[type="text"],
+         input[type="number"],
          input[type="password"]
          {
              padding: 10px;
@@ -199,22 +200,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display:flex;
             flex-direction:column;
          }
-         
+         .right button{
+            width:100%;
+         }
          
      </style>
 
 <body>
         <div class="right">
             <img src="https://cdn.pixabay.com/photo/2015/12/15/23/32/universal-health-care-1095124_640.png" alt="Welcome Image" style="width: 100%; height: 100%;">
+         
             <h2>
                 <b>WELCOME DOCTOR</b>  
             </h2>
+            <a href="frontpage.html"><button>Go to Main Page</button></a>
         </div>
-  
+  <main>
         <form action="" method="POST">
+            <header>
         <h2>Doctor Login
         </h2>
-
+        </header>
         <h3>Doctor Id:</h3>
         <input type="number" placeholder="Enter doctor id" name="doc_id" >
 
@@ -224,6 +230,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            <button>Login </button>
         </form>
 
-        
+        </main>
     </body>
 </html>
