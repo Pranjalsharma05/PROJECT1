@@ -10,7 +10,7 @@ $em = "";
 session_start();
 
 
-if($_POST['bookAppointment'])
+if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
 	if (isset($_SESSION['username'])) {
 		// Select the username from the profile table
@@ -87,7 +87,6 @@ if ($result) {
             $fathername = $row['fathername'];
             $adharcard = $row['adharcard'];
             $city = $row['city']; // Assuming 'name' is the column for the user's name
-
            
         }
     } else {
@@ -102,7 +101,7 @@ if(isset($_POST['bookAppointment'])) {
 
     // // Output the HTML content
     // echo $output;
-header("Location:samya.html");
+header("Location:samya.php");
 }
 
 
@@ -258,17 +257,9 @@ button[type="button"]:hover {
 						<h2>Registration Process For Patient Details</h2><br>
 	
 						<div class="input-name">
-						<form method="post" action="samya.html">
+						<form method="post" action="samya.php">
     <div class="input-name">
-        <label for="Department"><h2>Choose a Department:</h2></label>
-        <select id="Department" name="patient_department">
-            <option value=""></option>
-            <option value="Cardiology Department" name="patient_department">Cardiology Department</option>
-            <option value="Orthopedics Department" name="patient_department">Orthopedics Department</option>
-            <option value="Oncology Department" name="patient_department">Oncology Department</option>
-            <option value="Neurology Department" name="patient_department">Neurology Department</option>
-            <option value="Gynecology/Obstetrics Department" name="patient_department">Gynecology/Obstetrics Department</option>
-        </select>
+        
     </div><br>
     <h2>Patient Name:</h2><br><?php echo $name ?>
     <div>
@@ -282,7 +273,7 @@ button[type="button"]:hover {
         <h2>Patient Aadhar no.:</h2><?php echo $adharcard ?>
     </div>
     <hr>
-    <button type="submit"  value="Book Appointment">SELECT APPOINTMENT DATE:</button>
+    <button type="submit"  name="bookAppointment">SELECT APPOINTMENT DATE:</button>
     <hr>			    
     <input type="reset" value="Reset">
     <button type="button" onclick="">Submit</button>
