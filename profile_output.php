@@ -23,6 +23,26 @@ if (empty($loggedInUsername)) {
     die("Username not available");
 }
 
+if (isset($_POST['reset'])) {
+    // Prepare and execute the SQL query to delete the profile data
+    $sql = "DELETE profile FROM profile
+    INNER JOIN users ON profile.username = users.username
+    WHERE profile.username = ?";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $loggedInUsername);
+    mysqli_stmt_execute($stmt);
+    
+    // Check if the query was successful
+    if (mysqli_affected_rows($conn) > 0) {
+        // Profile reset successful, redirect to the same page to regenerate content
+        header("Location: profile.php");
+        exit();
+    } else {
+        echo "Failed to reset profile.";
+    }
+}
+
 // Retrieve data from the database using a prepared statement
 $sql = "SELECT * FROM profile
         INNER JOIN users ON profile.username = users.username
@@ -63,8 +83,7 @@ if ($result) {
     $em = "Error retrieving data from the database: " . mysqli_error($conn);
 }
 
-// Close the statement and database connection
-mysqli_stmt_close($stmt);
+
 mysqli_close($conn);
 ?>
 
@@ -196,6 +215,20 @@ mysqli_close($conn);
         </div>
       
     </div>
+    <style>
+  #reset{
+    background-color:red;
+    color:white;
+    align-items: center;
+  }
+  button:hover{
+    cursor:pointer;
+  }
+    </style>
+<form action="" method="Post">
+<h4>Want to Reset Your Profile?</h4>
+    <button id="reset" name="reset">Reset Profile</button>
+</form>
 </body>
 
 </html>
