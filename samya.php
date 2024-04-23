@@ -303,7 +303,7 @@ h1 {
                 <option value="10:00-11:00" >10:00 - 11:00 AM</option>
                 <option value="2:00-3:00"  >2:00 - 3:00 PM</option>
               </select>
-              <input id="hide" name="slot">
+              <input  type="hidden" id="hide" name="slot">
             </td>
             <td><button  id="btn22" onclick="timebook(event)" disabled>Book</button></td>
         </tr>

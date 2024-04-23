@@ -87,7 +87,7 @@ mysqli_close($conn);
             <th>Adhar card number</th>
             <th>Photo</th>
             <td>
-            <a href=PFORM1.html>
+            <a href=PFORM1.php>
             <button>Prescribe</button></a></td>
             
             <!-- Add other column headers here -->
