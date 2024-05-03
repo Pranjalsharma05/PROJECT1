@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Doctor Gender and Department Distribution</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .box{
+            width: 400px;
+            height: 400px;
+            border-radius: 20px;
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+        .conta{
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+    <div class="conta">
+        
+    <h1>Doctor Gender Distribution</h1>
+    <div class="box">
+        <canvas id="doctorGenderChart"></canvas>
+    </div>
+    
+    <h1>Doctor Department Distribution</h1>
+    <div class="box">
+        <canvas id="doctorDepartmentChart"></canvas>
+    </div>
+
+    <h1>Patients Registered in Different Departments</h1>
+    <div class="box">
+        <canvas id="patientregisterdChart"></canvas>
+    </div>
+</div>
+    <script>
+        // Fetch data from the server
+        fetch('http://localhost/clone/PROJECT1/graph.php')
+            .then(response => response.json())
+            .then(data => {
+                const genderLabels = data.gender.map(item => item.doc_gender);
+                const genderCounts = data.gender.map(item => item.count);
+
+                const departmentLabels = data.doc_department.map(item => item.doc_department);
+                const departmentCounts = data.doc_department.map(item => item.count);
+
+                const patientsLabels = data.patients.map(item => item.patient_department);
+                const patientsCounts = data.patients.map(item => item.count);
+                
+                // Get the canvas elements
+                const genderCtx = document.getElementById('doctorGenderChart').getContext('2d');
+                const departmentCtx = document.getElementById('doctorDepartmentChart').getContext('2d');
+                const patientsCtx = document.getElementById('patientregisterdChart').getContext('2d');
+                // Create the pie charts
+                const doctorGenderChart = new Chart(genderCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: genderLabels,
+                        datasets: [{
+                            label: 'Doctor Gender Distribution',
+                            data: genderCounts,
+                            backgroundColor: ['skyblue', 'lightcoral'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+                const doctorDepartmentChart = new Chart(departmentCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: departmentLabels,
+                        datasets: [{
+                            label: 'Doctor Department Distribution',
+                            data: departmentCounts,
+                            backgroundColor: ['lightgreen', 'orange', 'lightpink'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+                const patientsChart = new Chart(patientsCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: patientsLabels,
+                        datasets: [{
+                            label: 'Patients Registered in Different Departments',
+                            data: patientsCounts,
+                            backgroundColor: ['lightblue', 'lightgreen', 'lightcoral', 'lightorange', 'lightpink'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+</html>
