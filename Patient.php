@@ -36,35 +36,49 @@ if (empty($loggedInUsername)) {
 }
 
 // Check if the username exists in both tables
-$query = "SELECT * FROM users WHERE username = ?";
-$stmt_ = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt_, "s", $loggedInUsername);
-mysqli_stmt_execute($stmt_);
-mysqli_stmt_store_result($stmt_);
+// $query = "SELECT * FROM users WHERE username = ?";
+// $stmt_ = mysqli_prepare($conn, $query);
+// mysqli_stmt_bind_param($stmt_, "s", $loggedInUsername);
+// mysqli_stmt_execute($stmt_);
+// mysqli_stmt_store_result($stmt_);
 
-if (mysqli_stmt_num_rows($stmt_) == 1) {
     // Username exists in the users table
     // Now check if it exists in the patient_appointment table
-    $query = "SELECT * FROM patient_offline_appointment WHERE username = ?";
-    $stmtt_ = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmtt_, "s", $loggedInUsername);
-    mysqli_stmt_execute($stmtt_);
-    mysqli_stmt_store_result($stmtt_);
+    // $query = "SELECT * FROM patient_offline_appointment WHERE username = ?";
+    // $stmtt_ = mysqli_prepare($conn, $query);
+    // mysqli_stmt_bind_param($stmtt_, "s", $loggedInUsername);
+    // mysqli_stmt_execute($stmtt_);
+    // mysqli_stmt_store_result($stmtt_);
 
-    if (mysqli_stmt_num_rows($stmtt_) == mysqli_stmt_num_rows($stmt_)) {
-        // Username exists in both tables, redirect to samya_output.php
-        header("Location: samya_output.php");
-        exit;
-    }
-}
-
+    // if (mysqli_stmt_num_rows($stmtt_)==1) {
+    //     // Username exists in both tables, redirect to samya_output.php
+    //     header("Location: samya_output.php");
+    //     exit;
+    // }
 
 
-if(isset($_POST['bookAppointment'])) {
-    echo "Redirecting...";
+
+// Prepare SQL query to check if the username exists in the database
+$query = "SELECT * from patient_offline_appointment WHERE username = ?";
+$stmt = mysqli_prepare($conn, $query);
+
+// Bind parameters and execute the statement
+mysqli_stmt_bind_param($stmt, "s", $loggedInUsername);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_store_result($stmt);
+mysqli_stmt_num_rows($stmt);
+
+// Check if the username exists
+if (mysqli_stmt_num_rows($stmt) > 0) {
+    // Username exists in the database, redirect to samya_output.php
     header("Location: samya_output.php");
     exit;
 }
+
+
+
+
+
 
 
 
