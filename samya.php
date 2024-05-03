@@ -1,26 +1,64 @@
 <?php
 require_once "config.php";
 session_start();
+error_reporting(E_ALL);
+
+if (isset($_SESSION['username'])) {
+  // Select the username from the profile table
+  $query = "SELECT username FROM  patient_offline_appointment WHERE username = ?";
+  $stmt = mysqli_prepare($conn, $query);
+  mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
+  mysqli_stmt_execute($stmt);
+
+  // Store the result
+  mysqli_stmt_store_result($stmt);
+
+  if (mysqli_stmt_num_rows($stmt) == 1) {
+      // The username exists in the profile table
+
+      // You don't need a separate query for the users table
+      // Just check if the username exists in the users table
+      $query = "SELECT slot FROM patient_offline_appointment WHERE slot = ?";
+      mysqli_stmt_prepare($stmt, $query);
+      mysqli_stmt_bind_param($stmt, "s", $_SESSION['slot']);
+      mysqli_stmt_execute($stmt);
+
+      // Store the result
+      mysqli_stmt_store_result($stmt);
+
+      if (mysqli_stmt_num_rows($stmt) == 1) {
+          // Redirect to profile_output.php if the username exists in both tables
+          header("location: samya_output.php");
+          exit;
+      }
+  }
+}
+
+
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $patient_department = $p_a_date = $slot = "";
-    $errors = array();
+    $errors=array();
 
-    if (empty(trim($_POST['patient_department']))) {
-        $errors = "Please enter patient department";
-    } else {
-        $patient_department = trim($_POST['patient_department']);
-    }
+    // Check if the array keys are set before accessing them
+    if (isset($_POST['patient_department'])) {
+      $patient_department = trim($_POST['patient_department']);
+  } else {
+      $errors[] = "Please enter patient department";
+  }
 
-    if (empty(trim($_POST['p_a_date']))) {
-        $errors = "Please enter Appointment date";
-    } else {
-        $p_a_date = trim($_POST['p_a_date']);
-    }
+  if (isset($_POST['p_a_date'])) {
+      $p_a_date = trim($_POST['p_a_date']);
+  } else {
+      $errors[] = "Please enter Appointment date";
+  }
 
-   
-        $slot = trim($_POST['slot']);
+  if (isset($_POST['slot'])) {
+      $slot = trim($_POST['slot']);
+  } else {
+      $errors[] = "Slot information missing";
+  }
     
     // Check if there are any errors before proceeding
     if (empty($errors)) {
@@ -53,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_execute($stmt2);
 
         // Redirect to the desired page after successful submission
-        header("location: Patientbook.php");
+        header("location: samya_output.php");
         exit(); // Terminate script execution after redirection
     } 
 
@@ -303,7 +341,7 @@ h1 {
                 <option value="10:00-11:00" >10:00 - 11:00 AM</option>
                 <option value="2:00-3:00"  >2:00 - 3:00 PM</option>
               </select>
-              <input id="hide" name="slot">
+              <input id="hide" name="slot" type="hidden">
             </td>
             <td><button  id="btn22" onclick="timebook(event)" disabled>Book</button></td>
         </tr>
@@ -319,7 +357,11 @@ h1 {
 <!-- <\Asli logic!!! -->
 
 
-<?php if (!empty($errors)) { echo "<p style='color: red;'>$errors</p>"; } ?>
+<?php if (!empty($errors)) { 
+    // Convert the array of errors into a string
+    $errorString = implode('<br>', $errors);
+    echo "<p style='color: red;'>$errorString</p>"; 
+}  ?>
 <script src="Patientt.js"></script>
 </body>
 </html>

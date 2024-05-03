@@ -4,10 +4,50 @@
 require_once "config.php";
 
 // Initialize error message
-$em= $username = "";
+$em = "";
 
 // Start the session
 session_start();
+
+
+if ($_SERVER['REQUEST_METHOD'] == "POST")
+{
+	if (isset($_SESSION['username'])) {
+		// Select the username from the profile table
+		$query = "SELECT username FROM profile WHERE username = ?";
+		$stmt = mysqli_prepare($conn, $query);
+		mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
+		mysqli_stmt_execute($stmt);
+	
+		// Store the result
+		mysqli_stmt_store_result($stmt);
+	
+		if (mysqli_stmt_num_rows($stmt) == 1) {
+			// The username exists in the profile table
+	
+			// You don't need a separate query for the users table
+			// Just check if the username exists in the users table
+			$query = "SELECT username FROM users WHERE username = ?";
+			mysqli_stmt_prepare($stmt, $query);
+			mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
+			mysqli_stmt_execute($stmt);
+	
+			// Store the result
+			mysqli_stmt_store_result($stmt);
+	
+			if (mysqli_stmt_num_rows($stmt) == 1) {
+				// Redirect to profile_output.php if the username exists in both tables
+				header("location: Patientbook.php");
+				exit;
+			}
+		}
+	}
+   
+}
+
+
+
+
 
 
 
@@ -26,53 +66,6 @@ $loggedInUsername = $_SESSION['username'] ?? '';
 if (empty($loggedInUsername)) {
     die("Username not available");
 }
-
-
-$loggedInUsername = $_SESSION['username'] ?? '';
-
-// Check if the username is available
-if (empty($loggedInUsername)) {
-    die("Username not available");
-}
-
-// Check if the username exists in both tables
-$query = "SELECT * FROM users WHERE username = ?";
-$stmt_ = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt_, "s", $loggedInUsername);
-mysqli_stmt_execute($stmt_);
-mysqli_stmt_store_result($stmt_);
-
-if (mysqli_stmt_num_rows($stmt_) == 1) {
-    // Username exists in the users table
-    // Now check if it exists in the patient_appointment table
-    $query = "SELECT * FROM patient_offline_appointment WHERE username = ?";
-    $stmtt_ = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmtt_, "s", $loggedInUsername);
-    mysqli_stmt_execute($stmtt_);
-    mysqli_stmt_store_result($stmtt_);
-
-    if (mysqli_stmt_num_rows($stmtt_) == mysqli_stmt_num_rows($stmt_)) {
-        // Username exists in both tables, redirect to samya_output.php
-        header("Location: samya_output.php");
-        exit;
-    }
-}
-
-
-
-if(isset($_POST['bookAppointment'])) {
-    echo "Redirecting...";
-    header("Location: samya_output.php");
-    exit;
-}
-
-
-
-
-
-
-
-
 
 // Retrieve data from the database using a prepared statement
 $sql = "SELECT * FROM profile
@@ -102,11 +95,11 @@ if ($result) {
             $gender = $row['gender'];
             $fathername = $row['fathername'];
             $adharcard = $row['adharcard'];
-            $city = $row['city']; // Assuming 'name' is the column for the user's name
+            $city = $row['city']; 
            
         }
     } else {
-        // No matching profile found
+       
         echo "No profile found for the logged-in user.";
     }
 } else {
@@ -144,6 +137,55 @@ if ($result1) {
 			
 
 		}}}
+
+
+        
+
+// Select the appointment slot for the logged-in user
+$comm = "SELECT slot, p_a_date FROM patient_offline_appointment WHERE username = ?";
+$stmtt = mysqli_prepare($conn, $comm);
+mysqli_stmt_bind_param($stmtt, "s", $loggedInUsername);
+mysqli_stmt_execute($stmtt);
+$resultt = mysqli_stmt_get_result($stmtt);
+
+// Initialize slot variables
+$slot = "";
+$p_a_date = "";
+
+// Check if the query was successful
+if ($resultt) {
+    // Use a conditional check to see if there are any rows returned
+    if(mysqli_num_rows($resultt) > 0) {
+        while ($row = mysqli_fetch_assoc($resultt)) {
+            $slot = $row['slot'];
+            $p_a_date = $row['p_a_date'];
+        }
+    }
+}
+
+
+
+if (isset($_POST['cancel'])) {
+    // Get the username of the currently logged-in user from the session
+    $loggedInUsername = $_SESSION['username'];
+
+// Attempt to delete the profile data
+$sql = "DELETE FROM patient_offline_appointment WHERE username = ?";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "s", $loggedInUsername);
+mysqli_stmt_execute($stmt);
+
+// Check for errors
+if(mysqli_stmt_affected_rows($stmt) > 0) {
+    // Deletion successful, redirect
+    header("Location: Patient.php");
+    exit();
+} else {
+    // Deletion failed
+    echo "Failed to reset profile: " . mysqli_error($conn);
+}
+
+    } 
 
 // Close the statement and database connection
 mysqli_stmt_close($stmt);
@@ -244,9 +286,9 @@ h2 {
 /* Buttons */
 button[type="submit"],
 input[type="reset"],
-button[type="button"] {
+button[type="button"],#cancel {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: red;
     color: white;
     border: none;
     cursor: pointer;
@@ -270,10 +312,10 @@ button[type="button"]:hover {
 			<div class="input-name1">
 				
 					<fieldset><div>
-						<h2>Registration Process For Patient Details</h2><br>
+						<h2>Your Appointment Time</h2><br>
 	
 						<div class="input-name">
-						<form method="post" action="samya.php">
+						<form method="post" action="">
     <div class="input-name">
         
     </div><br>
@@ -281,21 +323,27 @@ button[type="button"]:hover {
     <div>
         <h2>Father Name:</h2><?php echo $fathername ?>
     </div>
-    <div><br>
+    <div>
         <h2>Patient Age:</h2><?php echo $age ?>
         <h2>Patient Gender:</h2><?php echo $gender ?>
         <h2>Patient Mobile no.:</h2><?php echo $mobile ?>
         <h2>Patient Email Id:</h2><?php echo $username ?>
         <h2>Patient Aadhar no.:</h2><?php echo $adharcard ?>
+        <h2>Appointment-Time::</h2><?php echo $p_a_date ?>
+        <h2>Slot::</h2><?php echo $slot ?>
     </div>
     <hr>
-    <button type="submit"  name="bookAppointment">SELECT APPOINTMENT DATE:</button>
+   
     <hr>			    
-    <input type="reset" value="Reset">
-    <button type="button" onclick="">Submit</button>
+    <button type="submit" name="cancel" id="cancel">Reset Profile</button>
 </form>
 
 
+<script>
+    function cancel(){
+        alert("PROFILE IS RESETTING!")
+    }
+    </script>
 					<script>
 						    function submitOption() {
 						        var ageOption = document.getElementById('ageOption');

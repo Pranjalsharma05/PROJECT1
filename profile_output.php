@@ -227,8 +227,14 @@ mysqli_close($conn);
     </style>
 <form action="" method="Post">
 <h4>Want to Reset Your Profile?</h4>
-    <button id="reset" name="reset">Reset Profile</button>
+    <button id="reset" name="reset" onclick="alt()">Reset Profile</button>
 </form>
+<script>
+    function alt(){
+        alert("PROFILE IS RESETTING!")
+    }
+    </script>
+
 </body>
 
 </html>
