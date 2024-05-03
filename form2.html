@@ -1,3 +1,46 @@
+<?php
+// Database connection
+$servername = "localhost"; // Change this if your database server is different
+$username = "root"; // Default username for XAMPP MySQL
+$password = ""; // Default password for XAMPP MySQL
+$database = "login"; // Replace "your_database_name" with your actual database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Process form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Prepare data for insertion
+    $name = $_POST["name"];
+    $father_name = $_POST["father_name"];
+    $adhar_card = $_POST["adhar_card"];
+    $mobile_number = $_POST["mobile_number"];
+    $email = $_POST["email"];
+    $age = $_POST["age"];
+    $gender = $_POST["gender"];
+    $labTests = $_POST["labTests"];
+    $lab_visit_date = $_POST["lab_visit_date"];
+    $slot = $_POST["slot"];
+    $prescription = $_FILES["prescription"]["name"]; // Assuming you're storing the filename only, not the file itself
+
+    // Insert data into database
+    $sql = "INSERT INTO booking_data (name, father_name, adhar_card, mobile_number, email, age, gender, labTests, lab_visit_date, slot, prescription) VALUES ('$name', '$father_name', '$adhar_card', '$mobile_number', '$email', '$age', '$gender', '$labTests', '$lab_visit_date', '$slot', '$prescription')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Close connection
+$conn->close();
+?>
 <!DOCTYPE html>
 <html>
 <head>
