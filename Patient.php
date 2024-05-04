@@ -278,36 +278,50 @@ button[type="button"]:hover {
 		</style>
 </head>
 <body>
-	<h1 style="font-size:34px;line-height: 24px;padding: 2px;text-align: center;">Welcome</h1>
+<h1 style="font-size:34px;line-height: 24px;padding: 2px;text-align: center;">Welcome</h1>
 
-	<div class="Head">
-			<div class="input-name1">
-				
-					<fieldset><div>
-						<h2>Registration Process For Patient Details</h2><br>
-	
-						<div class="input-name">
-						<form method="post" action="samya.php">
-    <div class="input-name">
-        
-    </div><br>
-    <h2>Patient Name:</h2><br><?php echo $name ?>
-    <div>
-        <h2>Father Name:</h2><?php echo $fathername ?>
+<div class="Head">
+    <div class="input-name1">
+        <form method="post" action="samya.php">
+            <fieldset>
+                <div>
+                    <h2>Registration Process For Patient Details</h2><br>
+                    <table>
+                        <tr>
+                            <td style="width: 25%;"><h2>Patient Name:</h2></td>
+                            <td style="width: 25%;"><?php echo $name ?></td>
+                            <td style="width: 25%;"><h2>Father Name:</h2></td>
+                            <td style="width: 25%;"><?php echo $fathername ?></td>
+                        </tr>
+                        <tr>
+                            <td><h2>Patient Age:</h2></td>
+                            <td><?php echo $age ?></td>
+                            <td><h2>Patient Gender:</h2></td>
+                            <td><?php echo $gender ?></td>
+                        </tr>
+                        <tr>
+                            <td><h2>Patient Mobile no.:</h2></td>
+                            <td><?php echo $mobile ?></td>
+                            <td><h2>Patient Email Id:</h2></td>
+                            <td><?php echo $username ?></td>
+                        </tr>
+                        <tr>
+                            <td><h2>Patient Aadhar no.:</h2></td>
+                            <td><?php echo $adharcard ?></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <button type="submit" name="bookAppointment">SELECT APPOINTMENT DATE:</button>
+                <hr>
+                <input type="reset" value="Reset">
+                <button type="button" onclick="">Submit</button>
+            </fieldset>
+        </form>
     </div>
-    <div><br>
-        <h2>Patient Age:</h2><?php echo $age ?>
-        <h2>Patient Gender:</h2><?php echo $gender ?>
-        <h2>Patient Mobile no.:</h2><?php echo $mobile ?>
-        <h2>Patient Email Id:</h2><?php echo $username ?>
-        <h2>Patient Aadhar no.:</h2><?php echo $adharcard ?>
-    </div>
-    <hr>
-    <button type="submit"  name="bookAppointment">SELECT APPOINTMENT DATE:</button>
-    <hr>			    
-    <input type="reset" value="Reset">
-    <button type="button" onclick="">Submit</button>
-</form>
+</div>
 
 
 					<script>
