@@ -1,52 +1,99 @@
 <?php
-// Database connection
-$servername = "localhost"; // Change this if your database server is different
-$username = "root"; // Default username for XAMPP MySQL
-$password = ""; // Default password for XAMPP MySQL
-$database = "login"; // Replace "your_database_name" with your actual database name
+require_once "config.php";
+session_start();
+error_reporting(E_ALL);
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+// Define variables to prevent undefined variable errors
+$name_err = $father_name_err = $adhar_card_err = $mobile_number_err = $email_err = $age_err = $gender_err = $labTests_err = $lab_visit_date_err = $slot_err = $prescription_err = "";
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Prepare data for insertion
-    $name = $_POST["name"];
-    $father_name = $_POST["father_name"];
-    $adhar_card = $_POST["adhar_card"];
-    $mobile_number = $_POST["mobile_number"];
-    $email = $_POST["email"];
-    $age = $_POST["age"];
-    $gender = $_POST["gender"];
-    $labTests = $_POST["labTests"];
-    $lab_visit_date = $_POST["lab_visit_date"];
-    $slot = $_POST["slot"];
-    $prescription = $_FILES["prescription"]["name"]; // Assuming you're storing the filename only, not the file itself
+    // Process image upload
+    if (isset($_FILES['prescription'])) {
+        $img_name = $_FILES['prescription']['name'];
+        $img_size = $_FILES['prescription']['size'];
+        $tmp_name = $_FILES['prescription']['tmp_name'];
+        $error = $_FILES['prescription']['error'];
 
-    // Insert data into database
-    $sql = "INSERT INTO booking_data (name, father_name, adhar_card, mobile_number, email, age, gender, labTests, lab_visit_date, slot, prescription) VALUES ('$name', '$father_name', '$adhar_card', '$mobile_number', '$email', '$age', '$gender', '$labTests', '$lab_visit_date', '$slot', '$prescription')";
+        if ($error === UPLOAD_ERR_OK) {
+            if ($img_size > 1250000) {
+                $em = "Sorry, the file is too large";
+            } else {
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $allowed_exs = array("jpeg", "jpg", "png");
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+                if (in_array($img_ex_lc, $allowed_exs)) {
+                    $image_data = file_get_contents($tmp_name);
+                    $base64_image = base64_encode($image_data);
+                    $base64_image = str_replace(array("\r", "\n"), '', $base64_image);
+                } else {
+                    $em = "Sorry, only JPG, JPEG, and PNG files are allowed";
+                }
+            }
+        } else {
+            $em = "Sorry, there was an error uploading your file";
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $em = "Please select a file to upload";
     }
-}
 
-// Close connection
-$conn->close();
+    // Process other form data
+    $name = $father_name = $adhar_card = $mobile_number = $email = $age = $gender = $labTests = $lab_visit_date = $slot = "";
+    $name_err = $father_name_err = $adhar_card_err = $mobile_number_err = $email_err = $age_err = $gender_err = $labTests_err = $lab_visit_date_err = $slot_err = $prescription_err = "";
+
+    // Validate form inputs
+    if (empty(trim($_POST["name"]))) {
+        $name_err = "Name cannot be blank";
+    } else {
+        $name = trim($_POST['name']);
+    }
+
+    // Validate other fields similarly...
+
+    if (empty($name_err) && empty($age_err) && empty($father_name_err) && empty($adhar_card_err) && empty($mobile_number_err) && empty($email_err) && empty($gender_err) && empty($labTests_err) && empty($lab_visit_date_err) && empty($slot_err) && empty($prescription_err)) {
+        $sql = "INSERT INTO booking_data (name, father_name, age, gender, email, slot, prescription, adhar_card, mobile_number, lab_visit_date, labTests) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "sssssssssss", $name, $father_name, $age, $gender, $email, $slot, $base64_image, $adhar_card, $mobile_number, $lab_visit_date, $labTests);
+
+            // Assign values to parameters
+            $name = $_POST['name'];
+            $father_name = $_POST['father_name'];
+            $age = $_POST['age'];
+            $gender = $_POST['gender'];
+            $email = $_POST['email'];
+            $labTests = $_POST['labTests'];
+            $lab_visit_date = $_POST['lab_visit_date'];
+            $slot = $_POST['slot'];
+            $adhar_card = $_POST['adhar_card'];
+            $mobile_number = $_POST['mobile_number'];
+
+            if (mysqli_stmt_execute($stmt)) {
+                header("location: show.php");
+                exit();
+            } else {
+                echo "Something went wrong... cannot redirect!";
+            }
+        }
+        mysqli_stmt_close($stmt);
+    }
+    mysqli_close($conn);
+}
 ?>
+
+
+
+
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Booking Form</title>
-</head>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date selection</title>
+  <style>
     body {
         font-family: Arial, sans-serif;
         background-image: url(https://img.freepik.com/free-vector/green-curve-frame-template-vector_53876-144370.jpg?size=626&ext=jpg);
@@ -125,7 +172,7 @@ input[type="file"] {
 </style>
 <body>
     <h2>Booking Form</h2>
-    <form action="/submit" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
@@ -173,9 +220,9 @@ input[type="file"] {
         </select>
 <hr>
         <label for="prescription">Upload Your Prescription:</label>
-        <input type="file" id="prescription" name="prescription" accept=".pdf, .doc, .docx" required>
+        <input type="file" id="profileImage" name="prescription" accept="image/*" required>
 
-        <input type="submit" value="Book Slot">
+       <button>Book</button>
     </form>
     <h4>NOTE:</h4>
     <p>Morning slots are in between 9AM-12NOON.<br>
@@ -188,4 +235,13 @@ input[type="file"] {
         If you unable to raech at your desried selected time,your slot will automatically delete after 2 hours.
     </p>
 </body>
+                                             
+
+
+
 </html>
+
+
+
+
+
