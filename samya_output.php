@@ -10,40 +10,40 @@ $em = "";
 session_start();
 
 
-if ($_SERVER['REQUEST_METHOD'] == "POST")
-{
-	if (isset($_SESSION['username'])) {
-		// Select the username from the profile table
-		$query = "SELECT username FROM profile WHERE username = ?";
-		$stmt = mysqli_prepare($conn, $query);
-		mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
-		mysqli_stmt_execute($stmt);
+// if ($_SERVER['REQUEST_METHOD'] == "POST")
+// {
+// 	if (isset($_SESSION['username'])) {
+// 		// Select the username from the profile table
+// 		$query = "SELECT username FROM profile WHERE username = ?";
+// 		$stmt = mysqli_prepare($conn, $query);
+// 		mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
+// 		mysqli_stmt_execute($stmt);
 	
-		// Store the result
-		mysqli_stmt_store_result($stmt);
+// 		// Store the result
+// 		mysqli_stmt_store_result($stmt);
 	
-		if (mysqli_stmt_num_rows($stmt) == 1) {
-			// The username exists in the profile table
+// 		if (mysqli_stmt_num_rows($stmt) == 1) {
+// 			// The username exists in the profile table
 	
-			// You don't need a separate query for the users table
-			// Just check if the username exists in the users table
-			$query = "SELECT username FROM users WHERE username = ?";
-			mysqli_stmt_prepare($stmt, $query);
-			mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
-			mysqli_stmt_execute($stmt);
+// 			// You don't need a separate query for the users table
+// 			// Just check if the username exists in the users table
+// 			$query = "SELECT username FROM users WHERE username = ?";
+// 			mysqli_stmt_prepare($stmt, $query);
+// 			mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
+// 			mysqli_stmt_execute($stmt);
 	
-			// Store the result
-			mysqli_stmt_store_result($stmt);
+// 			// Store the result
+// 			mysqli_stmt_store_result($stmt);
 	
-			if (mysqli_stmt_num_rows($stmt) == 1) {
-				// Redirect to profile_output.php if the username exists in both tables
-				header("location: Patientbook.php");
-				exit;
-			}
-		}
-	}
+// 			if (mysqli_stmt_num_rows($stmt) == 1) {
+// 				// Redirect to profile_output.php if the username exists in both tables
+// 				header("location: Patientbook.php");
+// 				exit;
+// 			}
+// 		}
+// 	}
    
-}
+// }
 
 
 
@@ -164,28 +164,20 @@ if ($resultt) {
 }
 
 
-
 if (isset($_POST['cancel'])) {
-    // Get the username of the currently logged-in user from the session
-    $loggedInUsername = $_SESSION['username'];
+    // Prepare and execute the SQL query to delete the profile data
+    $sql = "DELETE patient_offline_appointment FROM patient_offline_appointment WHERE username = ?";
 
-// Attempt to delete the profile data
-$sql = "DELETE FROM patient_offline_appointment WHERE username = ?";
-$stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "s", $loggedInUsername);
-mysqli_stmt_execute($stmt);
+    $stmtt_ = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmtt_, "s", $loggedInUsername);
+    mysqli_stmt_execute($stmtt_);
+    mysqli_stmt_store_result($stmtt_);
 
-// Check for errors
-if(mysqli_stmt_affected_rows($stmt) > 0) {
-    // Deletion successful, redirect
-    header("Location: Patient.php");
-    exit();
-} else {
-    // Deletion failed
-    echo "Failed to reset profile: " . mysqli_error($conn);
+        // Username exists in both tables, redirect to samya_output.php
+        header("Location: Patient.php");
+        exit;
+    
 }
-
-    } 
 
 // Close the statement and database connection
 mysqli_stmt_close($stmt);
