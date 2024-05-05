@@ -170,7 +170,7 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !==true)
             <BR></a></span>
                 <hr>
               <span> <br> 
-                <li><a href="#" target="content"><i class="fas fa-prescription-bottle-alt"></i>YOUR PRESCRIPTIONS</li>
+                <li><a href="prescription.php" target="content"><i class="fas fa-prescription-bottle-alt"></i>YOUR PRESCRIPTIONS</li>
             <br></a></span><hr>
            <span> <br>
             <li><a href="logout.php" ><i class="fas fa-sign-out-alt"></i>LOGOUT</li><br></a>

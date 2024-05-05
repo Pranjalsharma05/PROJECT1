@@ -1,38 +1,28 @@
 <?php
-// Establish connection to MySQL database
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "login";
+require_once "config.php";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+ $doc = trim($_POST['doc']);
+ $pat = trim($_POST['pat']);
+ $date = $_POST['date'];
+ $dis = trim($_POST['dis']);
+ $trt = trim($_POST['trt']);
+ $med = trim($_POST['med']);
+
+ $query = "SELECT * FROM patient_offline_appointment";
+ $result = mysqli_query($conn, $query);
+ $row = mysqli_fetch_assoc($result);
+ $username=$row['username'];
+
+ $text = json_encode([$doc, $pat, $date, $dis, $trt, $med]);
+ if (!empty($text) && isset($_POST['pdf'])) {
+     $python = shell_exec("python pdf.py \"$text\" \"$username\"");
+ }
+
 }
 
-// Retrieve form data
-$doctorName = $_POST['doctorName'];
-$patientName = $_POST['patientName'];
-$date = $_POST['date'];
-$diagnosedDisease = $_POST['diagnosedDisease'];
-$prescribedTreatment = $_POST['prescribedTreatment'];
-$medicineAdvised = $_POST['medicineAdvised'];
-$miscellaneous = $_POST['miscellaneous'];
-
-// Insert form data into the database
-$sql = "INSERT INTO prescriptions (doctorName, patientName, date, diagnosedDisease, prescribedTreatment, medicineAdvised, miscellaneous)
-        VALUES ('$doctorName', '$patientName', '$date', '$diagnosedDisease', '$prescribedTreatment', '$medicineAdvised', '$miscellaneous')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Record inserted successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +53,8 @@ $conn->close();
         font-weight: bold;
     }
     .form-group input[type="text"],
-    .form-group textarea {
+    .form-group textarea,
+    .form-group input[type="date"] {
         width: 100%;
         padding: 10px;
         border: 1px solid #ccc;
@@ -97,14 +88,14 @@ $conn->close();
 
 <div class="container">
     <h2>DEPARTMENT OF GENERAL SURGERY</h2>
-    <form id="prescriptionForm">
+    <form id="prescriptionForm" method="post" action="">
         <div class="form-group">
             <label for="doctorName">Doctor's Name:</label>
-            <input type="text" id="doctorName" name="doctorName" required>
+            <input type="text" id="doctorName" name="doc" required>
         </div>
         <div class="form-group">
             <label for="patientName">Patient's Name:</label>
-            <input type="text" id="patientName" name="patientName" required>
+            <input type="email" id="patientName" name="pat" required>
         </div>
         <div class="form-group">
             <label for="date">Date of Prescription:</label>
@@ -112,21 +103,18 @@ $conn->close();
         </div>
         <div class="form-group">
             <label for="diagnosedDisease">Diagnosed Disease:</label>
-            <input type="text" id="diagnosedDisease" name="diagnosedDisease" required>
+            <input type="text" id="diagnosedDisease" name="dis" required>
         </div>
         <div class="form-group">
             <label for="prescribedTreatment">Prescribed Treatment:</label>
-            <textarea id="prescribedTreatment" name="prescribedTreatment" required></textarea>
+            <textarea id="prescribedTreatment" name="trt" required></textarea>
         </div>
         <div class="form-group">
             <label for="medicineAdvised">Medicine Advised:</label>
-            <textarea id="medicineAdvised" name="medicineAdvised" required></textarea>
+            <textarea id="medicineAdvised" name="med" required></textarea>
         </div>
-        <div class="form-group">
-            <label for="miscellaneous">Miscellaneous:</label>
-            <textarea id="miscellaneous" name="miscellaneous"></textarea>
-        </div>
-        <button type="button" class="btn" onclick="generatePDF()">Generate PDF</button>
+      
+        <button type="submit" class="btn" name="pdf">Generate PDF</button>
 
     </form>
 </div>
@@ -143,7 +131,7 @@ $conn->close();
             diagnosedDisease: document.getElementById('diagnosedDisease').value,
             prescribedTreatment: document.getElementById('prescribedTreatment').value,
             medicineAdvised: document.getElementById('medicineAdvised').value,
-            miscellaneous: document.getElementById('miscellaneous').value
+            // miscellaneous: document.getElementById('miscellaneous').value // Uncomment this if there's a field with ID 'miscellaneous'
         };
 
         // Create PDF instance
@@ -156,7 +144,7 @@ $conn->close();
         doc.text(20, 50, 'Diagnosed Disease: ' + formData.diagnosedDisease);
         doc.text(20, 60, 'Prescribed Treatment: ' + formData.prescribedTreatment);
         doc.text(20, 70, 'Medicine Advised: ' + formData.medicineAdvised);
-        doc.text(20, 80, 'Miscellaneous: ' + formData.miscellaneous);
+        // doc.text(20, 80, 'Miscellaneous: ' + formData.miscellaneous); // Uncomment this if there's a field with ID 'miscellaneous'
 
         // Convert PDF to base64
         const pdfData = doc.output('datauristring');
