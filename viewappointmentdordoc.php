@@ -75,19 +75,17 @@ $result1 = mysqli_query($conn, $query1);
 </head>
 <body>
     <h1>WELCOME DOCTOR WISHES YOU ALL THE BEST</h1>
-    <table border="2">
+    <table >
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>MOBILE</th>
-            <th>Depatment</th>
+            <th>Department</th>
             <th>Gender</th>
             <th>Appointment Date</th>
             <th>Slot</th>
             <th>Adhar Card Number</th>
-            <td>
-            <a href=PFORM1.php>
-            <button>Prescribe</button></a></td>
+    
             
             <!-- Add other column headers here -->
         </tr>
@@ -102,6 +100,7 @@ $result1 = mysqli_query($conn, $query1);
             echo "<td>" . $row['gender'] . "</td>";
             echo "<td>" . $row['p_a_date'] . "</td>";
             echo "<td>" . $row['slot'] . "</td>";
+            
            
             // Add other columns here
 
@@ -111,6 +110,13 @@ $result1 = mysqli_query($conn, $query1);
             $row1 = mysqli_fetch_assoc($result1);
             // Display Adhar Card Number
             echo $row1['adharcard'];
+
+            echo "<td>"; // Open table data tag for the button
+            echo "<form action='PFORM1.php' method='post'>"; // Form for each prescribe button
+            echo "<input type='hidden' name='id' value='" . $row['id'] . "'>"; // Hidden input to send user ID
+            echo "<button type='submit'>Prescribe</button>"; // Prescribe button
+            echo "</form>";
+            echo "</td>"; 
 
             echo "</td>"; // Close table data tag for Adhar Card Number
 

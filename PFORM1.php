@@ -1,6 +1,7 @@
 <?php
 require_once "config.php";
 
+
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -88,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="container">
     <h2>DEPARTMENT OF GENERAL SURGERY</h2>
-    <form id="prescriptionForm" method="post" action="">
+    <form id="prescriptionForm" method="POST" action="">
         <div class="form-group">
             <label for="doctorName">Doctor's Name:</label>
             <input type="text" id="doctorName" name="doc" required>
