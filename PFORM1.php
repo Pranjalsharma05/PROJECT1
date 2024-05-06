@@ -12,10 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $med = trim($_POST['med']);
 
     // No need for the loop here, just proceed with generating PDF
-    $text = json_encode([$doc, $pat, $date, $dis, $trt, $med]);
-    if (!empty($text) && isset($_POST['pdf'])) {
-        $python = shell_exec("python pdf.py \"$text\" \"$pat\"");
-    }
+    // $text = json_encode([$doc, $pat, $date, $dis, $trt, $med]);
+
+        $python = shell_exec("python pdf.py \"$doc\" \"$pat\" \"$date\" \"$dis\" \"$trt\" \"$med\"");
+    
 }
 }
 ?>
