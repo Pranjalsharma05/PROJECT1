@@ -1,11 +1,6 @@
 <?php
 // Connect to MySQL database
-$conn = mysqli_connect("localhost", "root", "", "login");
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once "config.php";
 
 // Query to fetch data from the database
 $query = "SELECT * FROM patient_offline_appointment";
@@ -75,7 +70,7 @@ $result1 = mysqli_query($conn, $query1);
 </head>
 <body>
     <h1>WELCOME DOCTOR WISHES YOU ALL THE BEST</h1>
-    <table >
+    <table>
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -85,9 +80,7 @@ $result1 = mysqli_query($conn, $query1);
             <th>Appointment Date</th>
             <th>Slot</th>
             <th>Adhar Card Number</th>
-    
-            
-            <!-- Add other column headers here -->
+            <th>Action</th>
         </tr>
         <?php
         // Loop through the fetched data from the first result set
@@ -100,33 +93,31 @@ $result1 = mysqli_query($conn, $query1);
             echo "<td>" . $row['gender'] . "</td>";
             echo "<td>" . $row['p_a_date'] . "</td>";
             echo "<td>" . $row['slot'] . "</td>";
-            
-           
-            // Add other columns here
 
-            echo "<td>"; // Open table data tag for Adhar Card Number
-
+            // Add Adhar Card Number column
+            echo "<td>";
             // Fetch the corresponding row from the second result set
             $row1 = mysqli_fetch_assoc($result1);
             // Display Adhar Card Number
             echo $row1['adharcard'];
+            echo "</td>";
 
-            echo "<td>"; // Open table data tag for the button
-            echo "<form action='PFORM1.php' method='post'>"; // Form for each prescribe button
-            echo "<input type='hidden' name='id' value='" . $row['id'] . "'>"; // Hidden input to send user ID
-            echo "<button type='submit'>Prescribe</button>"; // Prescribe button
+            // Prescription button
+            echo "<td>";
+            echo "<form action='PFORM1.php' method='post'>";
+            echo "<input type='hidden' name='username' value='" . $row['username'] . "'>";  // Hidden input to send appointment ID
+            echo "<button type='submit'>Prescribe</button>";
             echo "</form>";
-            echo "</td>"; 
-
-            echo "</td>"; // Close table data tag for Adhar Card Number
+            echo "</td>";
 
             echo "</tr>";
         }
-
-        // Close the second result set cursor
-        mysqli_data_seek($result1, 0);
-
         ?>
     </table>
 </body>
 </html>
+
+<?php
+// Close the connection
+mysqli_close($conn);
+?>

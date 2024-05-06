@@ -11,6 +11,7 @@ def text_to_pdf(text):
 
 def update_pdf_in_database(pdf, username):
     try:
+        print("Connecting to the database...")
         # Establish database connection
         conn = mysql.connector.connect(
             host="localhost",
@@ -19,19 +20,23 @@ def update_pdf_in_database(pdf, username):
             database="login"
         )
         
+
+        
         # Create a cursor object
         cursor = conn.cursor()
         
         # Output PDF to memory
         pdf_output = pdf.output(dest='S').encode('latin1')
         
+
+        
         # Update PDF in database for the specified username
         cursor.execute("UPDATE patient_offline_appointment SET pdf_data = %s WHERE username = %s", (pdf_output, username))
         
+       
+        
         # Commit changes
         conn.commit()
-        
-        print("PDF updated in database successfully!")
         
     except mysql.connector.Error as error:
         print("Failed to update PDF in database:", error)
@@ -44,8 +49,18 @@ def update_pdf_in_database(pdf, username):
             conn.close()
 
 # Example usage:
-text = sys.argv[1]
-username = sys.argv[2]  # Assuming username is passed as the second command line argument
+if len(sys.argv) != 7:
+    print("Usage: python script.py <doctor_name> <username> <date> <diagnosis> <treatment> <medicine>")
+    sys.exit(1)
+
+doctor_name = sys.argv[1]
+username = sys.argv[2]
+date = sys.argv[3]
+diagnosis = sys.argv[4]
+treatment = sys.argv[5]
+medicine = sys.argv[6]
+
+text = f"PRESCRIBED BY Dr. {doctor_name}\n\nTO PATIENT: {username}\n\n ON DATE: {date}\n\n DIAGNOSIS: {diagnosis}\n\n TREATMENT RECOMMENDED BY DOCTOR: {treatment}\n\n MEDICINE PRESCRIBED: {medicine}\n"
 pdf = text_to_pdf(text)
 update_pdf_in_database(pdf, username)
  
