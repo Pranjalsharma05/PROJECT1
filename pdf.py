@@ -44,7 +44,11 @@ def update_pdf_in_database(pdf, username):
             conn.close()
 
 # Example usage:
+if len(sys.argv) != 3:
+    print("Usage: python script.py <text> <username>")
+    sys.exit(1)
+
 text = sys.argv[1]
-username = sys.argv[2]  # Assuming username is passed as the second command line argument
+username = sys.argv[2]
 pdf = text_to_pdf(text)
 update_pdf_in_database(pdf, username)

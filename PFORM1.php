@@ -1,29 +1,23 @@
 <?php
 require_once "config.php";
 
-
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['doc'], $_POST['pat'], $_POST['date'], $_POST['dis'], $_POST['trt'], $_POST['med'])) {
+    $doc = trim($_POST['doc']);
+    $pat = trim($_POST['pat']);
+    $date = $_POST['date'];
+    $dis = trim($_POST['dis']);
+    $trt = trim($_POST['trt']);
+    $med = trim($_POST['med']);
 
- $doc = trim($_POST['doc']);
- $pat = trim($_POST['pat']);
- $date = $_POST['date'];
- $dis = trim($_POST['dis']);
- $trt = trim($_POST['trt']);
- $med = trim($_POST['med']);
-
- $query = "SELECT * FROM patient_offline_appointment";
- $result = mysqli_query($conn, $query);
- $row = mysqli_fetch_assoc($result);
- $username=$row['username'];
-
- $text = json_encode([$doc, $pat, $date, $dis, $trt, $med]);
- if (!empty($text) && isset($_POST['pdf'])) {
-     $python = shell_exec("python pdf.py \"$text\" \"$username\"");
- }
-
+    // No need for the loop here, just proceed with generating PDF
+    $text = json_encode([$doc, $pat, $date, $dis, $trt, $med]);
+    if (!empty($text) && isset($_POST['pdf'])) {
+        $python = shell_exec("python pdf.py \"$text\" \"$pat\"");
+    }
 }
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,8 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="doctorName" name="doc" required>
         </div>
         <div class="form-group">
-            <label for="patientName">Patient's Name:</label>
-            <input type="email" id="patientName" name="pat" required>
+        <label for="patientUsername">Patient's Email:</label>
+            <input type="email" id="patientUsername" name="pat" required>
         </div>
         <div class="form-group">
             <label for="date">Date of Prescription:</label>
