@@ -48,3 +48,4 @@ text = sys.argv[1]
 username = sys.argv[2]  # Assuming username is passed as the second command line argument
 pdf = text_to_pdf(text)
 update_pdf_in_database(pdf, username)
+ 
