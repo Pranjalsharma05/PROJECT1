@@ -60,7 +60,7 @@ diagnosis = sys.argv[4]
 treatment = sys.argv[5]
 medicine = sys.argv[6]
 
-text = f"PRESCRIBED BY Dr. {doctor_name}\n\nTO PATIENT: {username}\n\n ON DATE: {date}\n\n DIAGNOSIS: {diagnosis}\n\n TREATMENT RECOMMENDED BY DOCTOR: {treatment}\n\n MEDICINE PRESCRIBED: {medicine}\n"
+text = f"HOSPITAL ABC \n\n\n PRESCRIBED BY Dr. {doctor_name}\n\nTO PATIENT: {username}\n\n ON DATE: {date}\n\n DIAGNOSIS: {diagnosis}\n\n TREATMENT RECOMMENDED BY DOCTOR: {treatment}\n\n MEDICINE PRESCRIBED: {medicine}\n"
 pdf = text_to_pdf(text)
 update_pdf_in_database(pdf, username)
  

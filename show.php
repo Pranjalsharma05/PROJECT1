@@ -42,7 +42,8 @@ $result = $conn->query($sql);
                 echo "<td>".$row["labTests"]."</td>";
                 echo "<td>".$row["lab_visit_date"]."</td>";
                 echo "<td>".$row["slot"]."</td>";
-                echo "<td>".$row["prescription"]."</td>";
+                echo "<td>".html_entity_decode($row["prescription"])."</td>";
+
                 echo "</tr>";
             }
         } else {
