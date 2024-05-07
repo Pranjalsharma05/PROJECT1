@@ -120,6 +120,7 @@ mysqli_close($conn);
             echo '<td><img src="data:image/jpeg;base64,' . $row['doc_image'] . '" /></td>';
 
             // Add other columns here
+            echo '<td><form method="post" action="delete_doc.php"><input type="hidden" name="doc_id" value="' . $row['doc_id'] . '"><button type="submit" name="delete_btn">Delete</button></form></td>';
             
             echo "</tr>";
         }
