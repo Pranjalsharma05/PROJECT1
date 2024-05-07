@@ -70,7 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mobile_number = $_POST['mobile_number'];
 
             if (mysqli_stmt_execute($stmt)) {
-                header("location: show.php");
+               
+                echo "<script>alert('YOUR LAB APPOINTMENT IS SUCCESSFULLY REGISTERED...KINDLY CHECK YOUR MAIL FOR FURTHER NOTIFICATIONS');</script>";
                 exit();
             } else {
                 echo "Something went wrong... cannot redirect!";

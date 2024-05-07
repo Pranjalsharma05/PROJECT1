@@ -145,10 +145,10 @@
           <span><br>  
           <li><a href="view_doc.php" id="view-doctor-link" target="content"><i class="fas fa-user"></i>VIEW DOCTORS</a></li></span>
             <hr>
-            <span><br><li><a href="#" id="view-appointment-link" target="content"><i class="fas fa-address-card"></i>VIEW OFFLINE APPOINTMENT</a></li></span>
+            <span><br><li><a href="viewappointmentdordoc.php" id="view-appointment-link" target="content"><i class="fas fa-address-card"></i>VIEW OFFLINE APPOINTMENT</a></li></span>
            
             <hr><span><br> <li><a href="#" id="view-telecommunication-appointment-link" target="content"><i class="fas fa-phone-volume"></i>VIEW TELECOMMUNICATION APPOINTMENT</a></li></span>
-            <hr><span><br> <li><a href="#" id="view-offlinelabtest-link" target="content"><i class="fas fa-user-md"></i>VIEW OFFLINE LAB TEST APPOINTMENTS</a></li></span>
+            <hr><span><br> <li><a href="show.php" id="view-offlinelabtest-link" target="content"><i class="fas fa-user-md"></i>VIEW OFFLINE LAB TEST APPOINTMENTS</a></li></span>
             <hr><span><br> <li><a href="#" id="view-onlinelabtest-link" target="content"><i class="fas fa-prescription-bottle-alt"></i>VIEW HOME LAB TEST BOOKINGS</a></li></span>
             <hr><span><br> <li><a href="graph.html" id="view-graph-link" target="content"><i class="fas fa-prescription-bottle-alt"></i>GRAPH</a></li></span>
             <hr><span><br> <li><a href="#" id="logout-link" target="content"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li></span>
@@ -171,6 +171,7 @@
         const docregistrationLink = document.getElementById("doc-registration-link");
         const viewdoctorLink = document.getElementById("view-doctor-link");
         const viewAppointmentsLink = document.getElementById("view-appointments-link");
+        const viewofflinelabLink = document.getElementById("iew-offlinelabtest-link");
         const viewPrescriptionLink = document.getElementById("view-prescription-link");
         const viewGraphsLink = document.getElementById("view-graphs-link");
         const logoutLink = document.getElementById("logout-link");
@@ -196,7 +197,11 @@
         });
         viewAppointmentsLink.addEventListener("click", function(event) {
             event.preventDefault();
-            setIframeSrc('doc_registration.php');
+            setIframeSrc('viewappointmentdordoc.php');
+        });
+        viewofflinelabLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            setIframeSrc('show.php');
         });
 
         viewPrescriptionLink.addEventListener("click", function(event) {
